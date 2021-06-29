@@ -19,7 +19,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 const LocalStrategy = require("passport-local").Strategy
-const User = require("../../14-auth/models/user")
+const {User} = require("./Models")
 
 passport.use(
     new LocalStrategy({ usernameField: "email", passwordField: "password" }, 
