@@ -10,7 +10,7 @@ export default ({ user, setUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("/user/login", { email: email, password: password })
+      .post("/api/users/login", { email: email, password: password })
       .then((response) => setUser(response.data))
       .catch((error) => console.log(error));
   };
