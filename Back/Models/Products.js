@@ -29,7 +29,7 @@ Product.init(
       type: S.BOOLEAN,
       defaultValue: false
     },
-
+    // CORREGIR AVAILABLE COMO SETER 
     available: {
       type: S.VIRTUAL,
       get() {
@@ -41,7 +41,7 @@ Product.init(
       type: S.TEXT,
     },
 
-    Image:{
+    image:{
         type: S.STRING,
         defaultValue: "https://images.pexels.com/photos/1300975/pexels-photo-1300975.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         isUrl: true,

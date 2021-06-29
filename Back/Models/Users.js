@@ -19,6 +19,10 @@ User.init(
         notEmpty: true
       }
     },
+    phone: {
+      type: S.INTEGER,
+      allowNull: false
+    },
     address:{
       type: S.STRING,
       allowNull: false,
