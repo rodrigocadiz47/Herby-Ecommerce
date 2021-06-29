@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  border: solid 1px black;
+}
+
+li {
+  display: inline;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 2rem;
+}
+
+li:hover {
+  color: grey;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
