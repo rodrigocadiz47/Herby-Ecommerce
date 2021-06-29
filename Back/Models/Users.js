@@ -8,10 +8,23 @@ User.init(
     firstName: {
       type: S.TEXT,
       allowNull: false,
+      validate:{
+        notEmpty: true
+      }
     },
     lastName: {
       type: S.TEXT,
       allowNull: false,
+      validate:{
+        notEmpty: true
+      }
+    },
+    address:{
+      type: S.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty: true
+      }
     },
     email: {
       type: S.STRING,
@@ -24,6 +37,9 @@ User.init(
     password: {
       type: S.STRING,
       allowNull: false,
+      validate:{
+        notEmpty: true
+      }
     },
     salt: {
       type: S.STRING,

@@ -12,6 +12,6 @@ const db = new Sequelize("herby", null, null, {
   host: "localhost",
   dialect: "postgres",
 });
-db.sync({force:true}).then(()=>console.log("DB CONNECTED"))
+db.sync({force: false}).then(()=>console.log("DB CONNECTED"))
 
 module.exports = db;

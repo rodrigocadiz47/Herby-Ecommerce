@@ -1,5 +1,5 @@
 const S = require("sequelize");
-const sequelize = require("../db");
+const sequelize = require("./_db");
 
 class Product extends S.Model {}
 
@@ -15,14 +15,14 @@ Product.init(
       allowNull: false,
     },
     price: {
-      tpye: S.INTEGER,
+      type: S.INTEGER,
       allowNull: false,
       min: 1,
       isNumeric: true
     },
     stock: {
       type: S.INTEGER,
-      defaultValue = 0
+      defaultValue : 0
     },
 
     seasonal: {
