@@ -12,23 +12,14 @@ const ProductCard = function () {
         />
       </div>
       <div class={s["card-content"]}>
-        <h2 class={s["card-title"]}>Card Grid Layout</h2>
+        <h2 class={s["card-title"]}>Banana</h2>
         <p class={s["card-text"]}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus
           nostrum!
         </p>
-        <div class="product-bottom-details">
-          <div class="product-price">
-            <small>$96.00</small>$230.99
-          </div>
-          <div class="product-links">
-            <a href="">
-              <i class="fa fa-heart"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-shopping-cart"></i>
-            </a>
-          </div>
+        <div class={s["card-bottom"]}>
+          <small>$100</small>
+          <button>+ ADD</button>
         </div>
       </div>
     </div>

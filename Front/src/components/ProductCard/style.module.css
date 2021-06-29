@@ -7,13 +7,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  padding: 50px;
   background: #f0f0f0;
 }
 
 .card {
-  width: 380px;
+  width: 300px;
   position: relative;
   box-shadow: 0 2px 7px #dfdfdf;
   margin: 50px auto;
@@ -22,11 +20,10 @@ img {
 
 .card-content {
   padding: 1rem;
-  background: linear-gradient(to bottom left, #ef8d9c 40%, #ffc39e 100%);
+  background: grey;
 }
 
 .card-title {
-  color: #ffffff;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -35,9 +32,13 @@ img {
 }
 
 .card-text {
-  color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
   font-weight: 400;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-around;
 }
