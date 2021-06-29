@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import reportWebVitals from "./reportWebVitals";
+
+// Locales
 import "./index.css";
 import Main from "./containers/Main";
-import { BrowserRouter, Route } from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
+import store from "./store/store";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Route path="/" component={Main} />
+      <Provider store={store}>
+        <Route path="/" component={Main} />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
