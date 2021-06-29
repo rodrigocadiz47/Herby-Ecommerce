@@ -10,6 +10,10 @@ router.get("/", (req, res, next)=>{
     })
 })
 
+router.get("/me", (req, res, next)=>{
+    res.send(req.user)
+})
+
 //POST METHOD
 router.post("/", (req, res, next)=>{
     User.create(req.body)
