@@ -1,12 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router";
 
 import Header from "../../components/Header";
 import ProductDetail from "../../components/ProductDetail";
 import ProductsContainer from "../ProductsContainer";
-import Register from "../../components/RegisterForm";
+import Register from "../../containers/RegisterContainer";
 import LandingPage from "../../components/LandingPage";
-import Login from "../../components/LoginForm";
+import Login from "../../containers/LoginContainer";
+
 
 function App() {
   return (
@@ -15,9 +17,10 @@ function App() {
       <Switch>
         <Route path="/products/:id" component={ProductDetail} />
         <Route path="/products" component={ProductsContainer} />
-        <Route path="/users" component={Register} />
-        <Route path="/" component={LandingPage} />
-        <Route path="/users/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/home" component={LandingPage}/>
+        <Redirect from="/" to="/home"/>
       </Switch>
     </div>
   );
