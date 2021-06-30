@@ -6,6 +6,7 @@ import ProductDetail from "../../components/ProductDetail";
 import ProductsContainer from "../ProductsContainer";
 import Register from "../../components/RegisterForm";
 import LandingPage from "../../components/LandingPage";
+import Login from "../../components/LoginForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/products" component={ProductsContainer} />
         <Route path="/users/register" component={Register} />
         <Route path="/" component={LandingPage} />
+        <Route path="/users/login" component={Login} />
       </Switch>
     </div>
   );

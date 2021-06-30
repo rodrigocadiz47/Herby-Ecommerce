@@ -20,18 +20,22 @@ export default ({ user, setUser }) => {
         <h2>Sign in to your account</h2>
       </div>
       <form onSubmit={handleSubmit}>
+        Email:{" "}
         <input
           type="email"
           required
-          placeholder="Email address"
+          placeholder="email"
           onChange={(event) => setEmail(event.target.value)}
         />
+        {" "}Password:{" "}
         <input
           type="password"
           required
-          placeholder="Password"
+          placeholder="contraseña"
           onChange={(event) => setPassword(event.target.value)}
         />
+        <br />
+        <br />
         <button type="submit" onSubmit={handleSubmit}>
           Log in
         </button>
