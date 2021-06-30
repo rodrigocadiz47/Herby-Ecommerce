@@ -7,7 +7,10 @@ const initialState = {
 };
 
 export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", () => {
-  return axios.get("/api/products").then((res) => res.data);
+  return axios.get("/api/products").then((res) => {
+    console.log("PRODUCTOS");
+    return res.data;
+  });
 });
 
 const usersReducer = createReducer(initialState, {
