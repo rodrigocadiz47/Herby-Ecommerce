@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import axios from "axios";
 
-import RegisterForm from "../../components/RegisterForm";
+import Form from "../../components/Form";
 
 const UsersContainer = function () {
   const [user, setUser] = useState({
@@ -39,7 +39,7 @@ const UsersContainer = function () {
 
   return (
     <div>
-      <RegisterForm />
+      <Form handleSubmit={handleSubmit} onChange={onChange}/>
     </div>
   );
 };
