@@ -5,7 +5,7 @@ import s from "./style.module.css";
 const Header = function () {
   return (
     <header>
-      <nav class={s.navbar}>
+      <nav className={s.navbar}>
         <ul>
           <a href="#">
             <li> Herby </li>
