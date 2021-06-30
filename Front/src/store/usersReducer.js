@@ -3,6 +3,7 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: {},
+  carrito: {},
 };
 
 export const registerUser = createAsyncThunk("REGISTER", (user) => {
