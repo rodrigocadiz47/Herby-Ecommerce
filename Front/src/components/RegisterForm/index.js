@@ -3,143 +3,117 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-export default () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [altura, setAltura] = useState("");
-  const [localidad, setLocalidad] = useState("");
-  const [codigoPostal, setCodigoPostal] = useState("");
-  const [observaciones, setObservaciones] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("/api/users/register", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        phone: phone,
-        address: address,
-      })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  };
-
-  useEffect(() => {
-    setAddress(
-      `${direccion} ${altura}, ${localidad} - ${codigoPostal}`.toUpperCase() +
-        ` (${observaciones})`
-    );
-  }, [direccion, altura, localidad, codigoPostal, observaciones]);
-
+export default ({ onChange, handleSubmit }) => {
   return (
     <div>
       <div>
         <h2>Create your account</h2>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         First Name:{" "}
         <input
           type="text"
+          name="firstName"
           required
           placeholder="nombre"
-          onChange={(event) => setFirstName(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Last Name:{" "}
         <input
           type="text"
+          name="lastName"
           required
           placeholder="apellido"
-          onChange={(event) => setLastName(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Email:{" "}
         <input
           type="email"
+          name="email"
           required
           placeholder="email"
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Password:{" "}
         <input
           type="password"
+          name="password"
           required
           placeholder="contraseña"
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Contact Number:{" "}
         <input
           type="text"
+          name="phone"
           required
           pattern="\d{8}|\d{10}"
           title="Tiene que tener 8 o 10 digitos"
           placeholder="8 o 10 digitos"
-          onChange={(event) => setPhone(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
-        Direccion:{" "}
+        Calle:{" "}
         <input
           type="text"
+          name="calle"
           required
           placeholder="calle"
-          onChange={(event) => setDireccion(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Altura:{" "}
         <input
           type="number"
+          name="altura"
           required
           placeholder="altura"
-          onChange={(event) => setAltura(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Localidad:{" "}
         <input
           type="text"
+          name="localidad"
           required
           placeholder="localidad"
-          onChange={(event) => setLocalidad(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Codigo Postal:{" "}
         <input
           type="text"
+          name="codigoPostal"
           required
           pattern="\d{4}"
           title="Tiene que tener 4 digitos"
           placeholder="CP"
-          onChange={(event) => setCodigoPostal(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
         Observaciones:{" "}
         <textarea
           type="text"
+          name="observaciones"
           placeholder="Observaciones"
-          onChange={(event) => setObservaciones(event.target.value)}
+          onChange={onChange}
         />
         <br />
         <br />
-        <button type="submit" onSubmit={handleSubmit}>
-          Sign up
-        </button>
+        <button type="submit">Sign up</button>
       </form>
     </div>
   );
