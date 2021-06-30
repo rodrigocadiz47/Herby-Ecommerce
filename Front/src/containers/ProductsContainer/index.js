@@ -7,16 +7,18 @@ import s from "./style.module.css";
 
 const ProductsContainer = function () {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.products);
 
   useEffect(() => {
-    dispatch(GET_PRODUCTS);
-  }, [dispatch, products]);
+    console.log("entre a use effect");
+    // console.log(GET_PRODUCTS());
+    dispatch(GET_PRODUCTS());
+  }, [dispatch]);
 
   return (
-    <div class={s["products-container"]}>
+    <div className={s["products-container"]}>
       {products.map((product) => {
-        return <ProductCard key={product.id} />;
+        return <ProductCard key={product.id} product={product} />;
       })}
     </div>
   );
