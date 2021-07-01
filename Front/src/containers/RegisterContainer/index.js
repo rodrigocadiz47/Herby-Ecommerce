@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useHistory} from 'react-router'
 import { Route } from "react-router-dom";
 import axios from "axios";
 
@@ -17,6 +18,7 @@ const UsersContainer = function () {
     codigoPostal: "",
     observaciones: "",
   });
+  const history=useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,6 +30,8 @@ const UsersContainer = function () {
       .post("http://localhost:3001/api/users/register", { ...user, address })
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
+
+      history.push('/login')
   };
 
   const onChange = (event) => {
