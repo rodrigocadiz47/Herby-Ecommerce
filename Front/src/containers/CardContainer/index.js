@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 export default function CardContainer(){
     const card = useSelector(store=>store.card)
     const [total, setTotal]= React.useState(Number)
+
     const memorizedCard = React.useMemo(()=>{
         return card.map((order)=>{
             return <h3>{order.name} {order.amount} kg x {order.price} = {order.preTotal}</h3>

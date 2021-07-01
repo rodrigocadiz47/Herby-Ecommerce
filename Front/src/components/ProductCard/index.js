@@ -7,10 +7,15 @@ import { SET_CARD } from "../../store/cardReducer";
 const ProductCard = function ({ product }) {
   const dispatch = useDispatch()
   const [amount, setAmount]= React.useState(Number)
+  const card = useSelector((store)=> store.card)
 
   const handleCard =(product)=>{
     dispatch(SET_CARD({ ...product, amount: amount, preTotal: amount * product.price }))
   }
+
+  React.useEffect(()=>{
+    localStorage.setItem("CARD-STORAGE", JSON.stringify(card));
+}, [card])
 
   const onChange= ({ target })=>{
     setAmount(target.value)
