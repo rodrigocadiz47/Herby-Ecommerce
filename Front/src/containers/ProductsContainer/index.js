@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 
 import ProductsCart from "../../components/ProductsCart";
 import { GET_PRODUCTS } from "../../store/productsReducer";
-import { SET_CART } from "../../store/cartReducer";
+import { POST_CART, SET_CART } from "../../store/cartReducer";
 
 import s from "./style.module.css";
 
@@ -14,10 +14,17 @@ const ProductsContainer = function () {
   const [amount, setAmount] = React.useState(Number);
   const products = useSelector((state) => state.products.products);
   const cart = useSelector((store) => store.cart);
+  const user = useSelector(store => store.users.currentUser)
 
   const handleCart = (product) => {
-    dispatch(SET_CART({ ...product, amount: amount, preTotal: amount * product.price }));
+    if(user.firstName){
+      dispatch(POST_CART({ ...product, amount: amount, preTotal: amount * product.price , userId: user.id}))
+    }
+    else{
+      dispatch(SET_CART({ ...product, amount: amount, preTotal: amount * product.price }));
+    }
   };
+
 
   React.useEffect(() => {
     localStorage.setItem("cart-STORAGE", JSON.stringify(cart));
