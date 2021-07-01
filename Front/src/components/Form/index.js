@@ -18,14 +18,14 @@ export default ({ handleSubmit, onChange }) => {
       <form onSubmit={handleSubmit}>
         {pathname === "/register" && (
           <div className="grid grid-cols-2">
-            <div className={s["input-container"]}>
-              <label for="firstName" className={s.label}>
+          <div className={s["input-container"]}>
+                <label for="firstName" className={s.label}>
                 Nombre:{" "}
               </label>
               <input
-                className={s.input}
-                type="text"
-                name="firstName"
+                 type="text"
+              className={s.input}
+                 name="firstName"
                 required
                 placeholder="ej. Sandra"
                 onChange={onChange}
