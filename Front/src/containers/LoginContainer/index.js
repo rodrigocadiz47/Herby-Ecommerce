@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import Form from "../../components/Form"
-import axios from "axios";
+import { SET_USER } from "../../store/usersReducer";
 
 export default () => {
+  const dispatch= useDispatch()
   const [loginData, setLoginData] = useState({ email: "", password:""})
-
+  const history =  useHistory()
   const onChange= (event)=> {
     const fieldName = event.target.name;
     const value = event.target.value;
@@ -13,11 +16,8 @@ export default () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // axios
-    //   .post("/api/users/login", loginData)
-    //   .then((response) => setUser(response.data))
-    //   .catch((error) => console.log(error));
-    console.log(loginData)
+    dispatch(SET_USER(loginData))
+    history.push("/card")
   };
 
   return (
