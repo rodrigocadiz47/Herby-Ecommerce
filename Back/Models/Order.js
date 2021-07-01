@@ -1,6 +1,6 @@
 const S = require("sequelize");
 const db = require("./_db");
-const { Products } = require("./index");
+const { Products } = require("./");
 
 class Order extends S.Model {}
 Order.init(
@@ -37,13 +37,16 @@ Order.init(
 );
 
 // Order.addHook("beforeCreate", function (order) {
-//   console.log("ORDERS--------------->", order.productId); //order llega como order.dataValues?
+//   console.log("PRODUCTID---->", order.productId);
 //   //comparamos precio del front con el back
 //   const id = order.productId;
 //   Products.findByPk(id).then((prod) => {
-//     prod.price !== order.productPrice
-//       ? (order.productPrice = prod.price)
-//       : null;
+//     console.log("PRODUCTS", prod);
 //   });
+//   // Products.findByPk(id).then((prod) => {
+//   //   prod.price !== order.productPrice
+//   //     ? (order.productPrice = prod.price)
+//   //     : null;
+//   // });
 // });
 module.exports = Order;

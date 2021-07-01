@@ -1,47 +1,44 @@
 const express = require("express");
 const router = express.Router();
-const { Order, Products } = require("../Models");
+const { Order } = require("../Models");
 
-// {
-//   id: 1,
-//   name: 'Banana',
-//   category: 'fruit',
-//   price: 100,
-//   stock: 250,
-//   seasonal: true,
-//   description: 'La bananaaporta vitaminas A, C, B1, B2, B6, B9 -ácido fólico- y E.',
-//   image: 'https://www.suat.com.uy/upcms/thumbs/648x365/novedades/imagen/955_big.jpg',
-//   createdAt: '2021-07-01T19:08:53.639Z',
-//   updatedAt: '2021-07-01T19:08:53.639Z',
-//   amount: 1,
-//   preTotal: 100,
-//   userId: 6
-// }
+router.get("/pending/:id", (req, res, next) => {
+  const userId = req.params.id;
+  Order.findAll({
+    where: {
+      userId: userId,
+      bought: false,
+    },
+  })
+    .then((orders) => res.send(orders))
+    .catch((error) => res.status(404).send(error));
+});
 
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
-  const { name, amount, price, id, preTotal } =
+  const { productName, productQuantity, productPrice, productId, totalOrder } =
     req.body;
   return Order.create({
-    productName: name,
-    productQuantity: amount,
-    productPrice: price,
-    productId: id,
-    totalOrder: preTotal,
+    productName,
+    productQuantity,
+    productPrice,
+    productId,
+    totalOrder,
   })
     .then((order) => {
-      order.setUser(userId)
-      .then(() => {
-        Products.findByPk(id)
-        .then(product=>{        
-          res.send(product)
-        })
+      order.setUser(userId).then(() => {
+        Products.findByPk(id).then((product) => {
+          res.send(product);
+        });
       });
     })
+    .catch((error) => res.status(400).send(error));
 });
 
 router.delete("/:id", (req, res, next) => {
   const orderId = req.params.id;
-  Order.findByPk(orderId).then((order) => order.destroy());
+  Order.findByPk(orderId)
+    .then((order) => order.destroy())
+    .catch((error) => res.status(404).send(error));
 });
 module.exports = router;
