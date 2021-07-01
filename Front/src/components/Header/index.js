@@ -11,7 +11,7 @@ const Header = function () {
           <Link to="/">
             <li> Herby </li>
           </Link>
-          <Link to="/products">
+          <Link to="/products/fruits">
             <li> Frutas </li>
           </Link>
           <Link to="/products">
@@ -24,6 +24,9 @@ const Header = function () {
             <li> Register </li>
           </Link>
           <li> Contacto </li>
+          <Link to="/card">
+            <li>Carrito</li>
+          </Link>
         </ul>
       </nav>
     </header>

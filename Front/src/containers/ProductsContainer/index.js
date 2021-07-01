@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router";
 
 import ProductCard from "../../components/ProductCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
@@ -13,7 +14,6 @@ const ProductsContainer = function () {
     dispatch(GET_PRODUCTS())
   }, [dispatch]);
 
-  console.log(products)
   return (
     <div className={s["products-container"]}>
       {products.map((product) => {
