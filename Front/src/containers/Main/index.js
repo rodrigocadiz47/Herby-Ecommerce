@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Redirect } from "react-router";
 
@@ -9,8 +9,16 @@ import Register from "../../containers/RegisterContainer";
 import LandingPage from "../../components/LandingPage";
 import Login from "../../containers/LoginContainer";
 import CardContainer from "../CardContainer";
+import { useDispatch } from "react-redux";
+import { SET_USER_ME } from "../../store/usersReducer"
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(SET_USER_ME())
+  }, [dispatch])
+
   return (
     <div>
       <Header />
