@@ -16,14 +16,14 @@ router.get("/pending/:id", (req, res, next) => {
 
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
-  const { productName, productQuantity, productPrice, productId, totalOrder } =
+  const { name, amount, price, id, preTotal } =
     req.body;
   return Order.create({
-    productName,
-    productQuantity,
-    productPrice,
-    productId,
-    totalOrder,
+    productName: name,
+    productQuantity: amount,
+    productPrice: price,
+    productId: id,
+    totalOrder: preTotal,
   })
     .then((order) => {
       order.setUser(userId).then(() => {
