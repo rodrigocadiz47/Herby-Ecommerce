@@ -36,12 +36,14 @@ Order.init(
   { sequelize: db, modelName: "order" }
 );
 
-Order.addHook("beforeCreate", function (order) {
-  //comparamos precio del front con el back
-  Products.findByPk(order.productId).then((prod) => {
-    prod.price !== order.productPrice
-      ? (order.productPrice = prod.price)
-      : null;
-  });
-});
+// Order.addHook("beforeCreate", function (order) {
+//   console.log("ORDERS--------------->", order.productId); //order llega como order.dataValues?
+//   //comparamos precio del front con el back
+//   const id = order.productId;
+//   Products.findByPk(id).then((prod) => {
+//     prod.price !== order.productPrice
+//       ? (order.productPrice = prod.price)
+//       : null;
+//   });
+// });
 module.exports = Order;

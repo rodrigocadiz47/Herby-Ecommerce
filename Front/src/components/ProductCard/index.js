@@ -5,8 +5,11 @@ import s from "./style.module.css";
 import { SET_CARD } from "../../store/cardReducer";
 
 const ProductCard = function ({ product }) {
-  const dispatch = useDispatch();
-  const [amount, setAmount] = React.useState(Number);
+
+  const dispatch = useDispatch()
+  const [amount, setAmount]= React.useState(Number)
+  const card = useSelector((store)=> store.card)
+
 
   const handleCard = (product) => {
     dispatch(
@@ -14,9 +17,15 @@ const ProductCard = function ({ product }) {
     );
   };
 
-  const onChange = ({ target }) => {
-    setAmount(target.value);
-  };
+
+  React.useEffect(()=>{
+    localStorage.setItem("CARD-STORAGE", JSON.stringify(card));
+}, [card])
+
+  const onChange= ({ target })=>{
+    setAmount(target.value)
+  }
+
 
   return (
     <div class={s.card}>

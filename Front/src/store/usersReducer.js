@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: {},
@@ -26,6 +26,10 @@ export const SET_USER = createAsyncThunk("SET_USER", (loginData)=>{
   .post("http://localhost:3001/api/users/login", loginData).then(res=> res.data)
 })
 
+export const SET_USER_ME = createAsyncThunk("SET_USER_ME", ()=>{
+  return axios.get("http://localhost:3001/api/users/me").then(res=>res.data)
+})
+
 export const logUser = createAsyncThunk();
 
 const usersReducer = createReducer(initialState, {
@@ -33,7 +37,8 @@ const usersReducer = createReducer(initialState, {
     state.error= false
     state.currentUser=action.payload
   },
-  [SET_USER.rejected]: (state, action)=>state.error=true
+  [SET_USER.rejected]: (state, action)=>state.error=true,
+  [SET_USER_ME]: (state, action)=> state.currentUser = action.payload
 });
 
 export default usersReducer;

@@ -5,6 +5,6 @@ const db = new Sequelize("herby", null, null, {
   dialect: "postgres",
   //logging: false,
 });
-db.sync({ force: true }).then(() => console.log("DB CONNECTED"));
+db.sync({ force: false }).then(() => console.log("DB CONNECTED"));
 
 module.exports = db;
