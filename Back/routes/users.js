@@ -14,6 +14,11 @@ router.get("/", (req, res, next) => {
 });
 
 
+router.get("/me", (req, res, next) => {
+  res.send(req.user);
+});
+
+
 //POST METHOD
 router.post("/register", (req, res, next) => {
   const { firstName, lastName, phone, address, email, password } = req.body;
