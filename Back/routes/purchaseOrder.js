@@ -1,8 +1,3 @@
-// req.body={idUser,pedidos:[idpedido1(get con el id nos trae el pedido {cant y id de prducto}),idpedido2]}
-
-//1- create q va a crear la orden por ende el id
-//2-map con los pedidos seteandoles el id de purchase
-
 const express = require("express");
 const router = express.Router();
 const { PurchaseOrder, Order } = require("../Models");
@@ -25,8 +20,14 @@ router.get("/:id", (req, res, next) => {
 
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
-  const { total, pedidos } = req.body; //en pedidos viene un array de orders={}
+  const { orders, total } = req.body; //orders=[{order1},{order2},{order3},{order4}
 
-  pedidos.map();
-  PurchaseOrder.create();
+  PurchaseOrder.create({ total }).then((purchase) => {
+    purchase.setUser(userId); //le seteo el id del usuario
+    orders.map((order) => {
+      order.setPurchaseOrder(purchase.id);
+      order.bought = true; //cambiando el estado de la order a comprado
+    });
+  });
 });
+module.exports = router;

@@ -38,7 +38,7 @@ Product.init(
     //   get() {
     //     this.stock > 0 ? true : false;
     //   },
-    // },
+    // },  deberia ser un hook beforecreate o beforeUpdate
 
     description: {
       type: S.TEXT,

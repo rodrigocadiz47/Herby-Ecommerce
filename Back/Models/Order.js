@@ -5,7 +5,7 @@ const { Products } = require("./index");
 class Order extends S.Model {}
 Order.init(
   {
-    prductName: {
+    productName: {
       type: S.STRING,
       allowNull: false,
     },
@@ -20,6 +20,10 @@ Order.init(
     productId: {
       type: S.INTEGER,
       allowNull: false,
+    },
+    bought: {
+      type: S.BOOLEAN,
+      defaultValue: false,
     },
     totalOrder: {
       type: S.VIRTUAL,
