@@ -17,10 +17,10 @@ const Header = function () {
           <Link to="/products">
             <li> Verduras </li>
           </Link>
-          <Link to="/users/login">
+          <Link to="/login">
             <li> Login </li>
           </Link>
-          <Link to="/users/register">
+          <Link to="/register">
             <li> Register </li>
           </Link>
           <li> Contacto </li>

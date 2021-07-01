@@ -1,0 +1,12 @@
+/* @tailwind base;
+@tailwind base;
+@tailwind utilities;
+@tailwind screens;
+
+.title {
+  @apply text-center text-2xl;
+}
+
+.input {
+  @apply border-gray-500 rounded-md;
+} */
