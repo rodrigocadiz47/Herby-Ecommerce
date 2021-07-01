@@ -8,15 +8,15 @@ router.get("/", (req, res, next) => {
 });
 
 // path ("api/products/admin")
-// router.post("/admin", (req, res, next) => {
-//   const { name, category, price, stock, seasonal, description, image } =
-//     req.body;
+router.post("/admin", (req, res, next) => {
+  const { name, category, price, stock, seasonal, description, image } =
+    req.body;
 
-//   Products.findOrCreate({
-//     where: { name },
-//     defaults: { name, category, price, stock, seasonal, description, image },
-//   }).then(product => sendStatus(201));
-// });
+  Products.findOrCreate({
+    where: { name },
+    defaults: { name, category, price, stock, seasonal, description, image },
+  }).then((product) => sendStatus(201));
+});
 
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;

@@ -13,7 +13,10 @@ router.post("/:id", (req, res, next) => {
     productId,
     totalOrder,
   })
-    .then((order) => order.setUser(userId))
+    .then((order) => {
+      console.log(order);
+      order.setUser(userId);
+    })
     .then((order) => res.send(order));
 });
 
