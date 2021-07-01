@@ -4,7 +4,10 @@ const passport = require("passport");
 const { User } = require("../Models");
 
 router.get("/me", (req, res, next) => {
-  res.send(req.user);
+  if(req.user){
+    return res.send(req.user);
+  }
+  res.sendStatus(401)
 });
 
 router.get("/", (req, res, next) => {
@@ -14,21 +17,17 @@ router.get("/", (req, res, next) => {
 });
 
 
-router.get("/me", (req, res, next) => {
-  res.send(req.user);
-});
-
-
 //POST METHOD
 router.post("/register", (req, res, next) => {
   const { firstName, lastName, phone, address, email, password } = req.body;
   User.create({ firstName, lastName, phone, address, email, password }).then(
     (user) => res.send(user)
-  );
-});
-
-router.post("/login", passport.authenticate("local"), (req, res, next) => {
-  res.send(req.user);
-});
+    );
+  });
+  
+  router.post("/login", passport.authenticate("local"), (req, res, next) => {
+    res.send(req.user);
+  });
+  
 
 module.exports = router;

@@ -13,11 +13,11 @@ import { useDispatch } from "react-redux";
 import { SET_USER_ME } from "../../store/usersReducer"
 
 function App() {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(()=>{
-    dispatch(SET_USER_ME())
-  }, [dispatch])
+  // useEffect(()=>{
+  //   dispatch(SET_USER_ME())
+  // }, [dispatch])
 
   return (
     <div>
