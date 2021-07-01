@@ -10,7 +10,7 @@ const store = configureStore({
   reducer: {
     users: usersReducer,
     products: productsReducer,
-    card: cardReducer
+    card: cardReducer,
   },
 });
 
