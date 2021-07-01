@@ -2,7 +2,7 @@ import { createReducer, createAction } from "@reduxjs/toolkit";
 
 const initialState = JSON.parse(localStorage.getItem("CART-STORAGE")) || [];
 
-export const SET_CART = createAction("SET_CARD");
+export const SET_CART = createAction("SET_CART");
 
 const cartReducer = createReducer(initialState, {
   [SET_CART]: (state, action) => {
