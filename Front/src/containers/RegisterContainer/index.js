@@ -23,11 +23,10 @@ const UsersContainer = function () {
     const address =
       `${user.calle} ${user.altura}, ${user.localidad} - ${user.codigoPostal}`.toUpperCase() +
       ` (${user.observaciones})`;
-    console.log("user", { ...user, address });
 
     axios
-      .post("/api/users/register", { ...user, address })
-      .then((response) => console.log(response))
+      .post("http://localhost:3001/api/users/register", { ...user, address })
+      .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };
 
