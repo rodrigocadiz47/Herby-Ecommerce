@@ -1,12 +1,18 @@
-/* @tailwind base;
 @tailwind base;
 @tailwind utilities;
-@tailwind screens;
 
-.title {
+/* .title {
   @apply text-center text-2xl;
+} */
+
+.input-container {
+  @apply mt-3 mx-1;
 }
 
 .input {
-  @apply border-gray-500 rounded-md;
-} */
+  @apply w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800;
+}
+
+.label {
+  @apply text-sm text-gray-800;
+}
