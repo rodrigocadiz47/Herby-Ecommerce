@@ -1,132 +1,150 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { useLocation } from "react-router";
 
-export default ({ handleSubmit, onChange }) => {
-  const { pathname } = useLocation()
-  return (
-    <div>
-      <div>
-        {pathname==="/register" ?
-        <h2>Crea tu cuenta</h2>
-        :
-        <h2>Ingresa</h2>
-        }
-      </div>
-      <form onSubmit={handleSubmit}>
-        {pathname==="/register" &&
-        <>
-        Nombre:{" "}
-        <input
-          type="text"
-          name="firstName"
-          required
-          placeholder="nombre"
-          onChange={onChange}
-        />
-        <br />
-        <br />
-        Apellido:{" "}
-        <input
-          type="text"
-          name="lastName"
-          required
-          placeholder="apellido"
-          onChange={onChange}
-        />
-        </>
-        }
-        <br />
-        <br />
-        Email:{" "}
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="email"
-          onChange={onChange}
-        />
-        <br />
-        <br />
-        Contraseña:{" "}
-        <input
-          type="password"
-          name="password"
-          required
-          placeholder="contraseña"
-          onChange={onChange}
-        />
-        <br />
-        <br />
-        {pathname==="/register" &&
-        <>
+import s from "./style.module.css";
 
-          Telefono:{" "}
+export default ({ handleSubmit, onChange }) => {
+  const { pathname } = useLocation();
+  return (
+    <div className="container mx-auto flex flex-col h-screen px-64 py-20">
+      <div>
+        {pathname === "/register" ? (
+          <h2 className="text-center text-2xl">Crea tu cuenta</h2>
+        ) : (
+          <h2 className="text-center text-2xl">Ingresa</h2>
+        )}
+      </div>
+      <div className="flex flex-col h-screen">
+        <form onSubmit={handleSubmit}>
+          {pathname === "/register" && (
+            <>
+              <label for="firstName">Nombre: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="firstName"
+                required
+                placeholder="ej. Sandra"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="lastName">Apellido: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="lastName"
+                required
+                placeholder="ej. Fernandez"
+                onChange={onChange}
+              />
+            </>
+          )}
+          <br />
+          <br />
+          <label for="email">Email: </label>
           <input
-            type="text"
-            name="phone"
+            className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+            type="email"
+            name="email"
             required
-            pattern="\d{8}|\d{10}"
-            title="Tiene que tener 8 o 10 digitos"
-            placeholder="8 o 10 digitos"
+            placeholder="ej. sandrafernandez@email.com"
             onChange={onChange}
           />
           <br />
           <br />
-          Calle:{" "}
+          <label for="password">Contraseña: </label>
           <input
-            type="text"
-            name="calle"
+            className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+            type="password"
+            name="password"
             required
-            placeholder="calle"
+            placeholder="************"
             onChange={onChange}
           />
           <br />
           <br />
-          Altura:{" "}
-          <input
-            type="number"
-            name="altura"
-            required
-            placeholder="altura"
-            onChange={onChange}
-          />
-          <br />
-          <br />
-          Localidad:{" "}
-          <input
-            type="text"
-            name="localidad"
-            required
-            placeholder="localidad"
-            onChange={onChange}
-          />
-          <br />
-          <br />
-          Codigo Postal:{" "}
-          <input
-            type="text"
-            name="codigoPostal"
-            required
-            pattern="\d{4}"
-            title="Tiene que tener 4 digitos"
-            placeholder="CP"
-            onChange={onChange}
-          />
-          <br />
-          <br />
-          Observaciones:{" "}
-          <textarea
-            type="text"
-            name="observaciones"
-            placeholder="casa, dpto, etc"
-            onChange={onChange}
-          />
-          <br />
-          <br />
-        </>
-        }
-        <button type="submit">{pathname==="/register" ? "Registrate" : "Ingresa"}</button>
-      </form>
+          {pathname === "/register" && (
+            <>
+              <label for="phone">Telefono: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="phone"
+                required
+                pattern="\d{8}|\d{10}"
+                title="Tiene que tener 8 o 10 digitos"
+                placeholder="ej. 1183771799"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="street">Calle: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="street"
+                required
+                placeholder="ej. Wallaby"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="streetNumber">Altura: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="number"
+                name="streetNumber"
+                required
+                placeholder="ej. 42"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="region">Localidad: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="region"
+                required
+                placeholder="ej. Sidney"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="zipCode">Codigo Postal: </label>
+              <input
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="zipCode"
+                required
+                pattern="\d{4}"
+                title="Tiene que tener 4 digitos"
+                placeholder="ej. 1800"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+              <label for="extraDetails">Observaciones: </label>
+              <textarea
+                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                type="text"
+                name="extraDetails"
+                placeholder="casa, dpto, etc"
+                onChange={onChange}
+              />
+              <br />
+              <br />
+            </>
+          )}
+          <button
+            type="submit"
+            className="w-full rounded-sm bg-blue-400 px-3 py-1 text-white"
+          >
+            {pathname === "/register" ? "Registrate" : "Ingresa"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

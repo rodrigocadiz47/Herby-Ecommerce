@@ -5,7 +5,18 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      maxHeight: ["focus"],
+      outline: ["responsive", "focus-within", "focus"],
+      borderColor: [
+        "responsive",
+        "dark",
+        "group-hover",
+        "focus-within",
+        "hover",
+        "focus",
+      ],
+    },
   },
   plugins: [],
 };
