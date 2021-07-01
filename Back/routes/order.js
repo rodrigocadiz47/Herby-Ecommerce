@@ -15,9 +15,8 @@ router.post("/:id", (req, res, next) => {
   })
     .then((order) => {
       console.log(order);
-      order.setUser(userId);
+      order.setUser(userId).then((order) => res.send(order));
     })
-    .then((order) => res.send(order));
 });
 
 router.delete("/:id", (req, res, next) => {
