@@ -16,6 +16,7 @@ export default function CartContainer() {
   }, [cart]);
 
   React.useEffect(() => {
+    console.log(cart)
     const pre = cart.map((product) => {
       return product.preTotal;
     });
