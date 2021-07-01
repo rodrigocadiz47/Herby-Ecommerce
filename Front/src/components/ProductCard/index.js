@@ -1,29 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
+import { SET_CARD } from "../../store/cardReducer";
 
 const ProductCard = function ({ product }) {
+  const dispatch = useDispatch()
+  const [amount, setAmount]= React.useState(Number)
+
+  const handleCard =(product)=>{
+    dispatch(SET_CARD({ ...product, amount: amount, preTotal: amount * product.price }))
+  }
+
+  const onChange= ({ target })=>{
+    setAmount(target.value)
+  }
+
   return (
     <div class={s.card}>
-      {/* <Link to={`/products/${product.id}`}> */}
-      <Link to={`/products/1`}>
+      <Link to={`/products/${product.id}`}>
         <div class={s["card-img"]}>
           <img
             alt=""
-            src="https://www.eluniverso.com/resizer/29qkFPHAP5BO2oFNkZLxlfyfpN0=/1005x670/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/eluniverso/DYL4SUBYLJAKDL2S3NN6AJHJJI.jpg"
+            src={product.image}
           />
         </div>
       </Link>
       <div class={s["card-content"]}>
-        <h2 class={s["card-title"]}>Banana</h2>
+        <h2 class={s["card-title"]}>{product.name}</h2>
         <p class={s["card-text"]}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus
-          nostrum!
+          {product.description}
         </p>
         <div class={s["card-bottom"]}>
-          <small>$100</small>
-          <button>+ ADD</button>
+          <small>${product.price}</small>
+          <input onChange={onChange} defaultValue="1kg" type="number" style={{width: "50px"}} min="0" max="10" pattern="^[0-9]+"/>kg
+          <button onClick={()=>handleCard(product)}>+ ADD</button>
         </div>
       </div>
     </div>
