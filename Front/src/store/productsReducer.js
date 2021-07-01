@@ -1,5 +1,5 @@
-import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   products: [],
@@ -7,20 +7,17 @@ const initialState = {
 };
 
 export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", () => {
-  return axios.get("/api/products").then((res) => {
-    console.log("PRODUCTOS");
-    return res.data;
-  });
+  return axios.get("http://localhost:3001/api/products").then((res) => res.data);
 });
 
-const usersReducer = createReducer(initialState, {
+const productsReducer = createReducer(initialState, {
   [GET_PRODUCTS.fulfilled]: (state, action) => {
-    state.error = false;
     state.products = action.payload;
+    state.error = false;
   },
   [GET_PRODUCTS.rejected]: (state, action) => {
     state.error = true;
   },
 });
 
-export default usersReducer;
+export default productsReducer;

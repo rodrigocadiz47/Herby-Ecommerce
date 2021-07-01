@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/products/:id" component={ProductDetail} />
-        <Route path="/products" component={ProductsContainer} />
+        <Route exact path="/products" component={ProductsContainer} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/home" component={LandingPage}/>
