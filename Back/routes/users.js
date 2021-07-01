@@ -3,15 +3,21 @@ const router = express.Router();
 const passport = require("passport");
 const { User } = require("../Models");
 
+router.get("/me", (req, res, next) => {
+  res.send(req.user);
+});
+
 router.get("/", (req, res, next) => {
   User.findAll().then((users) => {
     res.send(users);
   });
 });
 
+
 router.get("/me", (req, res, next) => {
   res.send(req.user);
 });
+
 
 //POST METHOD
 router.post("/register", (req, res, next) => {
