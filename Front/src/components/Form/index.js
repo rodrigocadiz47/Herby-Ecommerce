@@ -18,14 +18,14 @@ export default ({ handleSubmit, onChange }) => {
       <form onSubmit={handleSubmit}>
         {pathname === "/register" && (
           <div className="grid grid-cols-2">
-          <div className={s["input-container"]}>
-                <label for="firstName" className={s.label}>
+            <div className={s["input-container"]}>
+              <label for="firstName" className={s.label}>
                 Nombre:{" "}
               </label>
               <input
-                 type="text"
-              className={s.input}
-                 name="firstName"
+                type="text"
+                className={s.input}
+                name="firstName"
                 required
                 placeholder="ej. Sandra"
                 onChange={onChange}
@@ -97,7 +97,7 @@ export default ({ handleSubmit, onChange }) => {
                 <input
                   className={s.input}
                   type="text"
-                  name="street"
+                  name="calle"
                   required
                   placeholder="ej. Wallaby"
                   onChange={onChange}
@@ -109,7 +109,7 @@ export default ({ handleSubmit, onChange }) => {
                 </label>
                 <input
                   className={s.input}
-                  name="streetNumber"
+                  name="altura"
                   required
                   placeholder="ej. 42"
                   onChange={onChange}
@@ -122,7 +122,7 @@ export default ({ handleSubmit, onChange }) => {
                 <input
                   className={s.input}
                   type="text"
-                  name="region"
+                  name="localidad"
                   required
                   placeholder="ej. Sidney"
                   onChange={onChange}
@@ -135,7 +135,7 @@ export default ({ handleSubmit, onChange }) => {
                 <input
                   className={s.input}
                   type="text"
-                  name="zipCode"
+                  name="codigoPostal"
                   required
                   pattern="\d{4}"
                   title="Tiene que tener 4 digitos"
@@ -151,7 +151,7 @@ export default ({ handleSubmit, onChange }) => {
               <textarea
                 className={s.input}
                 type="text"
-                name="extraDetails"
+                name="observaciones"
                 placeholder="casa, dpto, etc"
                 onChange={onChange}
               />
@@ -161,6 +161,7 @@ export default ({ handleSubmit, onChange }) => {
         <button
           type="submit"
           className="inline-block w-full rounded-sm bg-green-600 px-3 py-2 my-4 text-white hover:bg-green-500"
+          onSubmit={handleSubmit}
         >
           {pathname === "/register" ? "Registrate" : "Ingresa"}
         </button>
