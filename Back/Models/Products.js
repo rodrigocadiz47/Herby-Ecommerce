@@ -51,7 +51,7 @@ Product.init(
       validate: { isUrl: true },
     },
   },
-  { sequelize, modelName: "Product" }
+  { sequelize, modelName: "product" }
 );
 
 module.exports = Product;

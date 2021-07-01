@@ -25,6 +25,7 @@ router.post("/:id", (req, res, next) => {
   PurchaseOrder.create({ total }).then((purchase) => {
     purchase.setUser(userId); //le seteo el id del usuario
     orders.map((order) => {
+      //si no funciona hacer un bypk
       order.setPurchaseOrder(purchase.id);
       order.bought = true; //cambiando el estado de la order a comprado
     });
