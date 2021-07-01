@@ -6,7 +6,7 @@ import s from "./style.module.css";
 export default ({ handleSubmit, onChange }) => {
   const { pathname } = useLocation();
   return (
-    <div className="container mx-auto flex flex-col h-screen px-64 py-20">
+    <div className="container mx-auto flex flex-col h-screen max-w-md p-8">
       <div>
         {pathname === "/register" ? (
           <h2 className="text-center text-2xl">Crea tu cuenta</h2>
@@ -14,61 +14,72 @@ export default ({ handleSubmit, onChange }) => {
           <h2 className="text-center text-2xl">Ingresa</h2>
         )}
       </div>
-      <div className="flex flex-col h-screen">
-        <form onSubmit={handleSubmit}>
-          {pathname === "/register" && (
-            <>
-              <label for="firstName">Nombre: </label>
+
+      <form onSubmit={handleSubmit}>
+        {pathname === "/register" && (
+          <div className="grid grid-cols-2">
+            <div className={s["input-container"]}>
+              <label for="firstName" className={s.label}>
+                Nombre:{" "}
+              </label>
               <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                className={s.input}
                 type="text"
                 name="firstName"
                 required
                 placeholder="ej. Sandra"
                 onChange={onChange}
               />
-              <br />
-              <br />
-              <label for="lastName">Apellido: </label>
+            </div>
+            <div className={s["input-container"]}>
+              <label for="lastName" className={s.label}>
+                Apellido:{" "}
+              </label>
               <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                className={s.input}
                 type="text"
                 name="lastName"
                 required
                 placeholder="ej. Fernandez"
                 onChange={onChange}
               />
-            </>
-          )}
-          <br />
-          <br />
-          <label for="email">Email: </label>
+            </div>
+          </div>
+        )}
+        <div className={s["input-container"]}>
+          <label for="email" className={s.label}>
+            Email:{" "}
+          </label>
           <input
-            className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+            className={s.input}
             type="email"
             name="email"
             required
             placeholder="ej. sandrafernandez@email.com"
             onChange={onChange}
           />
-          <br />
-          <br />
-          <label for="password">Contraseña: </label>
+        </div>
+        <div className={s["input-container"]}>
+          <label for="password" className={s.label}>
+            Contraseña:{" "}
+          </label>
           <input
-            className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+            className={s.input}
             type="password"
             name="password"
             required
             placeholder="************"
             onChange={onChange}
           />
-          <br />
-          <br />
-          {pathname === "/register" && (
-            <>
-              <label for="phone">Telefono: </label>
+        </div>
+        {pathname === "/register" && (
+          <div className="">
+            <div className={s["input-container"]}>
+              <label for="phone" className={s.label}>
+                Telefono:{" "}
+              </label>
               <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                className={s.input}
                 type="text"
                 name="phone"
                 required
@@ -77,74 +88,83 @@ export default ({ handleSubmit, onChange }) => {
                 placeholder="ej. 1183771799"
                 onChange={onChange}
               />
-              <br />
-              <br />
-              <label for="street">Calle: </label>
-              <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
-                type="text"
-                name="street"
-                required
-                placeholder="ej. Wallaby"
-                onChange={onChange}
-              />
-              <br />
-              <br />
-              <label for="streetNumber">Altura: </label>
-              <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
-                type="number"
-                name="streetNumber"
-                required
-                placeholder="ej. 42"
-                onChange={onChange}
-              />
-              <br />
-              <br />
-              <label for="region">Localidad: </label>
-              <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
-                type="text"
-                name="region"
-                required
-                placeholder="ej. Sidney"
-                onChange={onChange}
-              />
-              <br />
-              <br />
-              <label for="zipCode">Codigo Postal: </label>
-              <input
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
-                type="text"
-                name="zipCode"
-                required
-                pattern="\d{4}"
-                title="Tiene que tener 4 digitos"
-                placeholder="ej. 1800"
-                onChange={onChange}
-              />
-              <br />
-              <br />
-              <label for="extraDetails">Observaciones: </label>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className={s["input-container"]}>
+                <label for="street" className={s.label}>
+                  Calle:{" "}
+                </label>
+                <input
+                  className={s.input}
+                  type="text"
+                  name="street"
+                  required
+                  placeholder="ej. Wallaby"
+                  onChange={onChange}
+                />
+              </div>
+              <div className={s["input-container"]}>
+                <label for="streetNumber" className={s.label}>
+                  Altura:{" "}
+                </label>
+                <input
+                  className={s.input}
+                  name="streetNumber"
+                  required
+                  placeholder="ej. 42"
+                  onChange={onChange}
+                />
+              </div>
+              <div className={s["input-container"]}>
+                <label for="region" className={s.label}>
+                  Localidad:{" "}
+                </label>
+                <input
+                  className={s.input}
+                  type="text"
+                  name="region"
+                  required
+                  placeholder="ej. Sidney"
+                  onChange={onChange}
+                />
+              </div>
+              <div className={s["input-container"]}>
+                <label for="zipCode" className={s.label}>
+                  Codigo Postal:{" "}
+                </label>
+                <input
+                  className={s.input}
+                  type="text"
+                  name="zipCode"
+                  required
+                  pattern="\d{4}"
+                  title="Tiene que tener 4 digitos"
+                  placeholder="ej. 1800"
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+            <div className={s["input-container"]}>
+              <label for="extraDetails" className={s.label}>
+                Observaciones:{" "}
+              </label>
               <textarea
-                className="w-full border border-gray-400 rounded-sm px-3 py-1 shadow-sm focus:outline-none focus:border-gray-800"
+                className={s.input}
                 type="text"
                 name="extraDetails"
                 placeholder="casa, dpto, etc"
                 onChange={onChange}
               />
-              <br />
-              <br />
-            </>
-          )}
-          <button
-            type="submit"
-            className="w-full rounded-sm bg-blue-400 px-3 py-1 text-white"
-          >
-            {pathname === "/register" ? "Registrate" : "Ingresa"}
-          </button>
-        </form>
-      </div>
+            </div>
+          </div>
+        )}
+        <button
+          type="submit"
+          className="inline-block w-full rounded-sm bg-green-600 px-3 py-2 my-4 text-white hover:bg-green-500"
+        >
+          {pathname === "/register" ? "Registrate" : "Ingresa"}
+        </button>
+      </form>
     </div>
   );
 };
