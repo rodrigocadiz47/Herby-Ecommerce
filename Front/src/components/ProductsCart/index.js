@@ -1,32 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
-import { SET_CARD } from "../../store/cardReducer";
 
-const ProductCard = function ({ product }) {
-
-  const dispatch = useDispatch()
-  const [amount, setAmount]= React.useState(Number)
-  const card = useSelector((store)=> store.card)
-
-
-  const handleCard = (product) => {
-    dispatch(
-      SET_CARD({ ...product, amount: parseInt(amount), preTotal: amount * product.price })
-    );
-  };
-
-
-  React.useEffect(()=>{
-    localStorage.setItem("CARD-STORAGE", JSON.stringify(card));
-}, [card])
-
-  const onChange= ({ target })=>{
-    setAmount(target.value)
-  }
-
-
+const ProductsCart = function ({ product, handleCart, onChange }) {
   return (
     <div class={s.card}>
       <Link to={`/products/${product.id}`}>
@@ -49,11 +25,11 @@ const ProductCard = function ({ product }) {
             pattern="^[0-9]+"
           />
           kg
-          <button onClick={() => handleCard(product)}>+ ADD</button>
+          <button onClick={() => handleCart(product)}>+ ADD</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductsCart;
