@@ -6,8 +6,12 @@ const initialState = JSON.parse(localStorage.getItem("CART-STORAGE")) || [];
 export const SET_CART = createAction("SET_CART");
 
 export const POST_CART = createAsyncThunk("POST_CART", (orderData)=>{
-    return axios.post(`http://localhost:3001/api/orders/${orderData.userId}`, orderData).then(res=>res.data)
+  console.log(orderData)
+    return axios.post(`http://localhost:3001/api/orders/${orderData.userId}`, orderData).then(res=>{
+      return res.data
+    })
 })
+
 
 const cartReducer = createReducer(initialState, {
   [SET_CART]: (state, action) => {

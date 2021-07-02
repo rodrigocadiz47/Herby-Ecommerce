@@ -12,6 +12,7 @@ import CartContainer from "../CartContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_USER_ME } from "../../store/usersReducer";
 import axios from "axios";
+import { SET_CART } from "../../store/cartReducer";
 
 import { SET_USER_LOCAL } from "../../store/usersReducer"
 
