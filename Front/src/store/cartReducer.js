@@ -28,7 +28,26 @@ const cartReducer = createReducer(initialState, {
     // si todavia no tiene un producto igual al recien agregado, agregarlo
     if (!found) return [...state, action.payload];
   },
-  [POST_CART.fulfilled]: (state, action)=> [...state, action.payload],
+  [POST_CART.fulfilled]: (state, action)=> {
+    let found = false;
+    // si el carrito ya tiene un el producto, sumar cantidades y precio
+    if(state.length){
+      for (let product of state) {
+        if (product.id === action.payload.product.id) {
+          found = true;
+          product.amount += action.payload.order.productQuantity;
+          product.preTotal += action.payload.order.totalOrder;
+        }
+      }
+    }
+    if(!found){
+      const newItem= action.payload.product
+      newItem.amount= action.payload.order.productQuantity
+      newItem.preTotal= action.payload.order.totalOrder
+      return [...state, newItem]
+    }
+
+  },
   [SET_CART_LOCAL]: (state, action)=>{
     console.log("entre por aca")
     localStorage.removeItem("CART-STORAGE")
