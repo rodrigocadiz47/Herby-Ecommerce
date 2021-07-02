@@ -37,7 +37,7 @@ const ProductsContainer = function () {
   };
 
   React.useEffect(() => {
-    localStorage.setItem("cart-STORAGE", JSON.stringify(cart));
+    localStorage.setItem("CART-STORAGE", JSON.stringify(cart));
   }, [cart]);
 
   const onChange = ({ target }) => {
