@@ -15,4 +15,5 @@ Products.hasMany(Order);
 
 Order.belongsTo(User);
 User.hasMany(Order);
+
 module.exports = { User, Order, PurchaseOrder, Products };
