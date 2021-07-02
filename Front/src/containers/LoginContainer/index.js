@@ -26,7 +26,7 @@ export default () => {
         })
       }
     })
-    history.push("/card")
+    history.push("/products")
   };
 
   return (

@@ -12,6 +12,7 @@ export const POST_CART = createAsyncThunk("POST_CART", (orderData)=>{
     })
 })
 
+export const SET_CART_LOCAL= createAction("SET_CART_LOCAL")
 
 const cartReducer = createReducer(initialState, {
   [SET_CART]: (state, action) => {
@@ -27,7 +28,12 @@ const cartReducer = createReducer(initialState, {
     // si todavia no tiene un producto igual al recien agregado, agregarlo
     if (!found) return [...state, action.payload];
   },
-  [POST_CART.fulfilled]: (state, action)=> [...state, action.payload]
+  [POST_CART.fulfilled]: (state, action)=> [...state, action.payload],
+  [SET_CART_LOCAL]: (state, action)=>{
+    console.log("entre por aca")
+    localStorage.removeItem("CART-STORAGE")
+    return state = []
+  }
 });
 
 export default cartReducer;

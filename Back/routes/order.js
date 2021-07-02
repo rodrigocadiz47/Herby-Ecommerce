@@ -15,6 +15,7 @@ router.get("/pending/:id", (req, res, next) => {
 });
 
 router.post("/:id", (req, res, next) => {
+  console.log(req.body)
   const userId = req.params.id;
   const { amount, id, preTotal } = req.body;
   User.findByPk(userId)
@@ -35,7 +36,10 @@ router.post("/:id", (req, res, next) => {
         });
       }
     })
-    .catch((error) => res.status(404).send("error"));
+    .catch((error) => {
+      console.log(error)
+      res.status(404).send(error)
+    });
 });
 
 router.put("/:id", (req, res, next) => {
