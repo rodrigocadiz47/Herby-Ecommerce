@@ -9,13 +9,23 @@ import Register from "../../containers/RegisterContainer";
 import LandingPage from "../../components/LandingPage";
 import Login from "../../containers/LoginContainer";
 import CartContainer from "../CartContainer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_USER_ME } from "../../store/usersReducer";
+import axios from "axios";
+
+import { SET_USER_LOCAL } from "../../store/usersReducer"
 
 function App() {
+  const dispatch = useDispatch()
+  const logOut = ()=>{
+    axios.post("http://localhost:3001/api/users/logout")
+    .then(()=>{
+      dispatch(SET_USER_LOCAL())
+    })
+  }
   return (
     <div>
-      <Header />
+      <Header logOut={logOut}/>
       <Switch>
         <Route path="/cart" component={CartContainer} />
         <Route path="/products/fruits" component={ProductsContainer} />

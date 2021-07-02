@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 
 import s from "./style.module.css";
 
-const Header = function ({ emptyCart }) {
+const Header = function ({ emptyCart, logOut }) {
   const user = useSelector((store) => store.users.currentUser);
-
   return (
     <header>
       <nav className="flex items-center h-20 px-6 justify-around shadow-md relative">
@@ -14,16 +13,17 @@ const Header = function ({ emptyCart }) {
             <span> HERBY </span>
           </Link>
 
-          <Link to="/products/fruits">
+          {/* <Link to="/products/fruits">
             <span> FRUTAS </span>
           </Link>
           <Link to="/products">
             <span> VERDURAS </span>
-          </Link>
+          </Link> */}
+          <Link to="/products">PRODUCTOS</Link>
         </ul>
         <ul className="flex space-x-5">
           {user.id ? (
-            <button>SALIR</button>
+            <button onClick={logOut}>SALIR</button>
           ) : (
             <>
               <Link to="/login">
