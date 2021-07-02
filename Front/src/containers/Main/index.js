@@ -18,8 +18,8 @@ function App() {
       <Header />
       <Switch>
         <Route path="/cart" component={CartContainer} />
-        <Route path="/products/fruits" component={ProductsContainer} />
-        <Route path="/products/:id" component={ProductDetail} />
+        {/* <Route path="/products/fruits" component={ProductsContainer} />
+        <Route path="/products/:id" component={ProductDetail} /> */}
         <Route exact path="/products" component={ProductsContainer} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />

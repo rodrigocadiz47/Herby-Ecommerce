@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Route } from "react-router-dom";
 import { useLocation } from "react-router";
 
 import ProductsCard from "../../components/ProductsCard";
@@ -10,6 +11,8 @@ import s from "./style.module.css";
 
 const ProductsContainer = function () {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  console.log(pathname);
 
   const [amount, setAmount] = React.useState(Number);
   const products = useSelector((state) => state.products.products);
