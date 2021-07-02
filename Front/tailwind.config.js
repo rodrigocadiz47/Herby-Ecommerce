@@ -6,16 +6,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      maxHeight: ["focus"],
-      outline: ["responsive", "focus-within", "focus"],
-      borderColor: [
-        "responsive",
-        "dark",
-        "group-hover",
-        "focus-within",
-        "hover",
-        "focus",
-      ],
+      outline: ["responsive", "focus"],
+      borderColor: ["responsive", "hover", "focus"],
     },
   },
   plugins: [],
