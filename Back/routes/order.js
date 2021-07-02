@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Order, User } = require("../Models");
+const { Order, User, Products } = require("../Models");
 
 router.get("/pending/:id", (req, res, next) => {
   const userId = req.params.id;
@@ -16,27 +16,26 @@ router.get("/pending/:id", (req, res, next) => {
 
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
-  const { name, amount, price, id, preTotal } = User.findByPk(userId)
+  const { amount, id, preTotal } = req.body;
+  User.findByPk(userId)
     .then((user) => {
       if (user.firstName) {
         return Order.create({
-          productName: name,
           productQuantity: amount,
-          productPrice: price,
-          productId: id,
           totalOrder: preTotal,
         }).then((order) => {
           order
             .setUser(userId)
             .then(() => Products.findByPk(id))
             .then((product) => {
-              res.send(product);
+              order.setProduct(product);
+              res.send({ product, order });
             })
             .catch((error) => res.status(400).send(error));
         });
       }
     })
-    .catch((error) => res.status(404).send(error));
+    .catch((error) => res.status(404).send("error"));
 });
 
 router.put("/:id", (req, res, next) => {
