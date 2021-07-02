@@ -76,7 +76,7 @@ export default function CartContainer() {
                 Precio
               </th>
               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                Total
+                Sub-Total
               </th>
             </tr>
             {memorizedCart}

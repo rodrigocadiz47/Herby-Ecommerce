@@ -14,7 +14,7 @@ const ProductDetail = function ({ product }) {
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
               Zanahoria
             </h1>
-            <p className="leading-relaxed">Detalles</p>
+            <p className="leading-relaxed">Ricas en potasio y fósforo, las zanahorias son un remedio para mentes cansadas y nervios desatados.</p>
             <div className="flex">
               <span className="mr-4 title-font font-medium text-2xl text-gray-900">
                 $20

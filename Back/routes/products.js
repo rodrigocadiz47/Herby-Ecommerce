@@ -16,7 +16,7 @@ router.post("/admin", (req, res, next) => {
     where: { name },
     defaults: { name, category, price, stock, seasonal, description, image },
   })
-    .then((product) => sendStatus(201))
+    .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });
 

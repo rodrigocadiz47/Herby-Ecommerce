@@ -49,7 +49,6 @@ const cartReducer = createReducer(initialState, {
 
   },
   [SET_CART_LOCAL]: (state, action)=>{
-    console.log("entre por aca")
     localStorage.removeItem("CART-STORAGE")
     return state = []
   }

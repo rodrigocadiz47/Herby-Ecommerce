@@ -24,7 +24,9 @@ export const registerUser = createAsyncThunk("REGISTER", (user) => {
 export const SET_USER = createAsyncThunk("SET_USER", (loginData)=>{
   return axios
   .post("http://localhost:3001/api/users/login", loginData).then(res=> {
-    localStorage.setItem("USER-STORAGE", JSON.stringify(res.data))
+    if(res.data!==undefined){
+      localStorage.setItem("USER-STORAGE", JSON.stringify(res.data))
+    }
     return res.data
   })
 })
