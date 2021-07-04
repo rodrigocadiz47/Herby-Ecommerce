@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useHistory} from 'react-router'
-import { Route } from "react-router-dom";
+
 import axios from "axios";
 
 import Form from "../../components/Form";
@@ -18,6 +18,9 @@ const UsersContainer = function () {
     codigoPostal: "",
     observaciones: "",
   });
+
+  const [oneEmail, setOneEmail] = useState(false)
+
   const history=useHistory()
 
   const handleSubmit = (event) => {
@@ -28,13 +31,17 @@ const UsersContainer = function () {
 
     axios
       .post("http://localhost:3001/api/users/register", { ...user, address })
-      .then((response) => console.log(response.data))
-      .catch((error) => console.log(error));
-
-      history.push('/login')
+      .then(() =>{
+        setOneEmail(false)
+        history.push('/login')
+      })
+      .catch(() => {
+        setOneEmail(true)
+      });
   };
 
   const onChange = (event) => {
+    setOneEmail(false)
     const fieldName = event.target.name;
     const value = event.target.value;
     setUser({ ...user, [fieldName]: value });
@@ -42,7 +49,7 @@ const UsersContainer = function () {
 
   return (
     <div>
-      <Form handleSubmit={handleSubmit} onChange={onChange}/>
+      <Form handleSubmit={handleSubmit} onChange={onChange} oneEmail={oneEmail}/>
     </div>
   );
 };
