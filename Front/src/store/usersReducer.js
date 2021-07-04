@@ -40,7 +40,9 @@ const usersReducer = createReducer(initialState, {
     state.error= false
     state.currentUser=action.payload
   },
-  [SET_USER.rejected]: (state, action)=>state.error=true,
+  [SET_USER.rejected]: (state, action)=>{
+    state.error=true
+  },
   [SET_USER_LOCAL]: (state, action) => {
     console.log(action.payload)
     localStorage.removeItem("USER-STORAGE")

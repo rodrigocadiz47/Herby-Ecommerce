@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import s from "./style.module.css";
 
 const Header = function ({ emptyCart, logOut }) {
   const user = useSelector((store) => store.users.currentUser);

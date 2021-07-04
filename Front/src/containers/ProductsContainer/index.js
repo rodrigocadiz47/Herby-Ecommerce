@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route } from "react-router-dom";
-import { useLocation } from "react-router";
 
 import ProductsCard from "../../components/ProductsCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
 import { POST_CART, SET_CART } from "../../store/cartReducer";
 
+
 const ProductsContainer = function () {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  console.log(pathname);
+
 
   const [amount, setAmount] = React.useState(Number);
   const products = useSelector((state) => state.products.products);

@@ -10,7 +10,9 @@ export default () => {
   const [loginData, setLoginData] = useState({ email: "", password:""})
   const cart = useSelector(store=>store.cart)
   const history =  useHistory()
+
   const onChange= (event)=> {
+    //dispatch de funcion para sacar alerta de incorrecto
     const fieldName = event.target.name;
     const value = event.target.value;
     setLoginData({ ...loginData, [fieldName]: value });
@@ -25,8 +27,10 @@ export default () => {
           axios.post(`http://localhost:3001/api/orders/${user.payload.id}`, order)
         })
       }
+      if(user.payload){
+        history.push("/products")
+      }
     })
-    history.push("/products")
   };
 
   return (

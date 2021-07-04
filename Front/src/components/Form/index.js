@@ -1,10 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { useLocation } from "react-router";
+import { useSelector } from "react-redux"
 
 import s from "./style.module.css";
 
-export default ({ handleSubmit, onChange }) => {
+export default ({ handleSubmit, onChange, oneEmail }) => {
   const { pathname } = useLocation();
+  const userRejected = useSelector(store => store.users.error)
+
   return (
     <section className={s.stripped}>
       <div class="px-0 py-20 mx-auto max-w-7xl sm:px-4">
@@ -19,6 +22,10 @@ export default ({ handleSubmit, onChange }) => {
             )}
           </div>
 
+
+      {oneEmail && <small>Este email ya esta en uso, por favor, intenta con uno distinto</small>}
+      {(userRejected && pathname==="/login") && <small>Email o Contraseña incorrecta, intente nuevamente</small>}
+      
           <form onSubmit={handleSubmit} className="mb-8 space-y-4">
             {pathname === "/register" && (
               <div className="grid grid-cols-2">
@@ -50,6 +57,7 @@ export default ({ handleSubmit, onChange }) => {
                 </div>
               </div>
             )}
+
             <div className={s["input-container"]}>
               <label for="email" className={s.label}>
                 Email:{" "}
