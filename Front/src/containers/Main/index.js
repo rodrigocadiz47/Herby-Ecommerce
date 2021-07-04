@@ -12,22 +12,23 @@ import CartContainer from "../CartContainer";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { SET_CART_LOCAL } from "../../store/cartReducer";
-import { SET_USER_LOCAL } from "../../store/usersReducer"
+import { SET_USER_LOCAL } from "../../store/usersReducer";
 
 function App() {
-  const dispatch = useDispatch()
-  const logOut = ()=>{
-    axios.post("http://localhost:3001/api/users/logout")
-    .then(()=>{
-      return dispatch(SET_USER_LOCAL())
-    })
-    .then(()=>{
-      dispatch(SET_CART_LOCAL())
-    })
-  }
+  const dispatch = useDispatch();
+  const logOut = () => {
+    axios
+      .post("http://localhost:3001/api/users/logout")
+      .then(() => {
+        return dispatch(SET_USER_LOCAL());
+      })
+      .then(() => {
+        dispatch(SET_CART_LOCAL());
+      });
+  };
   return (
     <div>
-      <Header logOut={logOut}/>
+      <Header logOut={logOut} />
       <Switch>
         <Route path="/cart" component={CartContainer} />
         <Route path="/products/fruits" component={ProductsContainer} />

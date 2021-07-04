@@ -3,42 +3,50 @@ import { Link } from "react-router-dom";
 
 const ProductsCard = function ({ product, handleCart, onChange }) {
   return (
-    <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-      <Link to={`/products/${product.id}`}>
-        <div className="block relative h-48 rounded overflow-hidden">
-          <img alt="" src={product.image} />
-        </div>
-      </Link>
-      <div className="mt-4">
-        <h2 className="text-gray-900 title-font text-lg font-medium">{product.name}</h2>
-        <div className="flex items-center mt-1 space-x-5">
-          <span>${product.price}/ kg</span>
-          <input
-            className="border focus:outline-none"
-            onChange={onChange}
-            defaultValue="1kg"
-            type="number"
-            style={{ width: "50px" }}
-            min="0"
-            max="10"
-            pattern="^[0-9]+"
+    <div className="xl:w-1/4 md:w-1/2 p-4">
+      <div className="bg-gray-100 rounded-lg p-2">
+        <Link to={`/products/${product.id}`}>
+          <img
+            className="h-80 rounded w-full object-cover object-center mb-6"
+            alt=""
+            src={product.image}
           />
-          <button onClick={() => handleCart(product)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        </Link>
+        <div className="p-2">
+          <h3 className="tracking-widest text-gray-500 text-xs font-medium title-font">
+            CATEGORIA
+          </h3>
+          <div className="flex flex-row justify-between text-lg text-gray-700">
+            <h2 className="font-lora text-2xl text-gray-600 font-medium title-font mb-4">
+              {product.name}
+            </h2>
+            <p className="pr-2">${product.price}/ kg</p>
+          </div>
+          <div className="flex items-center mt-1 space-x-5">
+            {/* <label className="text-gray-700">Kg: </label>
+            <input
+              className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700  leading-8 transition-colors duration-200 ease-in-out"
+              // className="outline-none "
+              onChange={onChange}
+              defaultValue="1kg"
+              type="number"
+              style={{ width: "50px" }}
+              min="0"
+              max="10"
+              pattern="^[0-9]+"
+            /> */}
+            <select onChange={onChange} placeholder="Kg" className="p-3 rounded">
+              <option>1 kg</option>
+              <option>2 kg</option>
+              <option>3 kg</option>
+            </select>
+            <button
+              onClick={() => handleCart(product)}
+              className="inline-flex text-white bg-green-500 border-0 py-2 px-5 focus:outline-none hover:bg-green-600 rounded text-lg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </button>
+              Anadir
+            </button>
+          </div>
         </div>
       </div>
     </div>

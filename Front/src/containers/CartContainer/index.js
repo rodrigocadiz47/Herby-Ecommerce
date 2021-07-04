@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import AddRemoveIcons from "../../components/AddRemoveIcons";
+
 export default function CartContainer() {
   const cart = useSelector((store) => store.cart);
   const [total, setTotal] = React.useState(Number);
@@ -9,41 +11,12 @@ export default function CartContainer() {
     return cart.map((order) => {
       return (
         <tr>
-          <th class="px-4 py-3">{order.name}</th>
-          <th class="px-4 py-3">{order.amount} kg</th>
-          <th class="px-4 py-3">${order.price}</th>
-          <th class="px-4 py-3">${order.preTotal}</th>
-          <td class="w-10 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <th className="px-4 py-3">{order.name}</th>
+          <th className="px-4 py-3">{order.amount} kg</th>
+          <th className="px-4 py-3">${order.price}</th>
+          <th className="px-4 py-3">${order.preTotal}</th>
+          <td className="w-10 text-center">
+            <AddRemoveIcons />
           </td>
         </tr>
       );
@@ -66,16 +39,16 @@ export default function CartContainer() {
         {cart.length ? (
           <thead>
             <tr>
-              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                 Producto
               </th>
-              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                 Cantidad
               </th>
-              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                 Precio
               </th>
-              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                 Sub-Total
               </th>
             </tr>
@@ -89,7 +62,7 @@ export default function CartContainer() {
             <span className="px-4 py-8 title-font font-medium text-xl text-gray-900">
               Total = ${total}
             </span>
-            <button class="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+            <button className="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
               Comprar
             </button>
           </div>
