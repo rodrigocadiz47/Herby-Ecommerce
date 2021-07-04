@@ -7,8 +7,6 @@ import ProductsCard from "../../components/ProductsCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
 import { POST_CART, SET_CART } from "../../store/cartReducer";
 
-import s from "./style.module.css";
-
 const ProductsContainer = function () {
   const dispatch = useDispatch();
   const { pathname } = useLocation();

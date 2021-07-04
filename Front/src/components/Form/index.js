@@ -6,166 +6,172 @@ import s from "./style.module.css";
 export default ({ handleSubmit, onChange }) => {
   const { pathname } = useLocation();
   return (
-    <div className="container mx-auto flex flex-col h-screen max-w-md p-8">
-      <div>
-        {pathname === "/register" ? (
-          <h2 className="text-center text-2xl">Crea tu cuenta</h2>
-        ) : (
-          <h2 className="text-center text-2xl">Ingresa</h2>
-        )}
-      </div>
+    <section className={s.stripped}>
+      <div class="px-0 py-20 mx-auto max-w-7xl sm:px-4">
+        <div class="w-full px-4 pt-5 pb-6 mx-auto mt-8 mb-6 bg-white rounded-none shadow-xl sm:rounded-lg sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 sm:px-6">
+          <div>
+            {pathname === "/register" ? (
+              <h1 className="font-lora mb-4 text-2xl text-left text-gray-600">
+                Crea tu cuenta
+              </h1>
+            ) : (
+              <h2 className="font-lora mb-4 text-2xl text-left text-gray-600">Ingresa</h2>
+            )}
+          </div>
 
-      <form onSubmit={handleSubmit}>
-        {pathname === "/register" && (
-          <div className="grid grid-cols-2">
+          <form onSubmit={handleSubmit} className="mb-8 space-y-4">
+            {pathname === "/register" && (
+              <div className="grid grid-cols-2">
+                <div className={s["input-container"]}>
+                  <label for="firstName" className={s.label}>
+                    Nombre:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    className={s.input}
+                    name="firstName"
+                    required
+                    placeholder="ej. Sandra"
+                    onChange={onChange}
+                  />
+                </div>
+                <div className={s["input-container"]}>
+                  <label for="lastName" className={s.label}>
+                    Apellido:{" "}
+                  </label>
+                  <input
+                    className={s.input}
+                    type="text"
+                    name="lastName"
+                    required
+                    placeholder="ej. Fernandez"
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+            )}
             <div className={s["input-container"]}>
-              <label for="firstName" className={s.label}>
-                Nombre:{" "}
+              <label for="email" className={s.label}>
+                Email:{" "}
               </label>
               <input
-                type="text"
                 className={s.input}
-                name="firstName"
+                type="email"
+                name="email"
                 required
-                placeholder="ej. Sandra"
+                placeholder="ej. sandrafernandez@email.com"
                 onChange={onChange}
               />
             </div>
             <div className={s["input-container"]}>
-              <label for="lastName" className={s.label}>
-                Apellido:{" "}
+              <label for="password" className={s.label}>
+                Contraseña:{" "}
               </label>
               <input
                 className={s.input}
-                type="text"
-                name="lastName"
+                type="password"
+                name="password"
                 required
-                placeholder="ej. Fernandez"
+                placeholder="************"
                 onChange={onChange}
               />
             </div>
-          </div>
-        )}
-        <div className={s["input-container"]}>
-          <label for="email" className={s.label}>
-            Email:{" "}
-          </label>
-          <input
-            className={s.input}
-            type="email"
-            name="email"
-            required
-            placeholder="ej. sandrafernandez@email.com"
-            onChange={onChange}
-          />
+            {pathname === "/register" && (
+              <div className="">
+                <div className={s["input-container"]}>
+                  <label for="phone" className={s.label}>
+                    Telefono:{" "}
+                  </label>
+                  <input
+                    className={s.input}
+                    type="text"
+                    name="phone"
+                    required
+                    pattern="\d{8}|\d{10}"
+                    title="Tiene que tener 8 o 10 digitos"
+                    placeholder="ej. 1183771799"
+                    onChange={onChange}
+                  />
+                </div>
+                <div className="grid grid-cols-2">
+                  <div className={s["input-container"]}>
+                    <label for="street" className={s.label}>
+                      Calle:{" "}
+                    </label>
+                    <input
+                      className={s.input}
+                      type="text"
+                      name="calle"
+                      required
+                      placeholder="ej. Av. Cabildo"
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className={s["input-container"]}>
+                    <label for="streetNumber" className={s.label}>
+                      Altura:{" "}
+                    </label>
+                    <input
+                      className={s.input}
+                      name="altura"
+                      required
+                      placeholder="ej. 1242"
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className={s["input-container"]}>
+                    <label for="region" className={s.label}>
+                      Localidad:{" "}
+                    </label>
+                    <input
+                      className={s.input}
+                      type="text"
+                      name="localidad"
+                      required
+                      placeholder="ej. Buenos Aires"
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className={s["input-container"]}>
+                    <label for="zipCode" className={s.label}>
+                      Codigo Postal:{" "}
+                    </label>
+                    <input
+                      className={s.input}
+                      type="text"
+                      name="codigoPostal"
+                      required
+                      pattern="\d{4}"
+                      title="Tiene que tener 4 digitos"
+                      placeholder="ej. 1800"
+                      onChange={onChange}
+                    />
+                  </div>
+                </div>
+                <div className={s["input-container"]}>
+                  <label for="extraDetails" className={s.label}>
+                    Observaciones:{" "}
+                  </label>
+                  <textarea
+                    className={s.input}
+                    type="text"
+                    name="observaciones"
+                    placeholder="casa, dpto, etc"
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+            )}
+            <button
+              type="submit"
+              className="text-white bg-green-500 border-0 py-2 px-6 m-1.5 focus:outline-none hover:bg-green-600 rounded text-lg"
+              onSubmit={handleSubmit}
+            >
+              {pathname === "/register" ? "Registrate" : "Ingresa"}
+            </button>
+          </form>
         </div>
-        <div className={s["input-container"]}>
-          <label for="password" className={s.label}>
-            Contraseña:{" "}
-          </label>
-          <input
-            className={s.input}
-            type="password"
-            name="password"
-            required
-            placeholder="************"
-            onChange={onChange}
-          />
-        </div>
-        {pathname === "/register" && (
-          <div className="">
-            <div className={s["input-container"]}>
-              <label for="phone" className={s.label}>
-                Telefono:{" "}
-              </label>
-              <input
-                className={s.input}
-                type="text"
-                name="phone"
-                required
-                pattern="\d{8}|\d{10}"
-                title="Tiene que tener 8 o 10 digitos"
-                placeholder="ej. 1183771799"
-                onChange={onChange}
-              />
-            </div>
-            <div className="grid grid-cols-2">
-              <div className={s["input-container"]}>
-                <label for="street" className={s.label}>
-                  Calle:{" "}
-                </label>
-                <input
-                  className={s.input}
-                  type="text"
-                  name="calle"
-                  required
-                  placeholder="ej. Wallaby"
-                  onChange={onChange}
-                />
-              </div>
-              <div className={s["input-container"]}>
-                <label for="streetNumber" className={s.label}>
-                  Altura:{" "}
-                </label>
-                <input
-                  className={s.input}
-                  name="altura"
-                  required
-                  placeholder="ej. 42"
-                  onChange={onChange}
-                />
-              </div>
-              <div className={s["input-container"]}>
-                <label for="region" className={s.label}>
-                  Localidad:{" "}
-                </label>
-                <input
-                  className={s.input}
-                  type="text"
-                  name="localidad"
-                  required
-                  placeholder="ej. Sidney"
-                  onChange={onChange}
-                />
-              </div>
-              <div className={s["input-container"]}>
-                <label for="zipCode" className={s.label}>
-                  Codigo Postal:{" "}
-                </label>
-                <input
-                  className={s.input}
-                  type="text"
-                  name="codigoPostal"
-                  required
-                  pattern="\d{4}"
-                  title="Tiene que tener 4 digitos"
-                  placeholder="ej. 1800"
-                  onChange={onChange}
-                />
-              </div>
-            </div>
-            <div className={s["input-container"]}>
-              <label for="extraDetails" className={s.label}>
-                Observaciones:{" "}
-              </label>
-              <textarea
-                className={s.input}
-                type="text"
-                name="observaciones"
-                placeholder="casa, dpto, etc"
-                onChange={onChange}
-              />
-            </div>
-          </div>
-        )}
-        <button
-          type="submit"
-          className="inline-block w-full rounded-sm bg-green-600 px-3 py-2 my-4 text-white hover:bg-green-500"
-          onSubmit={handleSubmit}
-        >
-          {pathname === "/register" ? "Registrate" : "Ingresa"}
-        </button>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };
