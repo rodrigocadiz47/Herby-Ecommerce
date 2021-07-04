@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import s from "./style.module.css";
-import AddRemoveIcons from "../AddRemoveIcons";
 
 const ProductsCard = function ({ product, handleCart, onChange }) {
   return (
@@ -25,7 +24,7 @@ const ProductsCard = function ({ product, handleCart, onChange }) {
             <p className="pr-2">${product.price}/ kg</p>
           </div>
           <div className="flex items-center mt-1 space-x-5">
-            <label className="text-gray-700">Kg: </label>
+            {/* <label className="text-gray-700">Kg: </label>
             <input
               className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700  leading-8 transition-colors duration-200 ease-in-out"
               // className="outline-none "
@@ -36,14 +35,18 @@ const ProductsCard = function ({ product, handleCart, onChange }) {
               min="0"
               max="10"
               pattern="^[0-9]+"
-            />
-            <AddRemoveIcons click={handleCart} arg={product} />
-            {/* <button
+            /> */}
+            <select onChange={onChange} placeholder="Kg" className="p-3 rounded">
+              <option>1 kg</option>
+              <option>2 kg</option>
+              <option>3 kg</option>
+            </select>
+            <button
               onClick={() => handleCart(product)}
               className="inline-flex text-white bg-green-500 border-0 py-2 px-5 focus:outline-none hover:bg-green-600 rounded text-lg"
             >
               Anadir
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
