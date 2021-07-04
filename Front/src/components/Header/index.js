@@ -6,7 +6,7 @@ import s from "./style.module.css";
 const Header = function ({ emptyCart, logOut }) {
   const user = useSelector((store) => store.users.currentUser);
   return (
-    <header>
+    <header className="sticky top-0 z-20 bg-gray-100">
       <nav className="flex items-center h-20 px-6 justify-around shadow-md relative">
         <ul className="space-x-5">
           <Link to="/">
@@ -51,15 +51,15 @@ const Header = function ({ emptyCart, logOut }) {
               {!emptyCart && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
+                    // stroke-linecap="round"
+                    // stroke-linejoin="round"
+                    // strokeWidth="1"
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
