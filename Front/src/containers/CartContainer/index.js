@@ -5,15 +5,14 @@ import { REMOVE_ITEM } from "../../store/cartReducer";
 import AddRemoveIcons from "../../components/AddRemoveIcons";
 
 export default function CartContainer() {
-  const dispatch = useDispatch() 
-    const handleRemove = (productId)=>{
-      dispatch(REMOVE_ITEM(productId))
-    }
+  const dispatch = useDispatch();
+  const handleRemove = (productId) => {
+    dispatch(REMOVE_ITEM(productId));
+  };
   const cart = useSelector((store) => store.cart);
   const [total, setTotal] = React.useState(Number);
 
   const memorizedCart = React.useMemo(() => {
-
     return cart.map((order) => {
       return (
         <tr>
@@ -22,12 +21,12 @@ export default function CartContainer() {
           <th className="px-4 py-3">${order.price}</th>
           <th className="px-4 py-3">${order.preTotal}</th>
           <td className="w-10 text-center">
-            <AddRemoveIcons handleRemove={()=>handleRemove(order.id)}/>
+            <AddRemoveIcons handleRemove={() => handleRemove(order.id)} />
           </td>
         </tr>
       );
     });
-  }, [cart]);
+  }, [cart, handleRemove]);
 
   React.useEffect(() => {
     console.log(cart);
