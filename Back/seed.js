@@ -456,3 +456,4 @@ Products.bulkCreate([
 ]).then((algo) => {
   console.log("PRODUCT SEED");
 });
+

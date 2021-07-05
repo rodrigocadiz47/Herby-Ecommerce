@@ -6,8 +6,8 @@ const initialState = {
   error: false,
 };
 
-export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", () => {
-  return axios.get("http://localhost:3001/api/products").then((res) => res.data);
+export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", (pathname) => {
+  return axios.get(`http://localhost:3001/api${pathname}`).then((res) => res.data);
 });
 
 const productsReducer = createReducer(initialState, {

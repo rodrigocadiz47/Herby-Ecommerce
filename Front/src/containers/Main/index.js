@@ -31,7 +31,8 @@ function App() {
       <Header logOut={logOut} />
       <Switch>
         <Route path="/cart" component={CartContainer} />
-        <Route path="/products/fruits" component={ProductsContainer} />
+        <Route path="/products/veg" component={ProductsContainer} />
+        <Route path="/products/fruit" component={ProductsContainer} />
         <Route path="/products/:id" render={({match})=><ProductDetail productId={match.params.id}/>} />
         <Route exact path="/products" component={ProductsContainer} />
         <Route path="/register" component={Register} />
