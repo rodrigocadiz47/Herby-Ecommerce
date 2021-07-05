@@ -21,6 +21,7 @@ const ProductsContainer = function () {
   const handleCart = (product) => {
     console.log(amount);
     if (user.firstName) {
+      console.log("usuariousuario",user)
       dispatch(
         POST_CART({
           ...product,

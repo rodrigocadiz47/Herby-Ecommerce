@@ -15,7 +15,6 @@ router.get("/pending/:id", (req, res, next) => {
 });
 
 router.post("/:id", (req, res, next) => {
-  console.log(req.body)
   const userId = req.params.id;
   const { amount, id, preTotal } = req.body;
   User.findByPk(userId)
