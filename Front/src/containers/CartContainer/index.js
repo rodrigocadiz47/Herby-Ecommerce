@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { REMOVE_ITEM } from "../../store/cartReducer";
 import { CHECKOUT } from "../../store/cartReducer";
+import OptionQuantity from "../../components/OptionQuantity";
 
 import AddRemoveIcons from "../../components/AddRemoveIcons";
 import axios from "axios";
@@ -20,7 +21,7 @@ export default function CartContainer() {
       return (
         <tr>
           <th className="px-4 py-3">{order.name}</th>
-          <th className="px-4 py-3">{order.amount} kg</th>
+          <th className="px-4 py-3"><OptionQuantity amount={order.amount} productId={order.id}/></th>
           <th className="px-4 py-3">${order.price}</th>
           <th className="px-4 py-3">${order.preTotal}</th>
           <td className="w-10 text-center">
