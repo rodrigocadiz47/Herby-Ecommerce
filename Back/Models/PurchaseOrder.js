@@ -24,7 +24,7 @@ PurchaseOrder.init(
 PurchaseOrder.addHook("afterCreate", async function (purchaseOrder) {
   try {
     const orders = await Order.findAll({
-      where: { userId: purchaseOrder.userId },
+      where: { userId: purchaseOrder.userId, bought: false },
     });
     orders.map((order) => {
       order.setPurchaseOrder(purchaseOrder.id);
