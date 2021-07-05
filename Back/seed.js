@@ -1,50 +1,50 @@
 const {User, Products}= require("./Models")
 
-User.bulkCreate([
-    {
-        firstName: "Rodrigo",
-        lastName: "Cadiz",
-        email: "rodrigo@ro.com",
-        address: "lebensohn 412, mar de ajo, 7109",
-        password: "1234",
-        phone: 1161185846
-    },
-    {
-        firstName: "Erika",
-        lastName: "Zurhmule",
-        email: "erika@ro.com",
-        address: "costanera 24, mar de ajo, 7109",
-        password: "1234",
-        phone: 1154856985
-    },
-    {
-        firstName: "Belen",
-        lastName: "Buccolo",
-        email: "belen@ro.com",
-        address: "costanera 24, mar de ajo, 7109",
-        password: "1234",
-        phone: 1154850148
-    },
-    {
-        firstName: "Fer",
-        lastName: "Yifii",
-        email: "fer@ro.com",
-        address: "costanera 24, mar de ajo, 7109",
-        password: "1234",
-        phone: 1154852357
-    },
-    {
-        firstName: "Hernan",
-        lastName: "Langer",
-        email: "hernan@ro.com",
-        address: "costanera 24, mar de ajo, 7109",
-        password: "1234",
-        phone: 1154854593
-    },
-])
-.then(algo=>{
-    console.log("USERS SEED")
-})
+// User.bulkCreate([
+//     {
+//         firstName: "Rodrigo",
+//         lastName: "Cadiz",
+//         email: "rodrigo@ro.com",
+//         address: "lebensohn 412, mar de ajo, 7109",
+//         password: "1234",
+//         phone: 1161185846
+//     },
+//     {
+//         firstName: "Erika",
+//         lastName: "Zurhmule",
+//         email: "erika@ro.com",
+//         address: "costanera 24, mar de ajo, 7109",
+//         password: "1234",
+//         phone: 1154856985
+//     },
+//     {
+//         firstName: "Belen",
+//         lastName: "Buccolo",
+//         email: "belen@ro.com",
+//         address: "costanera 24, mar de ajo, 7109",
+//         password: "1234",
+//         phone: 1154850148
+//     },
+//     {
+//         firstName: "Fer",
+//         lastName: "Yifii",
+//         email: "fer@ro.com",
+//         address: "costanera 24, mar de ajo, 7109",
+//         password: "1234",
+//         phone: 1154852357
+//     },
+//     {
+//         firstName: "Hernan",
+//         lastName: "Langer",
+//         email: "hernan@ro.com",
+//         address: "costanera 24, mar de ajo, 7109",
+//         password: "1234",
+//         phone: 1154854593
+//     },
+// ])
+// .then(algo=>{
+//     console.log("USERS SEED")
+// })
 
 Products.bulkCreate([
     {
@@ -81,7 +81,7 @@ Products.bulkCreate([
         stock: 180,
         seasonal: false,
         description: "El tomate maduro, además de agua, posee carbohidratos, potasio, fósforo, magnesio, vitaminas B1, B2, B5 y C.",
-        image: "https://www.hogarmania.com/archivos/201305/5185-nutricion-ainhoa-zanahorias-xl-668x400x80xX.jpg"
+        image: "https://www.cucinare.tv/wp-content/uploads/2019/05/Tomates.jpg"
     },
 
 ])
