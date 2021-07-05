@@ -32,17 +32,17 @@ passport.use(
       usernameField: "email",
       passwordField: "password",
     },
-    (imputEmail, imputPassword, done) => {
+    (inputEmail, inputPassword, done) => {
       User.findOne({
         where: {
-          email: imputEmail,
+          email: inputEmail,
         },
       })
         .then((user) => {
           if (!user) {
             return done(null, false);
           }
-          user.isValidPassword(imputPassword).then((bool) => {
+          user.isValidPassword(inputPassword).then((bool) => {
             if (!bool) {
               return done(null, false);
             } else {

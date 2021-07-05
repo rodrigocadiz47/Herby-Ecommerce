@@ -1,5 +1,6 @@
 const S = require("sequelize");
 const db = require("./_db");
+const Order = require("./Order");
 
 class PurchaseOrder extends S.Model {}
 PurchaseOrder.init(
@@ -19,4 +20,20 @@ PurchaseOrder.init(
   }, //hacer hook para comprobar total
   { sequelize: db, modelName: "purchaseOrder" }
 );
+
+PurchaseOrder.addHook("afterCreate", async function (purchaseOrder) {
+  try {
+    const orders = await Order.findAll({
+      where: { userId: purchaseOrder.userId },
+    });
+    orders.map((order) => {
+      order.setPurchaseOrder(purchaseOrder.id);
+      order.bought = true;
+      order.save();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = PurchaseOrder;
