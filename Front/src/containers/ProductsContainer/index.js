@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ProductsCard from "../../components/ProductsCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
-import { POST_CART, SET_CART } from "../../store/cartReducer";
+import { POST_CART, SET_CART, EDIT_AMOUNT } from "../../store/cartReducer";
 import { useLocation } from "react-router";
 
 const ProductsContainer = function () {
@@ -19,14 +19,20 @@ const ProductsContainer = function () {
     console.log(amount);
     if (user.firstName) {
       console.log("usuariousuario", user);
-      dispatch(
-        POST_CART({
-          ...product,
-          amount: amount,
-          preTotal: amount * product.price,
-          userId: user.id,
-        })
-      );
+      let changeOrder = cart.filter((order) => order.productId === product.id);
+      if (changeOrder.length) {
+        let newAmount = changeOrder[0].amount + product.amount;
+        dispatch(EDIT_AMOUNT({ id: changeOrder[0].id, amount: newAmount }));
+      } else {
+        dispatch(
+          POST_CART({
+            ...product,
+            amount: amount,
+            preTotal: amount * product.price,
+            userId: user.id,
+          })
+        );
+      }
     } else {
       dispatch(
         SET_CART({
@@ -39,10 +45,16 @@ const ProductsContainer = function () {
   };
   const handleCard = (data) => {
     let cardId = document.getElementById(data);
-
+    cardId.style.backgroundColor = "#0284C7";
     cardId.textContent === "Añadir"
       ? (cardId.textContent = "Añadido")
       : (cardId.textContent = "Añadir");
+    setTimeout(() => {
+      cardId.style.backgroundColor = "#10B981";
+      cardId.textContent === "Añadir"
+        ? (cardId.textContent = "Añadido")
+        : (cardId.textContent = "Añadir");
+    }, 1000);
   };
 
   React.useEffect(() => {
