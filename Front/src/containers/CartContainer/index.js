@@ -35,7 +35,9 @@ export default function CartContainer() {
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
-        <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">Carrito</h1>
+        <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">
+          Carrito
+        </h1>
         {cart.length ? (
           <thead>
             <tr>
