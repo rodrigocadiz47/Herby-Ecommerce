@@ -4,7 +4,8 @@ import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit"
 const initialState = {
   currentUser: JSON.parse(localStorage.getItem("USER-STORAGE")) || {},
   carrito: {},
-  error: false
+  ordersHistory: {},
+  error: false,
 };
 
 export const registerUser = createAsyncThunk("REGISTER", (user) => {
@@ -21,33 +22,41 @@ export const registerUser = createAsyncThunk("REGISTER", (user) => {
     .catch((error) => console.log(error));
 });
 
-export const SET_USER = createAsyncThunk("SET_USER", (loginData)=>{
-  return axios
-  .post("http://localhost:3001/api/users/login", loginData).then(res=> {
-    if(res.data!==undefined){
-      localStorage.setItem("USER-STORAGE", JSON.stringify(res.data))
+export const SET_USER = createAsyncThunk("SET_USER", (loginData) => {
+  return axios.post("http://localhost:3001/api/users/login", loginData).then((res) => {
+    if (res.data !== undefined) {
+      localStorage.setItem("USER-STORAGE", JSON.stringify(res.data));
     }
-    return res.data
-  })
-})
+    return res.data;
+  });
+});
 
-export const SET_USER_LOCAL = createAction("SET_USER_LOCAL")
+export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
+  return axios
+    .post(`http://localhost:3001/api/purchaseOrders/${userId}`)
+    .then((res) => res.data);
+});
+
+export const SET_USER_LOCAL = createAction("SET_USER_LOCAL");
 
 export const logUser = createAsyncThunk();
 
 const usersReducer = createReducer(initialState, {
-  [SET_USER.fulfilled]: (state, action)=> {
-    state.error= false
-    state.currentUser=action.payload
+  [SET_USER.fulfilled]: (state, action) => {
+    state.error = false;
+    state.currentUser = action.payload;
   },
-  [SET_USER.rejected]: (state, action)=>{
-    state.error=true
+  [SET_USER.rejected]: (state, action) => {
+    state.error = true;
   },
   [SET_USER_LOCAL]: (state, action) => {
-    console.log(action.payload)
-    localStorage.removeItem("USER-STORAGE")
-    state.currentUser= {}
-  }
+    console.log(action.payload);
+    localStorage.removeItem("USER-STORAGE");
+    state.currentUser = {};
+  },
+  [GET_HISTORY]: (state, action) => {
+    state.ordersHistory = action.payload;
+  },
 });
 
 export default usersReducer;
