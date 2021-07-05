@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { REMOVE_ITEM } from "../../store/cartReducer";
+import { CHECKOUT } from "../../store/cartReducer";
 
 import AddRemoveIcons from "../../components/AddRemoveIcons";
+import axios from "axios";
 
 export default function CartContainer() {
   const dispatch = useDispatch() 
@@ -10,6 +12,7 @@ export default function CartContainer() {
       dispatch(REMOVE_ITEM(productId))
     }
   const cart = useSelector((store) => store.cart);
+  const user = useSelector(store=>store.users.currentUser)
   const [total, setTotal] = React.useState(Number);
 
   const memorizedCart = React.useMemo(() => {
@@ -22,7 +25,7 @@ export default function CartContainer() {
           <th className="px-4 py-3">${order.price}</th>
           <th className="px-4 py-3">${order.preTotal}</th>
           <td className="w-10 text-center">
-            <AddRemoveIcons handleRemove={()=>handleRemove(order.id)}/>
+            <AddRemoveIcons handleRemove={()=>handleRemove(order)}/>
           </td>
         </tr>
       );
@@ -37,6 +40,10 @@ export default function CartContainer() {
     const toPay = cart.length && pre.reduce((a, b) => a + b);
     setTotal(toPay);
   }, [cart]);
+
+  const handleCheckout= ()=>{
+    dispatch(CHECKOUT())
+  }
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -70,7 +77,7 @@ export default function CartContainer() {
             <span className="px-4 py-8 title-font font-medium text-xl text-gray-900">
               Total = ${total}
             </span>
-            <button className="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+            <button className="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg" onClick={handleCheckout}>
               Comprar
             </button>
           </div>
