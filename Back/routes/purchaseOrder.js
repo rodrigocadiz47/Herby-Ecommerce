@@ -20,19 +20,19 @@ router.get("/:id", (req, res, next) => {
     .catch((error) => res.status(500).send(error));
 });
 
-router.post("/:id", (req, res, next) => {
-  const userId = req.params.id;
-  const { orders, total } = req.body; //orders=[{order1},{order2},{order3},{order4}
+// router.post("/:id", (req, res, next) => {
+//   const userId = req.params.id;
+//   const { orders, total } = req.body; //orders=[{order1},{order2},{order3},{order4}
 
-  PurchaseOrder.create({ total })
-    .then((purchase) => {
-      purchase.setUser(userId); //le seteo el id del usuario
-      orders.map((order) => {
-        //si no funciona hacer un bypk
-        order.setPurchaseOrder(purchase.id);
-        order.bought = true; //cambiando el estado de la order a comprado
-      });
-    })
-    .catch((error) => res.status(400).send(error));
-});
+//   PurchaseOrder.create({ total })
+//     .then((purchase) => {
+//       purchase.setUser(userId); //le seteo el id del usuario
+//       orders.map((order) => {
+//         //si no funciona hacer un bypk
+//         order.setPurchaseOrder(purchase.id);
+//         order.bought = true; //cambiando el estado de la order a comprado
+//       });
+//     })
+//     .catch((error) => res.status(400).send(error));
+// });
 module.exports = router;

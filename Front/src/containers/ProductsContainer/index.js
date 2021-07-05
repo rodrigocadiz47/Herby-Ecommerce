@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import ProductsCard from "../../components/ProductsCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
 import { POST_CART, SET_CART } from "../../store/cartReducer";
+import { useLocation } from "react-router";
 
 const ProductsContainer = function () {
   const dispatch = useDispatch();
 
+
   const [amount, setAmount] = React.useState(0);
   const [buttonTitle, setButtonTitle] = React.useState(true);
   const [buttonId, setButtonId] = React.useState(null);
+
   const products = useSelector((state) => state.products.products);
   const cart = useSelector((store) => store.cart);
   const user = useSelector((store) => store.users.currentUser);
@@ -60,9 +63,12 @@ const ProductsContainer = function () {
     setAmount(value);
   };
 
+  const {pathname} = useLocation()
+
+  
   useEffect(() => {
-    dispatch(GET_PRODUCTS());
-  }, [dispatch]);
+    dispatch(GET_PRODUCTS(pathname));
+  }, [pathname]);
 
   const quantity = [0, 0.5, 1, 1.5, 2, 2.5, 3];
 
