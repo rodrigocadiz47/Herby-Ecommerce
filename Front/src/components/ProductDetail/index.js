@@ -5,7 +5,7 @@ const ProductDetail = function ({productId}) {
   const [product, setProduct] = React.useState({})
 
   React.useEffect(()=>{
-    axios.get(`http://localhost:3001/api/products/${productId}`)
+    axios.get(`http://localhost:3001/api/products/detail/${productId}`)
     .then((res)=>{
       setProduct(res.data)
     })

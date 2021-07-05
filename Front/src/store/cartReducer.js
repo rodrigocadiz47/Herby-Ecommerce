@@ -12,9 +12,7 @@ export const POST_CART = createAsyncThunk("POST_CART", (orderData)=>{
 })
 
 export const REMOVE_ITEM = createAsyncThunk("REMOVE_ITEM", (product, thunkAPI)=>{
-  console.log("PRODUCTO", product)
   const {currentUser}= thunkAPI.getState().users
-  console.log("CURRENT USER", currentUser)
   if(currentUser.email){
     return axios.delete(`http://localhost:3001/api/orders/${product.id}`).then(({data})=>data)
   }
@@ -32,6 +30,16 @@ export const CHECKOUT = createAsyncThunk("CHECKOUT", (id, thunkAPI)=>{
     return axios.post(`http://localhost:3001/api/purchaseOrders/${currentUser.id}`).then(({data})=>data)
   }
 })
+
+export const EDIT_AMOUNT= createAsyncThunk("EDIT_AMOUNT", (({productId, newQuantity}, thunkAPI)=>{
+  const {currentUser}= thunkAPI.getState().users
+  if(currentUser.email){
+    return axios.put(`http://localhost:3001/api/orders/${productId}`, {quantityChange: newQuantity}).then(({data})=>data)
+  }
+  else{
+    return {productId: productId, productQuantity: newQuantity}
+  }
+}))
 
 const cartReducer = createReducer(initialState, {
   [SET_CART]: (state, action) => {
@@ -79,6 +87,17 @@ const cartReducer = createReducer(initialState, {
   [CHECKOUT.fulfilled]: (state, action)=>{
     localStorage.removeItem("CART-STORAGE")
     return []
+  },
+  [EDIT_AMOUNT.fulfilled]: (state, action)=>{
+    const {productId, productQuantity}= action.payload
+    const editCart=  state.map(order=>{
+      if(order.id===productId){
+        order.amount= productQuantity
+      }
+      return order
+    })
+    localStorage.setItem("CART-STORAGE", JSON.stringify(editCart))
+    state= editCart
   }
 });
 
