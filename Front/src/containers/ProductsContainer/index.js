@@ -9,10 +9,7 @@ import { useLocation } from "react-router";
 const ProductsContainer = function () {
   const dispatch = useDispatch();
 
-
   const [amount, setAmount] = React.useState(0);
-  const [buttonTitle, setButtonTitle] = React.useState(true);
-  const [buttonId, setButtonId] = React.useState(null);
 
   const products = useSelector((state) => state.products.products);
   const cart = useSelector((store) => store.cart);
@@ -21,7 +18,7 @@ const ProductsContainer = function () {
   const handleCart = (product) => {
     console.log(amount);
     if (user.firstName) {
-      console.log("usuariousuario",user)
+      console.log("usuariousuario", user);
       dispatch(
         POST_CART({
           ...product,
@@ -41,17 +38,12 @@ const ProductsContainer = function () {
     }
   };
   const handleCard = (data) => {
-    setButtonTitle(!buttonTitle);
-    setButtonId(data);
-  };
+    let cardId = document.getElementById(data);
 
-  React.useEffect(() => {
-    let buttonValue = buttonTitle ? "Añadir" : "Añadido";
-    if (buttonId) {
-      let cardId = document.getElementById(buttonId);
-      cardId.textContent = buttonValue;
-    }
-  }, [buttonId, buttonTitle]);
+    cardId.textContent === "Añadir"
+      ? (cardId.textContent = "Añadido")
+      : (cardId.textContent = "Añadir");
+  };
 
   React.useEffect(() => {
     localStorage.setItem("CART-STORAGE", JSON.stringify(cart));
@@ -64,9 +56,8 @@ const ProductsContainer = function () {
     setAmount(value);
   };
 
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
-  
   useEffect(() => {
     dispatch(GET_PRODUCTS(pathname));
   }, [pathname]);
@@ -85,7 +76,6 @@ const ProductsContainer = function () {
               onChange={onChange}
               quantity={quantity}
               handleCard={handleCard}
-              buttonTitle={buttonTitle}
             />
           );
         })}
