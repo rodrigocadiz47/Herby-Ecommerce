@@ -58,10 +58,17 @@ router.post("/:id", (req, res, next) => {
 //   });
 // });
 
-// router.delete("/:id", (req, res, next) => {
-//   const orderId = req.params.id;
-//   Order.findByPk(orderId)
-//     .then((order) => order.destroy())
-//     .catch((error) => res.status(404).send(error));
-// });
+router.delete("/:id", (req, res, next) => {
+  const productID = req.params.id;
+  Order.findOne({
+    where: {
+      productId: productID
+    }
+  })
+    .then((order) => {
+      order.destroy()
+      res.send(order)
+    })
+    .catch((error) => res.status(404).send(error));
+});
 module.exports = router;

@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import ProductsCard from "../../components/ProductsCard";
 import { GET_PRODUCTS } from "../../store/productsReducer";
 import { POST_CART, SET_CART } from "../../store/cartReducer";
+import { useLocation } from "react-router";
 
 
 const ProductsContainer = function () {
   const dispatch = useDispatch();
-
 
   const [amount, setAmount] = React.useState(Number);
   const products = useSelector((state) => state.products.products);
@@ -41,9 +41,12 @@ const ProductsContainer = function () {
     setAmount(value);
   };
 
+  const {pathname} = useLocation()
+
+  
   useEffect(() => {
-    dispatch(GET_PRODUCTS());
-  }, [dispatch]);
+    dispatch(GET_PRODUCTS(pathname));
+  }, [pathname]);
 
   return (
     <div className="container px-5 py-24 mx-auto">

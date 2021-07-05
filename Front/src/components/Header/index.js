@@ -12,13 +12,13 @@ const Header = function ({ emptyCart, logOut }) {
             <span> HERBY </span>
           </Link>
 
-          {/* <Link to="/products/fruits">
+          <Link to="/products/fruit">
             <span> FRUTAS </span>
           </Link>
-          <Link to="/products">
+          <Link to="/products/veg">
             <span> VERDURAS </span>
-          </Link> */}
-          <Link to="/products">PRODUCTOS</Link>
+          </Link> 
+          {/* <Link to="/products">PRODUCTOS</Link> */}
         </ul>
         <ul className="flex space-x-5">
           {user.id ? (

@@ -6,11 +6,14 @@ const initialState = JSON.parse(localStorage.getItem("CART-STORAGE")) || [];
 export const SET_CART = createAction("SET_CART");
 
 export const POST_CART = createAsyncThunk("POST_CART", (orderData)=>{
-  console.log(orderData)
     return axios.post(`http://localhost:3001/api/orders/${orderData.userId}`, orderData).then(res=>{
       return res.data
     })
 })
+
+export const REMOVE_ITEM = createAsyncThunk("REMOVE_ITEM", (productId)=>{
+  return axios.delete(`http://localhost:3001/api/orders/${productId}`).then(({data})=>data)
+}) 
 
 export const SET_CART_LOCAL= createAction("SET_CART_LOCAL")
 
@@ -51,6 +54,11 @@ const cartReducer = createReducer(initialState, {
   [SET_CART_LOCAL]: (state, action)=>{
     localStorage.removeItem("CART-STORAGE")
     return state = []
+  },
+  [REMOVE_ITEM.fulfilled]: (state, action) => {
+    const actuallyCart= state.filter(order=> order.id!==action.payload.productId)
+    localStorage.setItem("CART-STORAGE", JSON.stringify(actuallyCart))
+    return actuallyCart
   }
 });
 
