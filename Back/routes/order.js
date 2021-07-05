@@ -41,21 +41,21 @@ router.post("/:id", (req, res, next) => {
     });
 });
 
-// router.put("/:id", (req, res, next) => {
-//   const { productQuantity } = req.body;
-//   const orderId = req.params.id;
-//   Order.findByPk(orderId).then((order) => {
-//     if (order.id) {
-//       order
-//         .update({
-//           productQuantity,
-//         })
-//         .then((order) => {
-//           res.send(order);
-//         });
-//     }
-//   });
-// });
+router.put("/:productId", (req, res, next) => {
+  const { quantityChange } = req.body;
+  const productId = req.params.productId;
+  Order.findOne({where: {productId: productId}}).then((order) => {
+    if (order.id) {
+      order
+        .update({
+          productQuantity: quantityChange,
+        })
+        .then((order) => {
+          res.send(order);
+        });
+    }
+  });
+});
 
 router.delete("/:id", (req, res, next) => {
   const productID = req.params.id;
