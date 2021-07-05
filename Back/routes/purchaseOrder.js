@@ -20,6 +20,7 @@ router.get("/:id", (req, res, next) => {
     .catch((error) => res.status(500).send(error));
 });
 
+
 router.post("/:id", async (req, res, next) => {
   const userId = req.params.id;
   // const { total } = req.body; orders=[{order1},{order2},{order3},{order4}
@@ -40,4 +41,5 @@ router.post("/:id", async (req, res, next) => {
     res.status(400).send(error);
   }
 });
+
 module.exports = router;

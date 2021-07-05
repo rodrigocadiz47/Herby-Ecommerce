@@ -41,26 +41,33 @@ router.post("/:id", (req, res, next) => {
     });
 });
 
-router.put("/:id", (req, res, next) => {
-  const { productQuantity } = req.body;
-  const orderId = req.params.id;
-  Order.findByPk(orderId).then((order) => {
-    if (order.id) {
-      order
-        .update({
-          productQuantity,
-        })
-        .then((order) => {
-          res.send(order);
-        });
-    }
-  });
-});
+// router.put("/:id", (req, res, next) => {
+//   const { productQuantity } = req.body;
+//   const orderId = req.params.id;
+//   Order.findByPk(orderId).then((order) => {
+//     if (order.id) {
+//       order
+//         .update({
+//           productQuantity,
+//         })
+//         .then((order) => {
+//           res.send(order);
+//         });
+//     }
+//   });
+// });
 
 router.delete("/:id", (req, res, next) => {
-  const orderId = req.params.id;
-  Order.findByPk(orderId)
-    .then((order) => order.destroy())
+  const productID = req.params.id;
+  Order.findOne({
+    where: {
+      productId: productID
+    }
+  })
+    .then((order) => {
+      order.destroy()
+      res.send(order)
+    })
     .catch((error) => res.status(404).send(error));
 });
 module.exports = router;

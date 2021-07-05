@@ -3,8 +3,9 @@ const router = express.Router();
 const passport = require("passport");
 const { Products } = require("../Models");
 
-router.get("/", (req, res, next) => {
-  Products.findAll().then((products) => res.send(products));
+router.get("/:category", (req, res, next) => {
+  Products.findAll({where: {category: req.params.category}})
+  .then((products) => res.send(products));
 });
 
 // path ("api/products/admin")
