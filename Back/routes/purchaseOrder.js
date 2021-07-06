@@ -19,7 +19,9 @@ router.post("/:id", async (req, res, next) => {
   const userId = req.params.id;
   // const { total } = req.body; orders=[{order1},{order2},{order3},{order4}
   try {
-    const orders = await Order.findAll({ where: { userId: userId, bought: false } }); //obtenemos el arreglo de ordenes usando el id
+    const orders = await Order.findAll({
+      where: { userId: userId, bought: false },
+    }); //obtenemos el arreglo de ordenes usando el id
     const numberTotals = orders.map((order) => order.totalOrder); //creamos un nuevo arreglo con el total de cada orden
     const total = numberTotals.reduce((total, num) => {
       return total + num;
@@ -30,6 +32,9 @@ router.post("/:id", async (req, res, next) => {
       deliveryRange: "caba",
       wayToPay: "efectivo",
     }); //ver con el front para no harcodear 2 propiedades
+    orders.map((order) =>
+      order.stockUpdate(order.productQuantity, order.productId)
+    );
     res.send(order);
   } catch (error) {
     res.status(400).send(error);

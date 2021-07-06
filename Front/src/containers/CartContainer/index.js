@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { REMOVE_ITEM } from "../../store/cartReducer";
 import { CHECKOUT } from "../../store/cartReducer";
@@ -15,21 +16,23 @@ export default function CartContainer() {
     dispatch(REMOVE_ITEM(productId));
   };
   const cart = useSelector((store) => store.cart);
-  const user = useSelector(store=>store.users.currentUser)
+  const user = useSelector((store) => store.users.currentUser);
   const [total, setTotal] = React.useState(Number);
 
   const memorizedCart = React.useMemo(() => {
     return cart.map((order) => {
       return (
-        <tr>
-          <th className="px-4 py-3">{order.name}</th>
+
+        <tr key={order.id}>
+          <Link to={`/products/${order.id}`}>
+            <th className="px-4 py-3">{order.name}</th>
+          </Link>
           <th className="px-4 py-3"><OptionQuantity amount={order.amount} productId={order.id} price={order.price}/></th>
+
           <th className="px-4 py-3">${order.price}</th>
           <th className="px-4 py-3">${order.preTotal}</th>
           <td className="w-10 text-center">
-
-            <AddRemoveIcons handleRemove={()=>handleRemove(order)}/>
-
+            <AddRemoveIcons handleRemove={() => handleRemove(order)} />
           </td>
         </tr>
       );
@@ -51,6 +54,7 @@ export default function CartContainer() {
       history.push("/congratulation")
     })
   }
+
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -84,7 +88,10 @@ export default function CartContainer() {
             <span className="px-4 py-8 title-font font-medium text-xl text-gray-900">
               Total = ${total}
             </span>
-            <button className="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg" onClick={handleCheckout}>
+            <button
+              className="max-w-xs inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
+              onClick={handleCheckout}
+            >
               Comprar
             </button>
           </div>

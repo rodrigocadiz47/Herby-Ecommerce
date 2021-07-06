@@ -1,6 +1,6 @@
 const S = require("sequelize");
 const db = require("./_db");
-const { Products } = require("./");
+const Product = require("./Products");
 
 class Order extends S.Model {}
 Order.init(
@@ -22,6 +22,15 @@ Order.init(
 
   { sequelize: db, modelName: "order" }
 );
+
+Order.prototype.stockUpdate = (quantity, productId) => {
+  Product.findByPk(productId)
+    .then((producto) => {
+      producto.stock = producto.stock - quantity;
+      producto.save();
+    })
+    .catch((error) => console.log(error));
+};
 
 // Order.addHook("beforeCreate", function (order) {
 //   const id = order.productId;

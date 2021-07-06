@@ -62,7 +62,6 @@ export default function AddQuantityHook() {
     console.log(value);
     setAmount(value);
   };
-
-  const quantity = [0, 0.5, 1, 1.5, 2, 2.5, 3];
-  return { onChange, handleCard, quantity, handleCart };
+  
+  return { onChange, handleCard, handleCart };
 }
