@@ -19,9 +19,9 @@ router.get("/:id", (req, res, next) => {
     .then(user=>{
         transporter.sendMail({
           from: '"HERBY" <herbymailer@gmail.com>', 
-          to: "hernanlanger@gmail.com", 
+          to: user.email, 
           subject: "Nuevo pedido ingresado", 
-          text: `Estimado Hernan desde Herby le queremos agradecer por su compra.`, 
+          text: `Estimado ${user.firstName} desde Herby le queremos agradecer por su compra.`, 
       });
       res.send(purchases)
     })
