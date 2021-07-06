@@ -1,16 +1,15 @@
 import React from "react";
-import axios from "axios"
+import axios from "axios";
 
-const ProductDetail = function ({productId}) {
-  const [product, setProduct] = React.useState({})
+const ProductDetail = function ({ productId }) {
+  const [product, setProduct] = React.useState({});
 
-  React.useEffect(()=>{
-    axios.get(`http://localhost:3001/api/products/detail/${productId}`)
-    .then((res)=>{
-      setProduct(res.data)
-    })
-  }, [])
-  console.log(product)
+  React.useEffect(() => {
+    axios.get(`http://localhost:3001/api/products/detail/${productId}`).then((res) => {
+      setProduct(res.data);
+    });
+  }, []);
+  console.log(product);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">

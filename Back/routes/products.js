@@ -6,8 +6,9 @@ const { Products } = require("../Models");
 //GET METHOD
 
 router.get("/:category", (req, res, next) => {
-  Products.findAll({where: {category: req.params.category}})
-  .then((products) => res.send(products));
+  Products.findAll({ where: { category: req.params.category } }).then((products) =>
+    res.send(products)
+  );
 });
 
 router.get("/detail/:id", (req, res, next) => {
@@ -22,8 +23,7 @@ router.get("/detail/:id", (req, res, next) => {
 // path ("api/products/admin")
 //POST METHOD
 router.post("/admin", (req, res, next) => {
-  const { name, category, price, stock, seasonal, description, image } =
-    req.body;
+  const { name, image, category, price, stock, seasonal, description } = req.body;
 
   Products.findOrCreate({
     where: { name },
@@ -32,6 +32,5 @@ router.post("/admin", (req, res, next) => {
     .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });
-
 
 module.exports = router;
