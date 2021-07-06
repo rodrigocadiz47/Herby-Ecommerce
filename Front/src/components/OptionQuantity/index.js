@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { EDIT_AMOUNT } from "../../store/cartReducer";
+import { useSelector } from "react-redux";
 
 
 export default function OptionQuantity({ amount, productId, price }){
@@ -19,8 +20,8 @@ export default function OptionQuantity({ amount, productId, price }){
       <option selected hidden>
         {amount} kg
       </option>
-      {quantity.map((index, number) => {
-        return <option key={index}>{number} kg</option>;
+      {quantity.map((value, index) => {
+        return <option key={index}>{value} kg</option>;
       })}
     </select>
   );
