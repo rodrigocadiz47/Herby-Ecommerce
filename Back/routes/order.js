@@ -9,6 +9,8 @@ router.get("/pending/:id", (req, res, next) => {
       userId: userId,
       bought: false,
     },
+    attributes: ["id", "totalOrder", "productId", "productQuantity"],
+    include: { model: Products, attributes: ["name", "price"] },
   })
     .then((orders) => res.send(orders))
     .catch((error) => res.status(404).send(error));

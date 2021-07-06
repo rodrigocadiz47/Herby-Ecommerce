@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { REMOVE_ITEM } from "../../store/cartReducer";
 import { CHECKOUT } from "../../store/cartReducer";
 import OptionQuantity from "../../components/OptionQuantity";
+import { useHistory } from "react-router"
 
 import AddRemoveIcons from "../../components/AddRemoveIcons";
-import axios from "axios";
+
 
 export default function CartContainer() {
+  const history = useHistory()
   const dispatch = useDispatch();
   const handleRemove = (productId) => {
     dispatch(REMOVE_ITEM(productId));
@@ -21,7 +23,7 @@ export default function CartContainer() {
       return (
         <tr>
           <th className="px-4 py-3">{order.name}</th>
-          <th className="px-4 py-3"><OptionQuantity amount={order.amount} productId={order.id}/></th>
+          <th className="px-4 py-3"><OptionQuantity amount={order.amount} productId={order.id} price={order.price}/></th>
           <th className="px-4 py-3">${order.price}</th>
           <th className="px-4 py-3">${order.preTotal}</th>
           <td className="w-10 text-center">
@@ -45,6 +47,9 @@ export default function CartContainer() {
 
   const handleCheckout= ()=>{
     dispatch(CHECKOUT())
+    .then(()=>{
+      history.push("/congratulation")
+    })
   }
 
   return (
