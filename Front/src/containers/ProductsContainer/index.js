@@ -16,11 +16,8 @@ const ProductsContainer = function () {
   const user = useSelector((store) => store.users.currentUser);
 
   const handleCart = (product) => {
-    console.log(amount);
     if (user.firstName) {
-      console.log("usuariousuario", user);
       let changeOrder = cart.filter((order) => order.id === product.id);
-      console.log("CHANGE_ORDER :", changeOrder);
       if (changeOrder.length) {
         let newAmount = changeOrder[0].amount + amount;
         console.log("NEW_AMOUNT :", newAmount);

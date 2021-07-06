@@ -10,6 +10,7 @@ import LandingPage from "../../components/LandingPage";
 import Login from "../../containers/LoginContainer";
 import CartContainer from "../CartContainer";
 import OrdersHistory from "../../components/OrdersHistory";
+import Congratulation from "../../components/Congratulation";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/history" component={OrdersHistory} />
         <Route path="/home" component={LandingPage} />
+        <Route path="/congratulation" component={Congratulation}/>
         <Redirect from="/" to="/home" />
       </Switch>
     </div>

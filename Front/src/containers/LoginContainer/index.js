@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import Form from "../../components/Form"
 import { SET_USER } from "../../store/usersReducer";
+import { GET_LOG_CART } from "../../store/cartReducer";
 
 export default () => {
   const dispatch= useDispatch()
@@ -27,8 +28,9 @@ export default () => {
           axios.post(`http://localhost:3001/api/orders/${user.payload.id}`, order)
         })
       }
+      dispatch(GET_LOG_CART(user.payload.id))
       if(user.payload){
-        history.push("/products")
+        history.push("/products/fruit")
       }
     })
   };
