@@ -24,7 +24,7 @@ Product.init(
       },
     },
     stock: {
-      type: S.INTEGER,
+      type: S.FLOAT,
       defaultValue: 0,
     },
 

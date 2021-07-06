@@ -19,10 +19,14 @@ const ProductsContainer = function () {
     console.log(amount);
     if (user.firstName) {
       console.log("usuariousuario", user);
-      let changeOrder = cart.filter((order) => order.productId === product.id);
+      let changeOrder = cart.filter((order) => order.id === product.id);
+      console.log("CHANGE_ORDER :", changeOrder);
       if (changeOrder.length) {
-        let newAmount = changeOrder[0].amount + product.amount;
-        dispatch(EDIT_AMOUNT({ id: changeOrder[0].id, amount: newAmount }));
+        let newAmount = changeOrder[0].amount + amount;
+        console.log("NEW_AMOUNT :", newAmount);
+        dispatch(
+          EDIT_AMOUNT({ productId: changeOrder[0].id, newQuantity: newAmount })
+        );
       } else {
         dispatch(
           POST_CART({

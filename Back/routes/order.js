@@ -36,23 +36,26 @@ router.post("/:id", (req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error)
-      res.status(404).send(error)
+      console.log(error);
+      res.status(404).send(error);
     });
 });
 
 router.put("/:productId", (req, res, next) => {
   const { quantityChange } = req.body;
   const productId = req.params.productId;
-  Order.findOne({where: {productId: productId}}).then((order) => {
+  Order.findOne({ where: { productId: productId } }).then((order) => {
     if (order.id) {
-      order
-        .update({
-          productQuantity: quantityChange,
-        })
-        .then((order) => {
-          res.send(order);
-        });
+      Products.findByPk(order.productId).then((product) => {
+        order
+          .update({
+            productQuantity: quantityChange,
+            totalOrder: quantityChange * product.price,
+          })
+          .then((order) => {
+            res.send(order);
+          });
+      });
     }
   });
 });
@@ -61,12 +64,12 @@ router.delete("/:id", (req, res, next) => {
   const productID = req.params.id;
   Order.findOne({
     where: {
-      productId: productID
-    }
+      productId: productID,
+    },
   })
     .then((order) => {
-      order.destroy()
-      res.send(order)
+      order.destroy();
+      res.send(order);
     })
     .catch((error) => res.status(404).send(error));
 });
