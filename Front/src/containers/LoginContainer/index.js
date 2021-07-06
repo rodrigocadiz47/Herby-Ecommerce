@@ -30,13 +30,9 @@ export default () => {
           );
         });
       }
-
       dispatch(GET_LOG_CART(user.payload.id))
-      
-
       if (user.payload) {
         history.push("/home");
-
       }
     });
   };
