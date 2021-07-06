@@ -44,9 +44,29 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
   });
 });
 
+router.delete("/admin/:id", (req, res, next)=>{
+  User.findByPk(req.params.id)
+  .then(user=>{
+    user.destroy()
+    res.sendStatus(200)
+  })
+  .catch(()=>res.sendStatus(404))
+})
+
 router.post("/logout", (req, res, next) => {
   req.logOut();
   res.sendStatus(200);
+});
+
+router.delete("/admin/:id", (req, res, next) => {
+  console.log("req.params", req);
+  User.findByPk(req.params.id)
+    .then((user) => {
+      console.log("encontre el user");
+      user.destroy();
+      res.send(user);
+    })
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = router;

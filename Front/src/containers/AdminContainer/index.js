@@ -1,14 +1,25 @@
 import React, { useState } from "react";
+
 import { Switch, Route, Link, useHistory } from "react-router-dom";
+
+
 import { useDispatch, useSelector } from "react-redux";
 
 import NewProductForm from "../../components/NewProductForm";
+import UsersList from "../../components/UsersList";
 import { ADD_PRODUCT } from "../../store/productsReducer";
+import { GET_USERS, DELETE_USER } from "../../store/usersReducer";
 
 const Admin = function () {
   const dispatch = useDispatch();
+
   const history = useHistory();
   const user = useSelector((store) => store.users.currentUser);
+
+  const users = useSelector((state) => state.users.users);
+  const [edit, setEdit] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [product, setProduct] = useState({
     name: "",
     image: "",
@@ -18,8 +29,6 @@ const Admin = function () {
     seasonal: false,
     description: "",
   });
-
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -36,7 +45,17 @@ const Admin = function () {
     clearState();
   };
 
+  const deleteUser = (userId) => {
+    dispatch(DELETE_USER(userId));
+  };
+
+  const toggleEdit = () => {
+    if (edit) setEdit(false);
+    else setEdit(true);
+  };
+
   const clearState = () => {
+    setErrorMessage("");
     setProduct({
       name: "",
       image: "",
@@ -46,10 +65,10 @@ const Admin = function () {
       seasonal: false,
       description: "",
     });
-    setErrorMessage("");
   };
 
   return (
+
     <div>
       {user.isAdmin ? (
         <section className="text-gray-600 body-font overflow-hidden">
@@ -73,6 +92,14 @@ const Admin = function () {
                   Agregar Categoria
                 </button>
               </Link>
+            <Link to="/admin/users">
+            <button
+              onClick={() => dispatch(GET_USERS())}
+              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Editar Usuarios
+            </button>
+          </Link>
             </div>
             <Switch>
               <Route
@@ -85,6 +112,17 @@ const Admin = function () {
                   />
                 )}
               />
+              <Route
+            path="/admin/users"
+            render={() => (
+              <UsersList
+                users={users}
+                deleteUser={deleteUser}
+                edit={edit}
+                toggleEdit={toggleEdit}
+              />
+            )}
+          />
             </Switch>
           </div>
         </section>
@@ -92,6 +130,7 @@ const Admin = function () {
         history.push("/home")
       )}
     </div>
+
   );
 };
 
