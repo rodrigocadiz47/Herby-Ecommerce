@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import Form from "../../components/Form";
 import { SET_USER } from "../../store/usersReducer";
+import { GET_LOG_CART } from "../../store/cartReducer";
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,8 +30,13 @@ export default () => {
           );
         });
       }
+
+      dispatch(GET_LOG_CART(user.payload.id))
+      
+
       if (user.payload) {
         history.push("/home");
+
       }
     });
   };

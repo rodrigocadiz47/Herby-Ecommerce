@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+
 import AddQuantity from "../AddQuantity";
 import AddQuantityHook from "../../utils/AddQuantityHook";
 
@@ -8,11 +9,13 @@ const ProductDetail = function ({ productId }) {
   const { onChange, handleCard, handleCart } = AddQuantityHook();
 
   React.useEffect(() => {
+
     axios
       .get(`http://localhost:3001/api/products/detail/${productId}`)
       .then((res) => {
         setProduct(res.data);
       });
+
   }, []);
   console.log(product);
   return (
