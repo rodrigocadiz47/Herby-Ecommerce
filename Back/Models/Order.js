@@ -6,7 +6,7 @@ class Order extends S.Model {}
 Order.init(
   {
     productQuantity: {
-      type: S.INTEGER,
+      type: S.FLOAT,
       allowNull: false,
     },
 

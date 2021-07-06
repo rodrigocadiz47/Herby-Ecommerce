@@ -8,8 +8,6 @@ const OrdersHistory = function () {
   const user = useSelector((store) => store.users.currentUser);
   const ordersHistory = useSelector((store) => store.users.history);
 
-  console.log("history", ordersHistory);
-
   useEffect(() => {
     dispatch(GET_HISTORY(user.id));
   }, [dispatch, user]);
@@ -17,8 +15,8 @@ const OrdersHistory = function () {
   return (
     <div>
       <h1>History</h1>
-      {ordersHistory.map((element) => (
-        <p>{element}</p>
+      {ordersHistory && ordersHistory.map((purchaseOrder) => (
+        <p>{purchaseOrder.id}</p>
       ))}
     </div>
   );
