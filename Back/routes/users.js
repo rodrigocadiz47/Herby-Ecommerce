@@ -20,8 +20,16 @@ router.get("/", (req, res, next) => {
 
 //POST METHOD
 router.post("/register", (req, res, next) => {
-  const { firstName, lastName, phone, address, email, password } = req.body;
-  User.create({ firstName, lastName, phone, address, email, password })
+  const { firstName, lastName, phone, address, email, password /*,isAdmin*/ } =
+    req.body;
+  User.create({
+    firstName,
+    lastName,
+    phone,
+    address,
+    email,
+    password /*,isAdmin*/,
+  })
     .then((user) => res.send(user))
     .catch((error) => res.status(400).send(error));
 });
@@ -32,6 +40,7 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     email: req.user.email,
+    isAdmin: req.user.isAdmin,
   });
 });
 

@@ -1,49 +1,50 @@
 const { User, Products } = require("./Models");
 
-// User.bulkCreate([
-//   {
-//     firstName: "Rodrigo",
-//     lastName: "Cadiz",
-//     email: "rodrigo@ro.com",
-//     address: "lebensohn 412, mar de ajo, 7109",
-//     password: "1234",
-//     phone: 1161185846,
-//   },
-//   {
-//     firstName: "Erika",
-//     lastName: "Zurhmule",
-//     email: "erika@ro.com",
-//     address: "costanera 24, mar de ajo, 7109",
-//     password: "1234",
-//     phone: 1154856985,
-//   },
-//   {
-//     firstName: "Belen",
-//     lastName: "Buccolo",
-//     email: "belen@ro.com",
-//     address: "costanera 24, mar de ajo, 7109",
-//     password: "1234",
-//     phone: 1154850148,
-//   },
-//   {
-//     firstName: "Fer",
-//     lastName: "Yifii",
-//     email: "fer@ro.com",
-//     address: "costanera 24, mar de ajo, 7109",
-//     password: "1234",
-//     phone: 1154852357,
-//   },
-//   {
-//     firstName: "Hernan",
-//     lastName: "Langer",
-//     email: "hernan@ro.com",
-//     address: "costanera 24, mar de ajo, 7109",
-//     password: "1234",
-//     phone: 1154854593,
-//   },
-// ]).then((algo) => {
-//   console.log("USERS SEED");
-// });
+User.bulkCreate([
+  //   {
+  //     firstName: "Rodrigo",
+  //     lastName: "Cadiz",
+  //     email: "rodrigo@ro.com",
+  //     address: "lebensohn 412, mar de ajo, 7109",
+  //     password: "1234",
+  //     phone: 1161185846,
+  //   },
+  // {
+  //   firstName: "Erika",
+  //   lastName: "Zurhmule",
+  //   email: "erika@gmail.com",
+  //   address: "costanera 24, mar de ajo, 7109",
+  //   password: "1234",
+  //   phone: 1154856985,
+  //   isAdmin: true,
+  // },
+  //   {
+  //     firstName: "Belen",
+  //     lastName: "Buccolo",
+  //     email: "belen@ro.com",
+  //     address: "costanera 24, mar de ajo, 7109",
+  //     password: "1234",
+  //     phone: 1154850148,
+  //   },
+  //   {
+  //     firstName: "Fer",
+  //     lastName: "Yifii",
+  //     email: "fer@ro.com",
+  //     address: "costanera 24, mar de ajo, 7109",
+  //     password: "1234",
+  //     phone: 1154852357,
+  //   },
+  //   {
+  //     firstName: "Hernan",
+  //     lastName: "Langer",
+  //     email: "hernan@ro.com",
+  //     address: "costanera 24, mar de ajo, 7109",
+  //     password: "1234",
+  //     phone: 1154854593,
+  //   },
+]).then((algo) => {
+  console.log("Admin SEED");
+});
 
 Products.bulkCreate([
   {
