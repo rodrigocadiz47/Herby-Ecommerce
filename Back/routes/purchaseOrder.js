@@ -9,11 +9,7 @@ router.get("/:id", (req, res, next) => {
     where: {
       userId: id,
     },
-    include: [
-      {
-        model: Order,
-        attribute: { id, productName, productPrice, productQuantity },
-      },
+    include: [{model: Order},
     ],
   })
     .then((purchases) => res.send(purchases))

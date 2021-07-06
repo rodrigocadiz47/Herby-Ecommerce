@@ -4,7 +4,7 @@ import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit"
 const initialState = {
   currentUser: JSON.parse(localStorage.getItem("USER-STORAGE")) || {},
   carrito: {},
-  ordersHistory: {},
+  ordersHistory: [],
   error: false,
 };
 
@@ -33,8 +33,8 @@ export const SET_USER = createAsyncThunk("SET_USER", (loginData) => {
 
 export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
   return axios
-    .post(`http://localhost:3001/api/purchaseOrders/${userId}`)
-    .then((res) => res.data);
+    .get(`http://localhost:3001/api/purchaseOrders/${userId}`)
+    .then(({data}) => data);
 });
 
 export const SET_USER_LOCAL = createAction("SET_USER_LOCAL");
@@ -54,8 +54,9 @@ const usersReducer = createReducer(initialState, {
     localStorage.removeItem("USER-STORAGE");
     state.currentUser = {};
   },
-  [GET_HISTORY]: (state, action) => {
-    state.ordersHistory = action.payload;
+  [GET_HISTORY.fulfilled]: (state, action) => {
+    console.log("ACTION HISTORY", action.payload)
+    state.ordersHistory = [...action.payload]
   },
 });
 

@@ -63,6 +63,7 @@ const Header = function ({ emptyCart, logOut, user }) {
             </span>
           </Link>
           {user.id && (
+            <Link to="/history">
             <span className="flex">
               <p className="mr-2">{user.firstName.toUpperCase()}</p>
               <svg
@@ -78,6 +79,7 @@ const Header = function ({ emptyCart, logOut, user }) {
                 />
               </svg>
             </span>
+            </Link>
           )}
         </ul>
       </nav>
