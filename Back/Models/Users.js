@@ -1,5 +1,5 @@
 const S = require("sequelize");
-const db = require("./_db")
+const db = require("./_db");
 const bcrypt = require("bcrypt");
 
 class User extends S.Model {}
@@ -8,27 +8,27 @@ User.init(
     firstName: {
       type: S.TEXT,
       allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      validate: {
+        notEmpty: true,
+      },
     },
     lastName: {
       type: S.TEXT,
       allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      validate: {
+        notEmpty: true,
+      },
     },
     phone: {
       type: S.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
-    address:{
+    address: {
       type: S.STRING,
       allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      validate: {
+        notEmpty: true,
+      },
     },
     email: {
       type: S.STRING,
@@ -41,9 +41,13 @@ User.init(
     password: {
       type: S.STRING,
       allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      validate: {
+        notEmpty: true,
+      },
+    },
+    isAdmin: {
+      type: S.BOOLEAN,
+      defaultValue: false,
     },
     salt: {
       type: S.STRING,
