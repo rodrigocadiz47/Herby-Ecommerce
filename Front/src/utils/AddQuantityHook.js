@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { POST_CART, SET_CART, EDIT_AMOUNT } from "../store/cartReducer";
 
-import ProductsCard from "../../components/ProductsCard";
-import { GET_PRODUCTS } from "../../store/productsReducer";
-import { useLocation } from "react-router";
+export default function AddQuantityHook() {
+  const dispatch = useDispatch();
 
-const ProductsContainer = function () {
-  const products = useSelector((state) => state.products.products);
+  const [amount, setAmount] = React.useState(0);
+
   const cart = useSelector((store) => store.cart);
-
   const user = useSelector((store) => store.users.currentUser);
 
   const handleCart = (product) => {
+    console.log(amount);
     if (user.firstName) {
+      console.log("usuariousuario", user);
       let changeOrder = cart.filter((order) => order.id === product.id);
+      console.log("CHANGE_ORDER :", changeOrder);
       if (changeOrder.length) {
         let newAmount = changeOrder[0].amount + amount;
         console.log("NEW_AMOUNT :", newAmount);
@@ -54,28 +56,13 @@ const ProductsContainer = function () {
     }, 1000);
   };
 
-  const dispatch = useDispatch();
+  const onChange = ({ target }) => {
+    console.log(target.value);
+    const value = parseFloat(target.value);
+    console.log(value);
+    setAmount(value);
+  };
 
-
-  React.useEffect(() => {
-    localStorage.setItem("CART-STORAGE", JSON.stringify(cart));
-  }, [cart]);
-
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    dispatch(GET_PRODUCTS(pathname));
-  }, [pathname]);
-
-  return (
-    <div className="container px-5 py-24 mx-auto">
-      <div className="flex flex-wrap -m-4">
-        {products.map((product) => {
-          return <ProductsCard key={product.id} product={product} />;
-        })}
-      </div>
-    </div>
-  );
-};
-
-export default ProductsContainer;
+  const quantity = [0, 0.5, 1, 1.5, 2, 2.5, 3];
+  return { onChange, handleCard, quantity, handleCart };
+}

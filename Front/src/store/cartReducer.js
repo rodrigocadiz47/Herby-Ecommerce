@@ -1,8 +1,4 @@
-import {
-  createReducer,
-  createAction,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createReducer, createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = JSON.parse(localStorage.getItem("CART-STORAGE")) || [];
@@ -31,17 +27,14 @@ export const POST_CART = createAsyncThunk("POST_CART", (orderData) => {
       return { productId: product.id };
     }*/
 
-export const REMOVE_ITEM = createAsyncThunk(
-  "REMOVE_ITEM",
-  (product, thunkAPI) => {
-    const { currentUser } = thunkAPI.getState().users;
-    if (currentUser.email) {
-      return axios
-        .delete(`http://localhost:3001/api/orders/${product.id}`)
-        .then(({ data }) => data);
-    } else {
-      return { productId: product.id };
-    }
+export const REMOVE_ITEM = createAsyncThunk("REMOVE_ITEM", (product, thunkAPI) => {
+  const { currentUser } = thunkAPI.getState().users;
+  if (currentUser.email) {
+    return axios
+      .delete(`http://localhost:3001/api/orders/${product.id}`)
+      .then(({ data }) => data);
+  } else {
+    return { productId: product.id };
   }
 );
 
@@ -118,9 +111,7 @@ const cartReducer = createReducer(initialState, {
     return (state = []);
   },
   [REMOVE_ITEM.fulfilled]: (state, action) => {
-    const actuallyCart = state.filter(
-      (order) => order.id !== action.payload.productId
-    );
+    const actuallyCart = state.filter((order) => order.id !== action.payload.productId);
     localStorage.setItem("CART-STORAGE", JSON.stringify(actuallyCart));
     return actuallyCart;
   },
