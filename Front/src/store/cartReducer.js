@@ -36,7 +36,7 @@ export const REMOVE_ITEM = createAsyncThunk("REMOVE_ITEM", (product, thunkAPI) =
   } else {
     return { productId: product.id };
   }
-});
+);
 
 export const SET_CART_LOCAL = createAction("SET_CART_LOCAL");
 
