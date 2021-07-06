@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { PurchaseOrder, Order } = require("../Models");
+const { PurchaseOrder, Order, Products } = require("../Models");
 
 router.get("/:id", (req, res, next) => {
   //trae todos las ordenes de compra de un usuario [{purchase1}{purchase2}]//purchase1={id,fecha,total,[order1,order2]}// order={id,productId, productName, productQuantity,productPrice}
@@ -9,13 +9,11 @@ router.get("/:id", (req, res, next) => {
     where: {
       userId: id,
     },
-    include: [{model: Order},
-    ],
+    include: [{ model: Order, include: [{ model: Products }] }],
   })
     .then((purchases) => res.send(purchases))
     .catch((error) => res.status(500).send(error));
 });
-
 
 router.post("/:id", async (req, res, next) => {
   const userId = req.params.id;
@@ -31,7 +29,7 @@ router.post("/:id", async (req, res, next) => {
       userId: userId,
       deliveryRange: "caba",
       wayToPay: "efectivo",
-    });//ver con el front para no harcodear 2 propiedades
+    }); //ver con el front para no harcodear 2 propiedades
     res.send(order);
   } catch (error) {
     res.status(400).send(error);
