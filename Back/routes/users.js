@@ -40,4 +40,15 @@ router.post("/logout", (req, res, next) => {
   res.sendStatus(200);
 });
 
+router.delete("/admin/:id", (req, res, next) => {
+  console.log("req.params", req);
+  User.findByPk(req.params.id)
+    .then((user) => {
+      console.log("encontre el user");
+      user.destroy();
+      res.send(user);
+    })
+    .catch(() => res.sendStatus(404));
+});
+
 module.exports = router;

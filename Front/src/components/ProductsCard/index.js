@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import AddQuantityHook from "../../utils/AddQuantityHook";
 import AddQuantity from "../AddQuantity";
 
-
 const ProductsCard = function ({ product }) {
-
   const { onChange, handleCard, handleCart } = AddQuantityHook();
 
   return (
@@ -50,7 +48,6 @@ const ProductsCard = function ({ product }) {
               onChange={onChange}
               handleCard={handleCard}
             />
-
           </div>
         </div>
       </div>

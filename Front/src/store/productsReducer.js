@@ -26,7 +26,7 @@ const productsReducer = createReducer(initialState, {
     state.products = [...state.products, action.payload];
   },
   [ADD_PRODUCT.rejected]: (state, action) => {
-    state.error = action.error;
+    state.error = true;
   },
 });
 
