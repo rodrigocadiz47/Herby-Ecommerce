@@ -80,7 +80,7 @@ Products.bulkCreate([
       "https://images.pexels.com/photos/533343/pexels-photo-533343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
-    name: "Pomelo Rozado",
+    name: "Pomelo Rosado",
     category: "fruit",
     price: 110,
     stock: 400,
@@ -278,7 +278,7 @@ Products.bulkCreate([
       "https://images.unsplash.com/photo-1577166071289-3104dfa3f28d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80",
   },
   {
-    name: "papa",
+    name: "Papa",
     category: "veg",
     price: 90,
     stock: 180,
@@ -388,7 +388,7 @@ Products.bulkCreate([
       "https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
   },
   {
-    name: "cebolla Morada",
+    name: "Cebolla Morada",
     category: "veg",
     price: 80,
     stock: 180,
@@ -456,4 +456,3 @@ Products.bulkCreate([
 ]).then((algo) => {
   console.log("PRODUCT SEED");
 });
-

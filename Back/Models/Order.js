@@ -15,7 +15,7 @@ Order.init(
       defaultValue: false,
     },
     totalOrder: {
-      type: S.INTEGER,
+      type: S.FLOAT,
       allowNull: false,
     },
   }, //se va a setear el id de purchase
