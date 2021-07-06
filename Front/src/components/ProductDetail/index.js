@@ -1,17 +1,19 @@
 import React from "react";
 import axios from "axios";
+
 import AddQuantity from "../AddQuantity";
 
-// handleCart, onChange, quantity, handleCard
 const ProductDetail = function ({ productId }) {
   const [product, setProduct] = React.useState({});
 
   React.useEffect(() => {
+
     axios
       .get(`http://localhost:3001/api/products/detail/${productId}`)
       .then((res) => {
         setProduct(res.data);
       });
+
   }, []);
   console.log(product);
   return (

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import AddQuantityHook from "../../utils/AddQuantityHook";
 import AddQuantity from "../AddQuantity";
 
+
 const ProductsCard = function ({ product }) {
   const { onChange, handleCard, quantity, handleCart } = AddQuantityHook();
+
   return (
     <div className="xl:w-1/4 md:w-1/2 p-4">
       <div className="bg-gray-100 rounded-lg p-2">
@@ -38,6 +40,7 @@ const ProductsCard = function ({ product }) {
               max="10"
               pattern="^[0-9]+"
             /> */}
+
             <AddQuantity
               product={product}
               handleCart={handleCart}
@@ -45,6 +48,7 @@ const ProductsCard = function ({ product }) {
               quantity={quantity}
               handleCard={handleCard}
             />
+
           </div>
         </div>
       </div>
