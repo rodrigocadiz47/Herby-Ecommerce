@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
 import AddQuantity from "../AddQuantity";
+import AddQuantityHook from "../../utils/AddQuantityHook";
 
-// handleCart, onChange, quantity, handleCard
 const ProductDetail = function ({ productId }) {
   const [product, setProduct] = React.useState({});
+  const { onChange, handleCard, handleCart } = AddQuantityHook();
 
   React.useEffect(() => {
     axios
@@ -32,7 +33,12 @@ const ProductDetail = function ({ productId }) {
               <span className="mr-4 title-font font-medium text-2xl text-gray-900">
                 ${product.price}
               </span>
-              <AddQuantity />
+              <AddQuantity
+                product={product}
+                handleCart={handleCart}
+                onChange={onChange}
+                handleCard={handleCard}
+              />
             </div>
           </div>
         </div>

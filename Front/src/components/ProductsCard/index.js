@@ -4,7 +4,7 @@ import AddQuantityHook from "../../utils/AddQuantityHook";
 import AddQuantity from "../AddQuantity";
 
 const ProductsCard = function ({ product }) {
-  const { onChange, handleCard, quantity, handleCart } = AddQuantityHook();
+  const { onChange, handleCard, handleCart } = AddQuantityHook();
   return (
     <div className="xl:w-1/4 md:w-1/2 p-4">
       <div className="bg-gray-100 rounded-lg p-2">
@@ -17,12 +17,14 @@ const ProductsCard = function ({ product }) {
         </Link>
         <div className="p-2">
           <h3 className="tracking-widest text-gray-500 text-xs font-medium title-font">
-            CATEGORIA
+            CATEGORIA {product.category}
           </h3>
           <div className="flex flex-row justify-between text-lg text-gray-700">
-            <h2 className="font-lora text-2xl text-gray-600 font-medium title-font mb-4">
-              {product.name}
-            </h2>
+            <Link to={`/products/${product.id}`}>
+              <h2 className="font-lora text-2xl text-gray-600 font-medium title-font mb-4">
+                {product.name}
+              </h2>
+            </Link>
             <p className="pr-2">${product.price}/ kg</p>
           </div>
           <div className="flex items-center mt-1 space-x-5">
@@ -42,7 +44,6 @@ const ProductsCard = function ({ product }) {
               product={product}
               handleCart={handleCart}
               onChange={onChange}
-              quantity={quantity}
               handleCard={handleCard}
             />
           </div>

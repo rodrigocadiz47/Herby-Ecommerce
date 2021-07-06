@@ -1,12 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 
-export default ({ product, handleCart, onChange, quantity, handleCard }) => {
+export default ({ product, handleCart, onChange, handleCard }) => {
+  const quantity = [0, 0.5, 1, 1.5, 2, 2.5, 3];
   return (
     <div>
       <select onChange={onChange} placeholder="Kg" className="p-3 rounded">
-        {quantity.map((value) => (
-          <option>{`${value} kg`}</option>
+        {quantity.map((index,value) => (
+          <option key={index}>{`${value} kg`}</option>
         ))}
       </select>
       <button
