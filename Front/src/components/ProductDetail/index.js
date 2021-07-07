@@ -9,13 +9,9 @@ const ProductDetail = function ({ productId }) {
   const { onChange, handleCard, handleCart } = AddQuantityHook();
 
   React.useEffect(() => {
-
-    axios
-      .get(`http://localhost:3001/api/products/detail/${productId}`)
-      .then((res) => {
-        setProduct(res.data);
-      });
-
+    axios.get(`http://localhost:3001/api/products/detail/${productId}`).then((res) => {
+      setProduct(res.data);
+    });
   }, []);
   console.log(product);
   return (
@@ -23,7 +19,7 @@ const ProductDetail = function ({ productId }) {
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img
-            className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+            className="lg:w-1/2 w-full h-96 object-cover object-center rounded"
             src={product.image}
             alt="product-img"
           />
@@ -42,6 +38,21 @@ const ProductDetail = function ({ productId }) {
                 onChange={onChange}
                 handleCard={handleCard}
               />
+              <button className="inline-flex">
+                Volver
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 ml-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ const ProductsCard = function ({ product }) {
       <div className="bg-gray-100 rounded-lg p-2">
         <Link to={`/products/${product.id}`}>
           <img
-            className="h-80 rounded w-full object-cover object-center mb-6"
+            className="h-72 rounded w-full object-cover object-center mb-6"
             alt=""
             src={product.image}
           />

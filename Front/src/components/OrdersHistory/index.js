@@ -15,7 +15,7 @@ const OrdersHistory = function () {
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container px-40 py-24 mx-auto">
         <h1 className="font-lora text-gray-900 text-3xl title-font font-medium mb-8">
           Mis Ordenes
         </h1>
@@ -40,7 +40,7 @@ const OrdersHistory = function () {
                           <img
                             alt=""
                             src={order.product.image}
-                            className="h-16 rounded border my-2"
+                            className="h-16 w-20 object-cover rounded border my-2"
                           ></img>
                         </div>
                         <p className="text-md">${order.product.price}</p>
