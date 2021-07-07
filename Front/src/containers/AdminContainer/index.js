@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 
-
 import { useDispatch, useSelector } from "react-redux";
 
 import NewProductForm from "../../components/NewProductForm";
 import UsersList from "../../components/UsersList";
+import ProductsList from "../../components/ProductsList";
+import ProductDetail from "../../components/ProductDetail";
 import { ADD_PRODUCT } from "../../store/productsReducer";
 import { GET_USERS, DELETE_USER } from "../../store/usersReducer";
 
@@ -15,10 +16,12 @@ const Admin = function () {
 
   const history = useHistory();
   const user = useSelector((store) => store.users.currentUser);
-
   const users = useSelector((state) => state.users.users);
+  const products = useSelector((state) => state.products.products);
   const [edit, setEdit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  console.log("isAdmin en adminContainer", user.isAdmin);
 
   const [product, setProduct] = useState({
     name: "",
@@ -68,16 +71,13 @@ const Admin = function () {
   };
 
   return (
-
     <div>
       {user.isAdmin ? (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">
-              Admin
-            </h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">Admin</h1>
             <div className="space-x-5">
-              <Link to="/admin/edit">
+              <Link to="/admin/products">
                 <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                   Editar Productos
                 </button>
@@ -92,15 +92,35 @@ const Admin = function () {
                   Agregar Categoria
                 </button>
               </Link>
-            <Link to="/admin/users">
-            <button
-              onClick={() => dispatch(GET_USERS())}
-              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            >
-              Editar Usuarios
-            </button>
-          </Link>
+              <Link to="/admin/users">
+                <button
+                  onClick={() => dispatch(GET_USERS())}
+                  class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                >
+                  Editar Usuarios
+                </button>
+              </Link>
             </div>
+
+            <div className="grid grid-cols-8">
+              <div className="col-auto">
+                <Route
+                  path="/admin/products"
+                  render={() => <ProductsList products={products} />}
+                />
+              </div>
+              <div className="col-start-2 col-span-8">
+                <Route
+                  path="/admin/products/:id"
+                  render={({ match }) => {
+                    return (
+                      <ProductDetail isAdmin={user.isAdmin} productId={match.params.id} />
+                    );
+                  }}
+                />
+              </div>
+            </div>
+
             <Switch>
               <Route
                 path="/admin/add"
@@ -113,16 +133,16 @@ const Admin = function () {
                 )}
               />
               <Route
-            path="/admin/users"
-            render={() => (
-              <UsersList
-                users={users}
-                deleteUser={deleteUser}
-                edit={edit}
-                toggleEdit={toggleEdit}
+                path="/admin/users"
+                render={() => (
+                  <UsersList
+                    users={users}
+                    deleteUser={deleteUser}
+                    edit={edit}
+                    toggleEdit={toggleEdit}
+                  />
+                )}
               />
-            )}
-          />
             </Switch>
           </div>
         </section>
@@ -130,7 +150,6 @@ const Admin = function () {
         history.push("/home")
       )}
     </div>
-
   );
 };
 
