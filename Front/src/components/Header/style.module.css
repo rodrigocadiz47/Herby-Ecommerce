@@ -1,21 +1,8 @@
-/* .navbar {
-  display: flex;
-  justify-content: center;
-  border: solid 1px black;
+.menu {
+  position: relative;
+  cursor: pointer;
 }
 
-li {
-  display: inline;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 2rem;
+.menu span:focus + div {
+  opacity: 1;
 }
-
-li:hover {
-  color: grey;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-} */

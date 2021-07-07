@@ -1,10 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import s from "./style.module.css";
+
 const Header = function ({ emptyCart, logOut, user }) {
+  // const [openMenu, setOpenMenu] = useState(false);
+
+  // const toggleMenu = () => {
+  //   if (openMenu) setOpenMenu(false);
+  //   else setOpenMenu(true);
+  // };
+
   return (
     <header className="sticky top-0 z-20 bg-gray-100">
       <nav className="flex items-center h-20 px-6 justify-around text-gray-700 shadow-md relative">
-        <ul className="space-x-5">
+        <div className="space-x-5">
           <Link to="/">
             <span> HERBY </span>
           </Link>
@@ -16,8 +26,8 @@ const Header = function ({ emptyCart, logOut, user }) {
             <span> VERDURAS </span>
           </Link>
           {/* <Link to="/products">PRODUCTOS</Link> */}
-        </ul>
-        <ul className="flex space-x-5">
+        </div>
+        <div className="flex flex-row items-center space-x-5">
           {user.id ? (
             <button onClick={logOut}>SALIR</button>
           ) : (
@@ -63,8 +73,8 @@ const Header = function ({ emptyCart, logOut, user }) {
             </span>
           </Link>
           {user.id && (
-            <Link to="/history">
-              <span className="flex">
+            <div className={s.menu}>
+              <span className="flex relative">
                 <p className="mr-2">{user.firstName.toUpperCase()}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,14 +89,31 @@ const Header = function ({ emptyCart, logOut, user }) {
                   />
                 </svg>
               </span>
-            </Link>
+              <div className="absolute mt-2 w-56 flex flex-col justify-start rounded-md border shadow-lg bg-gray-100">
+                <a
+                  className="w-full text-gray-700 block px-4 py-2 rounded hover:bg-gray-200"
+                  href="http://"
+                >
+                  Mis Datos
+                </a>
+                <Link to="/history">
+                  <a
+                    className="w-full text-gray-700 block px-4 py-2 rounded hover:bg-gray-200"
+                    href="http://"
+                  >
+                    Mis Ordenes
+                  </a>
+                </Link>
+              </div>
+            </div>
           )}
+
           {user.isAdmin ? (
             <Link to="/admin">
               <span> ADMIN </span>
             </Link>
           ) : null}
-        </ul>
+        </div>
       </nav>
     </header>
   );

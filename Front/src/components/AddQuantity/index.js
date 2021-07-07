@@ -5,7 +5,7 @@ export default ({ product, handleCart, onChange, handleCard }) => {
   const quantity = [0, 0.5, 1, 1.5, 2, 2.5, 3];
   return (
     <div>
-      <select onChange={onChange} placeholder="Kg" className="p-3 rounded">
+      <select onChange={onChange} placeholder="Kg" className="p-3 mr-2 rounded">
         {quantity.map((value, index) => (
           <option key={index}>{`${value} kg`}</option>
         ))}
