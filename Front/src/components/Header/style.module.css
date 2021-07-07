@@ -3,6 +3,6 @@
   cursor: pointer;
 }
 
-.menu span:focus + div {
+.menu span:hover + div {
   opacity: 1;
 }

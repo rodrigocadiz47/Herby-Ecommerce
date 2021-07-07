@@ -31,7 +31,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/history" component={OrdersHistory} />
         <Route path="/home" component={LandingPage} />
-        <Route path="/congratulation" component={Congratulation}/>
+        <Route path="/congratulation" component={Congratulation} />
         <Redirect from="/" to="/home" />
       </Switch>
     </div>
