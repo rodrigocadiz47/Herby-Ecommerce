@@ -8,7 +8,7 @@ import NewProductForm from "../../components/NewProductForm";
 import UsersList from "../../components/UsersList";
 import ProductsList from "../../components/ProductsList";
 import ProductDetail from "../../components/ProductDetail";
-import { ADD_PRODUCT } from "../../store/productsReducer";
+import { ADD_PRODUCT, GET_ALL_PRODUCTS, EDIT_PRODUCT } from "../../store/productsReducer";
 import { GET_USERS, DELETE_USER, TOGGLE_ADMIN } from "../../store/usersReducer";
 
 const Admin = function () {
@@ -33,7 +33,12 @@ const Admin = function () {
     stock: 0,
     seasonal: false,
     description: "",
+    id: 0
   });
+
+  React.useEffect(()=>{
+    dispatch(GET_ALL_PRODUCTS())
+  }, [dispatch])
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -76,6 +81,12 @@ const Admin = function () {
       description: "",
     });
   };
+
+  const handleEdit = (e)=>{
+    e.preventDefault()
+    console.log("PRODUCT FORM",product)
+    // dispatch(EDIT_PRODUCT(product))
+  }
 
   return (
     <div>
@@ -123,7 +134,10 @@ const Admin = function () {
                   path="/admin/products/:id"
                   render={({ match }) => {
                     return (
+                      <>
                       <ProductDetail isAdmin={user.isAdmin} productId={match.params.id} />
+                      <NewProductForm handleChange={handleChange} handleSubmit={handleEdit} productId={match.params.id}/>
+                      </>
                     );
                   }}
                 />
