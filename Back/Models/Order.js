@@ -27,6 +27,9 @@ Order.prototype.stockUpdate = (quantity, productId) => {
   Product.findByPk(productId)
     .then((producto) => {
       producto.stock = producto.stock - quantity;
+      producto.available > 10
+        ? (producto.available = true)
+        : (producto.available = false);
       producto.save();
     })
     .catch((error) => console.log(error));

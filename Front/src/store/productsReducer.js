@@ -6,13 +6,22 @@ const initialState = {
   error: false,
 };
 
+export const GET_ALL_PRODUCTS = createAsyncThunk("GET_ALL_PRODUCTS", ()=>{
+  return axios.get("http://localhost:3001/api/products").then((res) => res.data);
+})
+
 export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", (pathname) => {
   return axios.get(`http://localhost:3001/api${pathname}`).then((res) => res.data);
 });
 
 export const ADD_PRODUCT = createAsyncThunk("ADD_PRODUCT", (product) => {
+  console.log("PRODUCT PARAM", product)
   return axios.post("http://localhost:3001/api/products/admin", product);
 });
+
+export const EDIT_PRODUCT = createAsyncThunk("EDIT_PRODUCT", (product)=>{
+  return axios.put(`http://localhost:3001/api/admin/${product.id}`, product).then(({data})=> data)
+})
 
 const productsReducer = createReducer(initialState, {
   [GET_PRODUCTS.fulfilled]: (state, action) => {
@@ -28,6 +37,9 @@ const productsReducer = createReducer(initialState, {
   [ADD_PRODUCT.rejected]: (state, action) => {
     state.error = true;
   },
+  [GET_ALL_PRODUCTS.fulfilled]: (state, action)=>{
+    state.products= action.payload
+  } 
 });
 
 export default productsReducer;

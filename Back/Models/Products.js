@@ -33,12 +33,10 @@ Product.init(
       defaultValue: false,
     },
 
-    // available: {
-    //   type: S.VIRTUAL,
-    //   get() {
-    //     this.stock > 0 ? true : false;
-    //   },
-    // },  deberia ser un hook beforecreate o beforeUpdate
+    available: {
+      type: S.BOOLEAN,
+      defaultValue: true,
+    },
 
     description: {
       type: S.TEXT,

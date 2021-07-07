@@ -33,12 +33,6 @@ export default () => {
           });
         }
         return user.payload;
-        //  else {
-        //   dispatch(GET_LOG_CART(user.payload.id));
-        //   if (user.payload) {
-        //     history.push("/home");
-        //   }
-        // }
       })
       .then((user) => {
         dispatch(GET_LOG_CART(user.id));

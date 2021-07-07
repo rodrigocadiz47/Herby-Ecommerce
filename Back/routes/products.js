@@ -5,9 +5,14 @@ const { Products } = require("../Models");
 
 //GET METHOD
 
+router.get("/", (req, res, next)=>{
+  Products.findAll()
+  .then((products) => res.send(products));
+})
+
 router.get("/:category", (req, res, next) => {
   Products.findAll({
-    where: { category: req.params.category },
+    where: { category: req.params.category, available: true },
     order: [["id", "ASC"]],
   }).then((products) => res.send(products));
 });
@@ -24,14 +29,23 @@ router.get("/detail/:id", (req, res, next) => {
 // path ("api/products/admin")
 //POST METHOD
 router.post("/admin", (req, res, next) => {
-  const { name, image, category, price, stock, seasonal, description } = req.body;
-
-  Products.findOrCreate({
-    where: { name },
-    defaults: { name, category, price, stock, seasonal, description, image },
-  })
+  // const { name, image, category, price, stock, seasonal, description } = req.body;
+  Products.create(req.body)
+    //   {
+    //   where: { name },
+    //   defaults: { name, category, price, stock, seasonal, description, image },
+    // }
     .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });
+
+router.put("/admin/:id", (req, res, next)=>{
+  const values = req.body;
+  const options = { returning: true, where: { id: req.params.id } };
+  Products.update(values, options)
+  .then(([cout, product])=>{
+    res.send(product)
+  })  
+})
 
 module.exports = router;
