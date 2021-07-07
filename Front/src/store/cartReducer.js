@@ -48,12 +48,15 @@ export const REMOVE_ITEM = createAsyncThunk(
 export const SET_CART_LOCAL = createAction("SET_CART_LOCAL");
 
 export const CHECKOUT = createAsyncThunk("CHECKOUT", (id, thunkAPI) => {
+  //aca el id no se usa
   const { currentUser } = thunkAPI.getState().users;
   const cart = thunkAPI.getState().cart;
   if (currentUser.id && cart.length) {
     return axios
       .post(`http://localhost:3001/api/purchaseOrders/${currentUser.id}`)
       .then(({ data }) => data);
+  } else {
+    console.log("NOOOOOOO");
   }
 });
 
@@ -75,7 +78,11 @@ export const EDIT_AMOUNT = createAsyncThunk(
         })
         .then(({ data }) => data);
     } else {
-      return { productId: productId, productQuantity: newQuantity, totalOrder: newQuantity * price };
+      return {
+        productId: productId,
+        productQuantity: newQuantity,
+        totalOrder: newQuantity * price,
+      };
     }
   }
 );
@@ -141,13 +148,20 @@ const cartReducer = createReducer(initialState, {
     localStorage.setItem("CART-STORAGE", JSON.stringify(editCart));
     state = editCart;
   },
-  [GET_LOG_CART.fulfilled]: (state, action)=>{
-    const getCart = action.payload.map(order=>{
-      return {...order, name: order.product.name, price: order.product.price, preTotal: order.totalOrder, amount: order.productQuantity, id: order.productId }
-    })
-    localStorage.setItem("CART-STORAGE", JSON.stringify(getCart))
-    return getCart
-  }
+  [GET_LOG_CART.fulfilled]: (state, action) => {
+    const getCart = action.payload.map((order) => {
+      return {
+        ...order,
+        name: order.product.name,
+        price: order.product.price,
+        preTotal: order.totalOrder,
+        amount: order.productQuantity,
+        id: order.productId,
+      };
+    });
+    localStorage.setItem("CART-STORAGE", JSON.stringify(getCart));
+    return getCart;
+  },
 });
 
 export default cartReducer;

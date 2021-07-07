@@ -41,9 +41,9 @@ const Admin = function () {
     setProduct({ ...product, [fieldName]: value });
   };
 
-  const toggleAdmin= (userId)=>{
-    dispatch(TOGGLE_ADMIN(userId))
-  }
+  const toggleAdmin = (userId) => {
+    dispatch(TOGGLE_ADMIN(userId));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const Admin = function () {
   const toggleEdit = () => {
     // if (edit) setEdit(false);
     // else setEdit(true);
-    setEdit(!edit)
+    setEdit(!edit);
   };
 
   const clearState = () => {
@@ -82,7 +82,9 @@ const Admin = function () {
       {user.isAdmin ? (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">Admin</h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">
+              Admin
+            </h1>
             <div className="space-x-5">
               <Link to="/admin/products">
                 <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
@@ -100,15 +102,14 @@ const Admin = function () {
                 </button>
               </Link>
 
-            <Link to="/admin/users">
-            <button
-              onClick={() => dispatch(GET_USERS(user.id))}
-              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            >
-              Editar Usuarios
-            </button>
-          </Link>
-
+              <Link to="/admin/users">
+                <button
+                  onClick={() => dispatch(GET_USERS(user.id))}
+                  class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                >
+                  Editar Usuarios
+                </button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-8">
@@ -123,7 +124,10 @@ const Admin = function () {
                   path="/admin/products/:id"
                   render={({ match }) => {
                     return (
-                      <ProductDetail isAdmin={user.isAdmin} productId={match.params.id} />
+                      <ProductDetail
+                        isAdmin={user.isAdmin}
+                        productId={match.params.id}
+                      />
                     );
                   }}
                 />
@@ -142,18 +146,17 @@ const Admin = function () {
                 )}
               />
               <Route
-
-            path="/admin/users"
-            render={() => (
-              <UsersList
-                users={users}
-                deleteUser={deleteUser}
-                edit={edit}
-                toggleEdit={toggleEdit}
-                toggleAdmin={toggleAdmin}
-
-              />
-            )}
+                path="/admin/users"
+                render={() => (
+                  <UsersList
+                    users={users}
+                    deleteUser={deleteUser}
+                    edit={edit}
+                    toggleEdit={toggleEdit}
+                    toggleAdmin={toggleAdmin}
+                  />
+                )}
+              ></Route>
             </Switch>
           </div>
         </section>
