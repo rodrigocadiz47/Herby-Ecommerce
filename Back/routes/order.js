@@ -30,9 +30,7 @@ router.post("/:id", (req, res, next) => {
               totalOrder: isOrderNew[0].totalOrder + preTotal,
             })
             .then((order) => {
-              order
-
-                .then(() => Products.findByPk(id))
+              Products.findByPk(id)
                 .then((product) => {
                   res.send({ product, order });
                 })

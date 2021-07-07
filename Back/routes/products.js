@@ -24,12 +24,12 @@ router.get("/detail/:id", (req, res, next) => {
 // path ("api/products/admin")
 //POST METHOD
 router.post("/admin", (req, res, next) => {
-  const { name, image, category, price, stock, seasonal, description } = req.body;
-
-  Products.findOrCreate({
-    where: { name },
-    defaults: { name, category, price, stock, seasonal, description, image },
-  })
+  // const { name, image, category, price, stock, seasonal, description } = req.body;
+  Products.create(req.body)
+  //   {
+  //   where: { name },
+  //   defaults: { name, category, price, stock, seasonal, description, image },
+  // }
     .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });

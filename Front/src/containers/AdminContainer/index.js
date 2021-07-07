@@ -153,7 +153,7 @@ const Admin = function () {
                 toggleAdmin={toggleAdmin}
 
               />
-            )}
+            )}/>
             </Switch>
           </div>
         </section>

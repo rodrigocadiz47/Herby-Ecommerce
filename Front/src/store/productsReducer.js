@@ -11,6 +11,7 @@ export const GET_PRODUCTS = createAsyncThunk("GET_PRODUCTS", (pathname) => {
 });
 
 export const ADD_PRODUCT = createAsyncThunk("ADD_PRODUCT", (product) => {
+  console.log("PRODUCT PARAM", product)
   return axios.post("http://localhost:3001/api/products/admin", product);
 });
 
