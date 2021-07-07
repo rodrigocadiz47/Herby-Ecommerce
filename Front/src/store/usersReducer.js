@@ -35,12 +35,12 @@ export const SET_USER = createAsyncThunk("SET_USER", (loginData) => {
 export const DELETE_USER = createAsyncThunk("DELETE_USER", (userId) => {
   console.log("userId", userId);
   return axios
-    .post(`http://localhost:3001/api/users/admin/${userId}`)
+    .delete(`http://localhost:3001/api/users/admin/${userId}`)
     .then((res) => res.data);
 });
 
-export const GET_USERS = createAsyncThunk("GET_USERS", () => {
-  return axios.get("http://localhost:3001/api/users").then((res) => res.data);
+export const GET_USERS = createAsyncThunk("GET_USERS", (adminId) => {
+  return axios.get(`http://localhost:3001/api/users/admin/${adminId}`).then((res) => res.data);
 });
 
 export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
@@ -48,6 +48,10 @@ export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
     .get(`http://localhost:3001/api/purchaseOrders/${userId}`)
     .then(({ data }) => data);
 });
+
+export const TOGGLE_ADMIN = createAsyncThunk("TOGGLE_ADMIN", (userId)=>{
+  return axios.put(`http://localhost:3001/api/users/admin/${userId}`).then(({data})=> data)
+})
 
 export const SET_USER_LOCAL = createAction("SET_USER_LOCAL");
 
@@ -62,7 +66,8 @@ const usersReducer = createReducer(initialState, {
     state.error = true;
   },
   [DELETE_USER.fulfilled]: (state, action) => {
-    state.users.filter((user) => user.id !== action.payload.id);
+    const refreshUser=  state.users.filter((user) => user.id !== action.payload.id);
+    state.users= refreshUser
   },
   [GET_USERS.fulfilled]: (state, action) => {
     state.users = action.payload;
@@ -71,14 +76,22 @@ const usersReducer = createReducer(initialState, {
     state.error = true;
   },
   [SET_USER_LOCAL]: (state, action) => {
-    console.log(action.payload);
     localStorage.removeItem("USER-STORAGE");
     state.currentUser = {};
   },
   [GET_HISTORY.fulfilled]: (state, action) => {
-    console.log("ACTION HISTORY", action.payload);
     state.ordersHistory = [...action.payload];
   },
+  [TOGGLE_ADMIN.fulfilled]: (state, action)=>{
+    console.log("STATE USERS", state.users)
+    const toggleAdmin = state.users.map(user=>{
+      if(user.id===action.payload.id){
+        user.isAdmin= action.payload.isAdmin
+      }
+      return user
+    })
+    state.users= toggleAdmin
+  }
 });
 
 export default usersReducer;

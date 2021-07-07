@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NewProductForm from "../../components/NewProductForm";
 import UsersList from "../../components/UsersList";
 import { ADD_PRODUCT } from "../../store/productsReducer";
-import { GET_USERS, DELETE_USER } from "../../store/usersReducer";
+import { GET_USERS, DELETE_USER, TOGGLE_ADMIN } from "../../store/usersReducer";
 
 const Admin = function () {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Admin = function () {
   const history = useHistory();
   const user = useSelector((store) => store.users.currentUser);
 
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((store) => store.users.users);
   const [edit, setEdit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -36,6 +36,10 @@ const Admin = function () {
     setProduct({ ...product, [fieldName]: value });
   };
 
+  const toggleAdmin= (userId)=>{
+    dispatch(TOGGLE_ADMIN(userId))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!product.name && !product.category && !product.price) {
@@ -50,8 +54,9 @@ const Admin = function () {
   };
 
   const toggleEdit = () => {
-    if (edit) setEdit(false);
-    else setEdit(true);
+    // if (edit) setEdit(false);
+    // else setEdit(true);
+    setEdit(!edit)
   };
 
   const clearState = () => {
@@ -94,7 +99,7 @@ const Admin = function () {
               </Link>
             <Link to="/admin/users">
             <button
-              onClick={() => dispatch(GET_USERS())}
+              onClick={() => dispatch(GET_USERS(user.id))}
               class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
             >
               Editar Usuarios
@@ -120,6 +125,7 @@ const Admin = function () {
                 deleteUser={deleteUser}
                 edit={edit}
                 toggleEdit={toggleEdit}
+                toggleAdmin={toggleAdmin}
               />
             )}
           />
