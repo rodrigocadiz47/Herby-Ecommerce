@@ -69,4 +69,13 @@ router.delete("/admin/:id", (req, res, next) => {
     .catch(() => res.sendStatus(404));
 });
 
+router.put("/admin/:id", (req, res, next) => {
+  User.findByPk(req.params.id).then((user) =>
+    user
+      .update({ isAdmin: !user.isAdmin })
+      .then((user) => res.status(200).send(user))
+      .catch(() => res.sendStatus(404))
+  );
+});
+
 module.exports = router;
