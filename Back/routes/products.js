@@ -12,7 +12,7 @@ router.get("/", (req, res, next)=>{
 
 router.get("/:category", (req, res, next) => {
   Products.findAll({
-    where: { category: req.params.category },
+    where: { category: req.params.category, available: true },
     order: [["id", "ASC"]],
   }).then((products) => res.send(products));
 });
@@ -31,10 +31,10 @@ router.get("/detail/:id", (req, res, next) => {
 router.post("/admin", (req, res, next) => {
   // const { name, image, category, price, stock, seasonal, description } = req.body;
   Products.create(req.body)
-  //   {
-  //   where: { name },
-  //   defaults: { name, category, price, stock, seasonal, description, image },
-  // }
+    //   {
+    //   where: { name },
+    //   defaults: { name, category, price, stock, seasonal, description, image },
+    // }
     .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });
