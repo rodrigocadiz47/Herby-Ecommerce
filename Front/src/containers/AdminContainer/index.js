@@ -9,15 +9,17 @@ import UsersList from "../../components/UsersList";
 import ProductsList from "../../components/ProductsList";
 import ProductDetail from "../../components/ProductDetail";
 import { ADD_PRODUCT } from "../../store/productsReducer";
-import { GET_USERS, DELETE_USER } from "../../store/usersReducer";
+import { GET_USERS, DELETE_USER, TOGGLE_ADMIN } from "../../store/usersReducer";
 
 const Admin = function () {
   const dispatch = useDispatch();
 
   const history = useHistory();
   const user = useSelector((store) => store.users.currentUser);
+
   const users = useSelector((state) => state.users.users);
   const products = useSelector((state) => state.products.products);
+
   const [edit, setEdit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -39,6 +41,10 @@ const Admin = function () {
     setProduct({ ...product, [fieldName]: value });
   };
 
+  const toggleAdmin= (userId)=>{
+    dispatch(TOGGLE_ADMIN(userId))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!product.name && !product.category && !product.price) {
@@ -53,8 +59,9 @@ const Admin = function () {
   };
 
   const toggleEdit = () => {
-    if (edit) setEdit(false);
-    else setEdit(true);
+    // if (edit) setEdit(false);
+    // else setEdit(true);
+    setEdit(!edit)
   };
 
   const clearState = () => {
@@ -92,14 +99,16 @@ const Admin = function () {
                   Agregar Categoria
                 </button>
               </Link>
-              <Link to="/admin/users">
-                <button
-                  onClick={() => dispatch(GET_USERS())}
-                  class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                >
-                  Editar Usuarios
-                </button>
-              </Link>
+
+            <Link to="/admin/users">
+            <button
+              onClick={() => dispatch(GET_USERS(user.id))}
+              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Editar Usuarios
+            </button>
+          </Link>
+
             </div>
 
             <div className="grid grid-cols-8">
@@ -133,16 +142,18 @@ const Admin = function () {
                 )}
               />
               <Route
-                path="/admin/users"
-                render={() => (
-                  <UsersList
-                    users={users}
-                    deleteUser={deleteUser}
-                    edit={edit}
-                    toggleEdit={toggleEdit}
-                  />
-                )}
+
+            path="/admin/users"
+            render={() => (
+              <UsersList
+                users={users}
+                deleteUser={deleteUser}
+                edit={edit}
+                toggleEdit={toggleEdit}
+                toggleAdmin={toggleAdmin}
+
               />
+            )}
             </Switch>
           </div>
         </section>

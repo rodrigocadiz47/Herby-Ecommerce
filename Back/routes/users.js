@@ -2,9 +2,16 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const { User } = require("../Models");
+const Sequelize = require("sequelize")
 
-router.get("/", (req, res, next) => {
-  User.findAll()
+router.get("/admin/:id", (req, res, next) => {
+  User.findAll({
+    where:{
+      [Sequelize.Op.not]:{
+        id: req.params.id
+      }
+    }
+  })
     .then((users) => {
       res.send(users);
     })
@@ -48,7 +55,7 @@ router.delete("/admin/:id", (req, res, next)=>{
   User.findByPk(req.params.id)
   .then(user=>{
     user.destroy()
-    res.sendStatus(200)
+    res.status(200).send(user)
   })
   .catch(()=>res.sendStatus(404))
 })
