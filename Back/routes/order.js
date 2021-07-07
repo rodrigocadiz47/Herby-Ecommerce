@@ -19,24 +19,43 @@ router.get("/pending/:id", (req, res, next) => {
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
   const { amount, id, preTotal } = req.body;
-  User.findByPk(userId)
+  User.findOne({ where: { id: userId }, include: { model: Order } })
     .then((user) => {
       if (user.firstName) {
-        return Order.create({
-          productQuantity: amount,
-          totalOrder: preTotal,
-        }).then((order) => {
-          order
-            .setUser(userId)
-            .then(() => Products.findByPk(id))
-            .then((product) => {
-              order.setProduct(product);
-              res.send({ product, order });
+        const isOrderNew = user.orders.filter((ord) => ord.productId === id);
+        if (isOrderNew.length) {
+          return isOrderNew[0]
+            .update({
+              productQuantity: isOrderNew[0].productQuantity + amount,
+              totalOrder: isOrderNew[0].totalOrder + preTotal,
             })
-            .catch((error) => res.status(400).send(error));
-        });
+            .then((order) => {
+              order
+
+                .then(() => Products.findByPk(id))
+                .then((product) => {
+                  res.send({ product, order });
+                })
+                .catch((error) => res.status(400).send(error));
+            });
+        } else {
+          return Order.create({
+            productQuantity: amount,
+            totalOrder: preTotal,
+          }).then((order) => {
+            order
+              .setUser(userId)
+              .then(() => Products.findByPk(id))
+              .then((product) => {
+                order.setProduct(product);
+                res.send({ product, order });
+              })
+              .catch((error) => res.status(400).send(error));
+          });
+        }
       }
     })
+
     .catch((error) => {
       console.log(error);
       res.status(404).send(error);
