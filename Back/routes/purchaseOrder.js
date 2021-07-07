@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { PurchaseOrder, Order, Products, User } = require("../Models");
-const transporter = require("../mailer")
-
-
+const transporter = require("../mailer");
 
 router.get("/:id", (req, res, next) => {
   //trae todos las ordenes de compra de un usuario [{purchase1}{purchase2}]//purchase1={id,fecha,total,[order1,order2]}// order={id,productId, productName, productQuantity,productPrice}
@@ -14,19 +12,18 @@ router.get("/:id", (req, res, next) => {
     },
     include: [{ model: Order, include: [{ model: Products }] }],
   })
-  .then((purchases) => {
-    User.findByPk(id)
-    .then(user=>{
+    .then((purchases) => {
+      User.findByPk(id).then((user) => {
         transporter.sendMail({
-          from: '"HERBY" <herbymailer@gmail.com>', 
-          to: user.email, 
-          subject: "Nuevo pedido ingresado", 
-          text: `Estimado ${user.firstName} desde Herby le queremos agradecer por su compra.`, 
+          from: '"HERBY" <herbymailer@gmail.com>',
+          to: user.email,
+          subject: "Nuevo pedido ingresado",
+          text: `Estimado ${user.firstName} desde Herby le queremos agradecer por su compra.`,
+        });
+        res.send(purchases);
       });
-      res.send(purchases)
     })
-  })
-  .catch((error) => res.status(500).send(error));
+    .catch((error) => res.status(500).send(error));
 });
 
 router.post("/:id", async (req, res, next) => {

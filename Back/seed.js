@@ -51,7 +51,7 @@ Products.bulkCreate([
     name: "Banana",
     category: "fruit",
     price: 100,
-    stock: 250,
+    stock: 12,
     seasonal: true,
     description:
       "La banana aporta vitaminas A, C, B1, B2, B6, B9 -ácido fólico- y E. Por otra parte, en cuanto a los minerales, se encuentran el potasio, magnesio, hierro, selenio, zinc y calcio. La lista de beneficios incluye el contenido de triptófano, el cual se presenta como un aminoácido esencial. Esta fruta se encuentra especialmente recomendada para las personas que realizan deporte o que son muy activas -tanto mental como físicamente-; por tal motivo, se sugiere incorporarla en la alimentación habitual de niños y adolescentes.",
