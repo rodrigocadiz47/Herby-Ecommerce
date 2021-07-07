@@ -23,22 +23,15 @@ const Admin = function () {
   const [edit, setEdit] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  console.log("isAdmin en adminContainer", user.isAdmin);
-
-  const [product, setProduct] = useState({
-    name: "",
-    image: "",
-    category: "",
-    price: 0,
-    stock: 0,
-    seasonal: false,
-    description: "",
-    id: 0
-  });
+  const [product, setProduct] = useState({});
 
   React.useEffect(()=>{
     dispatch(GET_ALL_PRODUCTS())
   }, [dispatch])
+
+  const getId= (productId)=>{
+    dispatch(EDIT_PRODUCT({product: product, productId: productId}))
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -85,7 +78,7 @@ const Admin = function () {
   const handleEdit = (e)=>{
     e.preventDefault()
     console.log("PRODUCT FORM",product)
-    // dispatch(EDIT_PRODUCT(product))
+    
   }
 
   return (
@@ -135,10 +128,9 @@ const Admin = function () {
                   path="/admin/products/:id"
                   render={({ match }) => {
                     return (
-
                       <>
                       <ProductDetail isAdmin={user.isAdmin} productId={match.params.id} />
-                      <NewProductForm handleChange={handleChange} handleSubmit={handleEdit} productId={match.params.id}/>
+                      <NewProductForm handleChange={handleChange} handleSubmit={handleEdit} productId={match.params.id} getId={getId}/>
                       </>
 
                     );

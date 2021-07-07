@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios"
 
-const NewProductForm = ({ handleChange, handleSubmit, errorMessage, productId }) => {
+const NewProductForm = ({ handleChange, handleSubmit, errorMessage, productId, getId }) => {
   const [product, setProduct] = React.useState({});
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const NewProductForm = ({ handleChange, handleSubmit, errorMessage, productId })
             {productId &&
             <div>
               <label>ID:</label>
-              <input name="id" disabled defaultValue={product.id}></input>
+              <input name="id" disabled value={product.id}></input>
             </div>
             }
           <div>
@@ -111,7 +111,7 @@ const NewProductForm = ({ handleChange, handleSubmit, errorMessage, productId })
             />
           </div>
           <div>
-            <button className="bg-blue-200" type="submit">
+            <button className="bg-blue-200" type="submit" onClick={()=>getId(product.id)}>
               {!productId ? "Agregar" : "Editar"}
             </button>
           </div>

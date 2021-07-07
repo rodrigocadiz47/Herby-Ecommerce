@@ -19,8 +19,9 @@ export const ADD_PRODUCT = createAsyncThunk("ADD_PRODUCT", (product) => {
   return axios.post("http://localhost:3001/api/products/admin", product);
 });
 
-export const EDIT_PRODUCT = createAsyncThunk("EDIT_PRODUCT", (product)=>{
-  return axios.put(`http://localhost:3001/api/admin/${product.id}`, product).then(({data})=> data)
+export const EDIT_PRODUCT = createAsyncThunk("EDIT_PRODUCT", ({product, productId})=>{
+  console.log("PRODUCT IDDD",product)
+  return axios.put(`http://localhost:3001/api/products/admin/${productId}`, product).then(({data})=> data)
 })
 
 const productsReducer = createReducer(initialState, {

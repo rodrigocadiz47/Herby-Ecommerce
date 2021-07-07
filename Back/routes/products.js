@@ -6,7 +6,7 @@ const { Products } = require("../Models");
 //GET METHOD
 
 router.get("/", (req, res, next)=>{
-  Products.findAll()
+  Products.findAll({order: [["id", "ASC"]]})
   .then((products) => res.send(products));
 })
 
@@ -40,6 +40,7 @@ router.post("/admin", (req, res, next) => {
 });
 
 router.put("/admin/:id", (req, res, next)=>{
+  console.log("EDIT PROD", req.body)
   const values = req.body;
   const options = { returning: true, where: { id: req.params.id } };
   Products.update(values, options)
