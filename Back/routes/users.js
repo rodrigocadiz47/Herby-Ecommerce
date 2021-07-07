@@ -18,12 +18,6 @@ router.get("/admin/:id", (req, res, next) => {
     .catch((error) => res.status(500).send(error));
 });
 
-// router.get("/me", (req, res, next) => {
-//   if (!req.user.firstName) {
-//     return res.sendStatus(401);
-//   }
-//   res.send(req.user);
-// });
 
 //POST METHOD
 router.post("/register", (req, res, next) => {

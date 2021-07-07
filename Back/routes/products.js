@@ -5,6 +5,11 @@ const { Products } = require("../Models");
 
 //GET METHOD
 
+router.get("/", (req, res, next)=>{
+  Products.findAll()
+  .then((products) => res.send(products));
+})
+
 router.get("/:category", (req, res, next) => {
   Products.findAll({
     where: { category: req.params.category },
@@ -33,5 +38,14 @@ router.post("/admin", (req, res, next) => {
     .then((product) => res.send(product))
     .catch((error) => res.status(400).send(error));
 });
+
+router.put("/admin/:id", (req, res, next)=>{
+  const values = req.body;
+  const options = { returning: true, where: { id: req.params.id } };
+  Products.update(values, options)
+  .then(([cout, product])=>{
+    res.send(product)
+  })  
+})
 
 module.exports = router;
