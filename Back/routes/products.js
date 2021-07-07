@@ -6,7 +6,14 @@ const { Products } = require("../Models");
 //GET METHOD
 
 router.get("/:category", (req, res, next) => {
-  Products.findAll({ where: { category: req.params.category } }).then((products) =>
+  Products.findAll({ 
+    where: 
+    { category: req.params.category }, 
+    order: [
+    ['id', 'ASC'] 
+    ]
+  })
+    .then((products) =>
     res.send(products)
   );
 });
