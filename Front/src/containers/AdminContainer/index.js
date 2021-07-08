@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-
 import { Switch, Route, Link, useHistory } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import NewProductForm from "../../components/NewProductForm";
 import UsersList from "../../components/UsersList";
 import ProductsList from "../../components/ProductsList";
 import ProductDetail from "../../components/ProductDetail";
-import { ADD_PRODUCT, GET_ALL_PRODUCTS, EDIT_PRODUCT } from "../../store/productsReducer";
 import { GET_USERS, DELETE_USER, TOGGLE_ADMIN } from "../../store/usersReducer";
+import {
+  ADD_PRODUCT,
+  GET_PRODUCT,
+  SET_PRODUCT,
+  GET_ALL_PRODUCTS,
+  EDIT_PRODUCT,
+} from "../../store/productsReducer";
 
 const Admin = function () {
   const dispatch = useDispatch();
@@ -21,13 +25,18 @@ const Admin = function () {
   const products = useSelector((state) => state.products.products);
 
   const [edit, setEdit] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-  const [product, setProduct] = useState({});
+  // const [product, setProduct] = useState({});
+  const product = useSelector((state) => state.products.currentProduct);
 
   React.useEffect(() => {
     dispatch(GET_ALL_PRODUCTS());
   }, [dispatch]);
+
+  // React.useEffect(() => {
+  //   dispatch(SET_PRODUCT(product));
+  // }, [dispatch, product]);
 
   const getId = (productId) => {
     dispatch(EDIT_PRODUCT({ product: product, productId: productId }));
@@ -37,7 +46,7 @@ const Admin = function () {
     const value = e.target.value;
     console.log(value);
     const fieldName = e.target.name;
-    setProduct({ ...product, [fieldName]: value });
+    dispatch(SET_PRODUCT({ ...product, [fieldName]: value }));
   };
 
   const toggleAdmin = (userId) => {
@@ -47,18 +56,24 @@ const Admin = function () {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!product.name && !product.category && !product.price) {
-      setErrorMessage("Completar todos los campos obligatorios");
+      setMessage("Completar todos los campos obligatorios");
     }
     dispatch(ADD_PRODUCT(product));
+    setMessage("Producto agregado correctamente!");
     clearState();
   };
 
   const handleEdit = (e) => {
     e.preventDefault();
     if (!product.name && !product.category && !product.price) {
-      setErrorMessage("Completar todos los campos obligatorios");
+      setMessage("Completar todos los campos obligatorios");
     }
-    console.log("PRODUCT FORM", product);
+    setMessage("Producto editado correctamente!");
+    clearState();
+  };
+
+  const setCurrentProduct = (productId) => {
+    dispatch(GET_PRODUCT(productId));
   };
 
   const deleteUser = (userId) => {
@@ -72,8 +87,8 @@ const Admin = function () {
   };
 
   const clearState = () => {
-    setErrorMessage("");
-    setProduct({});
+    // setMessage("");
+    dispatch(SET_PRODUCT({}));
   };
 
   return (
@@ -89,7 +104,13 @@ const Admin = function () {
                 </button>
               </Link>
               <Link to="/admin/add">
-                <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">
+                <button
+                  onClick={() => {
+                    clearState();
+                    setMessage("");
+                  }}
+                  class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
+                >
                   Agregar Producto
                 </button>
               </Link>
@@ -104,11 +125,18 @@ const Admin = function () {
               </Link>
             </div>
 
+            {/* RUTAS PARA EDITAR PRODUCTOS */}
             <div className="grid grid-cols-8">
               <div className="col-auto">
                 <Route
                   path="/admin/products"
-                  render={() => <ProductsList products={products} />}
+                  render={() => (
+                    <ProductsList
+                      products={products}
+                      setCurrentProduct={setCurrentProduct}
+                      setMessage={setMessage}
+                    />
+                  )}
                 />
               </div>
               <div className="col-start-2 col-span-8">
@@ -125,7 +153,10 @@ const Admin = function () {
                           handleChange={handleChange}
                           handleSubmit={handleEdit}
                           productId={match.params.id}
+                          product={product}
+                          setCurrentProduct={setCurrentProduct}
                           getId={getId}
+                          message={message}
                         />
                       </div>
                     );
@@ -134,33 +165,35 @@ const Admin = function () {
               </div>
             </div>
 
-            <Switch>
-              <Route
-                path="/admin/add"
-                render={() => (
-                  <div className="mt-20 -ml-20">
-                    <NewProductForm
-                      handleChange={handleChange}
-                      handleSubmit={handleSubmit}
-                      errorMessage={errorMessage}
-                      product={product}
-                    />
-                  </div>
-                )}
-              />
-              <Route
-                path="/admin/users"
-                render={() => (
-                  <UsersList
-                    users={users}
-                    deleteUser={deleteUser}
-                    edit={edit}
-                    toggleEdit={toggleEdit}
-                    toggleAdmin={toggleAdmin}
+            {/* RUTA PARA AGREGAR PRODUCTO */}
+            <Route
+              path="/admin/add"
+              render={() => (
+                <div className="mt-20 -ml-20">
+                  <NewProductForm
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    product={product}
+                    message={message}
+                    setCurrentProduct={setCurrentProduct}
                   />
-                )}
-              />
-            </Switch>
+                </div>
+              )}
+            />
+
+            {/* RUTA PARA EDITAR USUARIOS */}
+            <Route
+              path="/admin/users"
+              render={() => (
+                <UsersList
+                  users={users}
+                  deleteUser={deleteUser}
+                  edit={edit}
+                  toggleEdit={toggleEdit}
+                  toggleAdmin={toggleAdmin}
+                />
+              )}
+            />
           </div>
         </section>
       ) : (

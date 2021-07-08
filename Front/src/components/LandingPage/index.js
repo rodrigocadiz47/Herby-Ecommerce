@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Footer from "../../components/Footer";
+import s from "./style.module.css";
 
 const LandingPage = function () {
   return (
@@ -41,7 +42,7 @@ const LandingPage = function () {
       </section>
       <section className="text-gray-600 bg-gray-100 body-font">
         <div className="container px-5 py-12 mx-auto">
-          <div className="flex flex-wrap justify-center -m-4">
+          <div className="flex flex-wrap justify-center mt-20">
             <div className="xl:w-1/4 md:w-1/2 p-4">
               <div className="bg-gray-100 p-6 rounded-lg">
                 <img
@@ -100,27 +101,41 @@ const LandingPage = function () {
                 <p className="leading-relaxed text-base">
                   Enriquecé tu alimentación con las propiedades y los nutrientes completos
                   de cada producto. Tu organismo comenzará a olvidarse de las alergias y
-                  problemas digestivos que derivan de los agregados artificiales, usuales
-                  en producciones convencionales.
+                  problemas digestivos que derivan de los agregados artificiales.
                 </p>
               </div>
             </div>
           </div>
-          <div className="px-24 py-20 bg-gray-200 rounded-md shadow-lg my-12">
-            <p className="text-xl leading-relaxed text-gray-500 mb-4">
-              Nuestros proveedores son productores locales, en su mayoría pequeños
-              agricultores ecológicos. Cuando no encontramos productores locales, de fruta
-              en particular (plátano, kiwi, pera, manzana, etc.) el producto es siempre
-              ecológico certificado.
-            </p>
-            <p className="text-xl leading-relaxed text-gray-500">
-              Entregamos nuestros alimentos ecológicos en toda la ciudad y no tenemos
-              pedido minimo. En CABA el transporte es gratuito para compras superiores a
-              $1000 y te lo llevamos nosotros de martes a viernes. Fuera de nuestra zona
-              de reparto, la entrega se realiza por una empresa de mensajería en 24h, lo
-              que garantiza la frescura del producto.
-            </p>
-          </div>
+          <section>
+            <h1 className="text-3xl font-lora text-center mt-16 mb-16">
+              Cuida el medio ambiente
+            </h1>
+            <div>
+              <div className="grid grid-cols-2 mx-32 mb-32 space-x-14 items-center">
+                <img
+                  className="shadow-md rounded"
+                  alt="farm"
+                  src="https://images.pexels.com/photos/5529604/pexels-photo-5529604.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                ></img>
+                <div className="">
+                  <p className="text-xl leading-relaxed text-gray-500 mb-4">
+                    Nuestros proveedores son productores locales, en su mayoría pequeños
+                    agricultores ecológicos. Cuando no encontramos productores locales, de
+                    fruta en particular (plátano, kiwi, pera, manzana, etc.) el producto
+                    es siempre ecológico certificado.
+                  </p>
+                  <p className="text-xl leading-relaxed text-gray-500">
+                    Entregamos nuestros alimentos ecológicos en toda la ciudad y no
+                    tenemos pedido minimo. En CABA el transporte es gratuito para compras
+                    superiores a $1000 y te lo llevamos nosotros de martes a viernes.
+                    Fuera de nuestra zona de reparto, la entrega se realiza por una
+                    empresa de mensajería en 24h, lo que garantiza la frescura del
+                    producto.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
 

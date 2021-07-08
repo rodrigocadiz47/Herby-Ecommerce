@@ -1,7 +1,6 @@
-import { Link, Route } from "react-router-dom";
-import NewProductForm from "../NewProductForm";
+import { Link } from "react-router-dom";
 
-const ProductsList = function ({ products }) {
+const ProductsList = function ({ products, setCurrentProduct, setMessage }) {
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -9,7 +8,14 @@ const ProductsList = function ({ products }) {
           return (
             <div key={product.id}>
               <Link to={`/admin/products/${product.id}`}>
-                <p>{product.name}</p>
+                <p
+                  onClick={() => {
+                    setCurrentProduct(product.id);
+                    setMessage("");
+                  }}
+                >
+                  {product.name}
+                </p>
               </Link>
             </div>
           );
