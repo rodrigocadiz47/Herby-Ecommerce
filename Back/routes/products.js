@@ -5,10 +5,9 @@ const { Products } = require("../Models");
 
 //GET METHOD
 
-router.get("/", (req, res, next)=>{
-  Products.findAll({order: [["id", "ASC"]]})
-  .then((products) => res.send(products));
-})
+router.get("/", (req, res, next) => {
+  Products.findAll({ order: [["id", "ASC"]] }).then((products) => res.send(products));
+});
 
 router.get("/:category", (req, res, next) => {
   Products.findAll({
@@ -29,24 +28,34 @@ router.get("/detail/:id", (req, res, next) => {
 // path ("api/products/admin")
 //POST METHOD
 router.post("/admin", (req, res, next) => {
-  // const { name, image, category, price, stock, seasonal, description } = req.body;
-  Products.create(req.body)
-    //   {
-    //   where: { name },
-    //   defaults: { name, category, price, stock, seasonal, description, image },
-    // }
+  console.log("req.body", req.body);
+  const { name, image, category, price, stock, seasonal, description } = req.body;
+  Products.create({
+    name: name,
+    image: image,
+    category: category,
+    price: price,
+    seasonal: seasonal,
+    description: description,
+  })
     .then((product) => res.send(product))
-    .catch((error) => res.status(400).send(error));
+    .catch((error) => {
+      console.log(error);
+      return res.status(400).send(error);
+    });
 });
+//   {
+//   where: { name },
+//   defaults: { name, category, price, stock, seasonal, description, image },
+// }
 
-router.put("/admin/:id", (req, res, next)=>{
-  console.log("EDIT PROD", req.body)
+router.put("/admin/:id", (req, res, next) => {
+  console.log("EDIT PROD", req.body);
   const values = req.body;
   const options = { returning: true, where: { id: req.params.id } };
-  Products.update(values, options)
-  .then(([cout, product])=>{
-    res.send(product)
-  })  
-})
+  Products.update(values, options).then(([cout, product]) => {
+    res.send(product);
+  });
+});
 
 module.exports = router;

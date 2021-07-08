@@ -59,13 +59,9 @@ export default function CartContainer() {
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-40 py-24 mx-auto">
-        <h1 className="font-lora text-gray-900 text-3xl font-medium mb-8">
-          Carrito
-        </h1>
+        <h1 className="font-lora text-gray-900 text-3xl font-medium mb-8">Carrito</h1>
         {emptyCart && (
-          <p className="leading-relaxed text-lg">
-            Aun no hay nada en el carrito
-          </p>
+          <p className="leading-relaxed text-lg">Aun no hay nada en el carrito</p>
         )}
         {!emptyCart && (
           <div>
@@ -86,11 +82,6 @@ export default function CartContainer() {
                     <Link to={`/products/${order.id}`}>
                       <div className="px-16 py-3">
                         <p>{order.name}</p>
-                        <img
-                          alt=""
-                          src={order.image}
-                          className="h-16 w-20 object-cover rounded border my-2"
-                        ></img>
                       </div>
                     </Link>
                     <div className="px-16 py-3">
@@ -103,9 +94,7 @@ export default function CartContainer() {
                     <div className="px-16 py-3">${order.price}</div>
                     <div className="px-16 py-3">${order.preTotal}</div>
                     <div className="px-16 py-3 w-10 text-center">
-                      <AddRemoveIcons
-                        handleRemove={() => handleRemove(order)}
-                      />
+                      <AddRemoveIcons handleRemove={() => handleRemove(order)} />
                     </div>
                   </div>
                 );
@@ -125,13 +114,13 @@ export default function CartContainer() {
             </button> */}
             </div>
             <Link to={`/home`}>
-              <button class="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+              <button className="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
                 Continuar pedido
               </button>
             </Link>
             <button
               onClick={handleCheckout}
-              class="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
+              className="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
             >
               Comprar
             </button>

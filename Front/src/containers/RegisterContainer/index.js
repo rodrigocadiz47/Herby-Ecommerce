@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useHistory} from 'react-router'
+import { useHistory } from "react-router";
 
 import axios from "axios";
 
@@ -19,9 +19,9 @@ const UsersContainer = function () {
     observaciones: "",
   });
 
-  const [oneEmail, setOneEmail] = useState(false)
+  const [oneEmail, setOneEmail] = useState(false);
 
-  const history=useHistory()
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,17 +31,17 @@ const UsersContainer = function () {
 
     axios
       .post("http://localhost:3001/api/users/register", { ...user, address })
-      .then(() =>{
-        setOneEmail(false)
-        history.push('/login')
+      .then(() => {
+        setOneEmail(false);
+        history.push("/login");
       })
       .catch(() => {
-        setOneEmail(true)
+        setOneEmail(true);
       });
   };
 
   const onChange = (event) => {
-    setOneEmail(false)
+    setOneEmail(false);
     const fieldName = event.target.name;
     const value = event.target.value;
     setUser({ ...user, [fieldName]: value });
@@ -49,7 +49,7 @@ const UsersContainer = function () {
 
   return (
     <div>
-      <Form handleSubmit={handleSubmit} onChange={onChange} oneEmail={oneEmail}/>
+      <Form handleSubmit={handleSubmit} onChange={onChange} oneEmail={oneEmail} />
     </div>
   );
 };

@@ -1,17 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { useLocation } from "react-router";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 import s from "./style.module.css";
 
 export default ({ handleSubmit, onChange, oneEmail }) => {
   const { pathname } = useLocation();
-  const userRejected = useSelector(store => store.users.error)
+  const userRejected = useSelector((store) => store.users.error);
 
   return (
     <section className={s.stripped}>
-      <div class="px-0 py-20 mx-auto max-w-7xl sm:px-4">
-        <div class="w-full px-4 pt-5 pb-6 mx-auto mt-8 mb-6 bg-white rounded-none shadow-xl sm:rounded-lg sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 sm:px-6">
+      <div className="px-0 py-20 mx-auto max-w-7xl sm:px-4">
+        <div className="w-full px-4 pt-5 pb-6 mx-auto mt-8 mb-6 bg-white rounded-none shadow-xl sm:rounded-lg sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 sm:px-6">
           <div>
             {pathname === "/register" ? (
               <h1 className="font-lora mb-4 text-2xl text-left text-gray-600">
@@ -22,15 +22,18 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
             )}
           </div>
 
+          {oneEmail && (
+            <small>Este email ya esta en uso, por favor, intenta con uno distinto</small>
+          )}
+          {userRejected && pathname === "/login" && (
+            <small>Email o Contraseña incorrecta, intente nuevamente</small>
+          )}
 
-      {oneEmail && <small>Este email ya esta en uso, por favor, intenta con uno distinto</small>}
-      {(userRejected && pathname==="/login") && <small>Email o Contraseña incorrecta, intente nuevamente</small>}
-      
           <form onSubmit={handleSubmit} className="mb-8 space-y-4">
             {pathname === "/register" && (
               <div className="grid grid-cols-2">
                 <div className={s["input-container"]}>
-                  <label for="firstName" className={s.label}>
+                  <label htmlFor="firstName" className={s.label}>
                     Nombre:{" "}
                   </label>
                   <input
@@ -43,7 +46,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                   />
                 </div>
                 <div className={s["input-container"]}>
-                  <label for="lastName" className={s.label}>
+                  <label htmlFor="lastName" className={s.label}>
                     Apellido:{" "}
                   </label>
                   <input
@@ -59,7 +62,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
             )}
 
             <div className={s["input-container"]}>
-              <label for="email" className={s.label}>
+              <label htmlFor="email" className={s.label}>
                 Email:{" "}
               </label>
               <input
@@ -72,7 +75,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
               />
             </div>
             <div className={s["input-container"]}>
-              <label for="password" className={s.label}>
+              <label htmlFor="password" className={s.label}>
                 Contraseña:{" "}
               </label>
               <input
@@ -87,7 +90,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
             {pathname === "/register" && (
               <div className="">
                 <div className={s["input-container"]}>
-                  <label for="phone" className={s.label}>
+                  <label htmlFor="phone" className={s.label}>
                     Telefono:{" "}
                   </label>
                   <input
@@ -103,7 +106,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                 </div>
                 <div className="grid grid-cols-2">
                   <div className={s["input-container"]}>
-                    <label for="street" className={s.label}>
+                    <label htmlFor="street" className={s.label}>
                       Calle:{" "}
                     </label>
                     <input
@@ -116,7 +119,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                     />
                   </div>
                   <div className={s["input-container"]}>
-                    <label for="streetNumber" className={s.label}>
+                    <label htmlFor="streetNumber" className={s.label}>
                       Altura:{" "}
                     </label>
                     <input
@@ -128,7 +131,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                     />
                   </div>
                   <div className={s["input-container"]}>
-                    <label for="region" className={s.label}>
+                    <label htmlFor="region" className={s.label}>
                       Localidad:{" "}
                     </label>
                     <input
@@ -141,7 +144,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                     />
                   </div>
                   <div className={s["input-container"]}>
-                    <label for="zipCode" className={s.label}>
+                    <label htmlFor="zipCode" className={s.label}>
                       Codigo Postal:{" "}
                     </label>
                     <input
@@ -157,7 +160,7 @@ export default ({ handleSubmit, onChange, oneEmail }) => {
                   </div>
                 </div>
                 <div className={s["input-container"]}>
-                  <label for="extraDetails" className={s.label}>
+                  <label htmlFor="extraDetails" className={s.label}>
                     Observaciones:{" "}
                   </label>
                   <textarea
