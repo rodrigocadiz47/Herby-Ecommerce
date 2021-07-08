@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 import s from "./style.module.css";
 
-const Header = function ({ emptyCart, logOut, user }) {
+const Header = function ({ logOut, user }) {
   return (
     <header className="sticky top-0 z-20 bg-gray-100">
-      <nav className="flex items-center h-20 px-6 justify-around text-gray-600 text-lg shadow-md relative">
-        <div className="flex flex-row space-x-5">
+      <nav className="flex items-center h-20 px-6 justify-around text-gray-600 text-md shadow-md relative">
+        <div className="flex flex-row space-x-9">
           <Link to="/">
             <span className="flex flex-row hover:text-gray-900">
-              <img alt="logo" src="/palta.png" className="h-8"></img>
+              <img alt="logo" src="/palta.png" className="h-6"></img>
               <p>HERBY</p>
             </span>
           </Link>
@@ -38,39 +38,25 @@ const Header = function ({ emptyCart, logOut, user }) {
             </>
           )}
           <Link to="/cart">
-            <span className="flex">
+            <span className="flex ml-4">
               <p className="mr-2 hover:text-gray-900">CARRITO</p>
-              {/* esto es para mostrar el carrito lleno o vacio */}
-              {emptyCart && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                </svg>
-              )}
-              {!emptyCart && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+              </svg>
             </span>
           </Link>
           {user.id && (
             <div className={s.menu}>
-              <span className="flex relative">
+              <span className="flex relative ml-2">
                 <p className="mr-2">{user.firstName.toUpperCase()}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6d"
+                  className="h-6 w-6"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -102,7 +88,10 @@ const Header = function ({ emptyCart, logOut, user }) {
 
           {user.isAdmin ? (
             <Link to="/admin">
-              <span className="hover:text-gray-900"> ADMIN </span>
+              <button className="text-white text-md bg-blue-500 border-0 py-1 px-3 m-1.5 focus:outline-none hover:bg-blue-600 rounded">
+                {" "}
+                ADMIN{" "}
+              </button>
             </Link>
           ) : null}
         </div>
