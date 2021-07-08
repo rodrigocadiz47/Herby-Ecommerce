@@ -105,13 +105,22 @@ const NewProductForm = ({
             />
           </div>
           <div>
-            <button
-              className="text-white bg-blue-500 border-0 py-2 px-6 m-1.5 focus:outline-none hover:bg-blue-600 rounded text-lg"
-              type="submit"
-              onClick={() => getId(product.id)}
-            >
-              {!productId ? "Agregar" : "Editar"}
-            </button>
+            {getId ? (
+              <button
+                className="text-white bg-blue-500 border-0 py-2 px-6 m-1.5 focus:outline-none hover:bg-blue-600 rounded text-lg"
+                type="submit"
+                onClick={() => getId(product.id)}
+              >
+                {!productId ? "Agregar" : "Editar"}
+              </button>
+            ) : (
+              <button
+                className="text-white bg-blue-500 border-0 py-2 px-6 m-1.5 focus:outline-none hover:bg-blue-600 rounded text-lg"
+                type="submit"
+              >
+                {!productId ? "Agregar" : "Editar"}
+              </button>
+            )}
           </div>
         </form>
       </div>

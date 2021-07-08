@@ -35,6 +35,7 @@ const Admin = function () {
 
   const handleChange = (e) => {
     const value = e.target.value;
+    console.log(value);
     const fieldName = e.target.name;
     setProduct({ ...product, [fieldName]: value });
   };
@@ -72,15 +73,7 @@ const Admin = function () {
 
   const clearState = () => {
     setErrorMessage("");
-    setProduct({
-      name: "",
-      image: "",
-      category: "",
-      price: 0,
-      stock: 0,
-      seasonal: false,
-      description: "",
-    });
+    setProduct({});
   };
 
   return (
@@ -150,6 +143,7 @@ const Admin = function () {
                       handleChange={handleChange}
                       handleSubmit={handleSubmit}
                       errorMessage={errorMessage}
+                      product={product}
                     />
                   </div>
                 )}
