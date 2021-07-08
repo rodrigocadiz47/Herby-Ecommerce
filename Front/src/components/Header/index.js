@@ -68,12 +68,6 @@ const Header = function ({ logOut, user }) {
                 </svg>
               </span>
               <div className="absolute opacity-0 hover:opacity-100 mt-2 w-56 flex flex-col justify-start rounded-md border shadow-lg bg-gray-100">
-                <a
-                  className="w-full text-gray-700 block px-4 py-2 rounded hover:bg-gray-200"
-                  href="http://"
-                >
-                  Mis Datos
-                </a>
                 <Link to="/history">
                   <a
                     className="w-full text-gray-700 block px-4 py-2 rounded hover:bg-gray-200"
