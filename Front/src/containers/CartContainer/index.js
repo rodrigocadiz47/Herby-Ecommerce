@@ -114,13 +114,13 @@ export default function CartContainer() {
             </button> */}
             </div>
             <Link to={`/home`}>
-              <button class="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+              <button className="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
                 Continuar pedido
               </button>
             </Link>
             <button
               onClick={handleCheckout}
-              class="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
+              className="my-10 mx-3 inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
             >
               Comprar
             </button>

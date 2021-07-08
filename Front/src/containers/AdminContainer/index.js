@@ -25,13 +25,13 @@ const Admin = function () {
 
   const [product, setProduct] = useState({});
 
-  React.useEffect(()=>{
-    dispatch(GET_ALL_PRODUCTS())
-  }, [dispatch])
+  React.useEffect(() => {
+    dispatch(GET_ALL_PRODUCTS());
+  }, [dispatch]);
 
-  const getId= (productId)=>{
-    dispatch(EDIT_PRODUCT({product: product, productId: productId}))
-  }
+  const getId = (productId) => {
+    dispatch(EDIT_PRODUCT({ product: product, productId: productId }));
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -50,6 +50,14 @@ const Admin = function () {
     }
     dispatch(ADD_PRODUCT(product));
     clearState();
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    if (!product.name && !product.category && !product.price) {
+      setErrorMessage("Completar todos los campos obligatorios");
+    }
+    console.log("PRODUCT FORM", product);
   };
 
   const deleteUser = (userId) => {
@@ -75,41 +83,28 @@ const Admin = function () {
     });
   };
 
-  const handleEdit = (e)=>{
-    e.preventDefault()
-    console.log("PRODUCT FORM",product)
-    
-  }
-
   return (
     <div>
       {user.isAdmin ? (
         <section className="text-gray-600 body-font overflow-hidden">
-          <div className="container px-5 py-24 mx-auto">
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">
-              Admin
-            </h1>
+          <div className="container px-32 py-24 mx-auto">
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">Admin</h1>
             <div className="space-x-5">
               <Link to="/admin/products">
-                <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">
                   Editar Productos
                 </button>
               </Link>
               <Link to="/admin/add">
-                <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">
                   Agregar Producto
-                </button>
-              </Link>
-              <Link to="/admin/addCategory">
-                <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Agregar Categoria
                 </button>
               </Link>
 
               <Link to="/admin/users">
                 <button
                   onClick={() => dispatch(GET_USERS(user.id))}
-                  class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
                 >
                   Editar Usuarios
                 </button>
@@ -128,11 +123,18 @@ const Admin = function () {
                   path="/admin/products/:id"
                   render={({ match }) => {
                     return (
-                      <>
-                      <ProductDetail isAdmin={user.isAdmin} productId={match.params.id} />
-                      <NewProductForm handleChange={handleChange} handleSubmit={handleEdit} productId={match.params.id} getId={getId}/>
-                      </>
-
+                      <div className="flex flex-col">
+                        <ProductDetail
+                          isAdmin={user.isAdmin}
+                          productId={match.params.id}
+                        />
+                        <NewProductForm
+                          handleChange={handleChange}
+                          handleSubmit={handleEdit}
+                          productId={match.params.id}
+                          getId={getId}
+                        />
+                      </div>
                     );
                   }}
                 />
@@ -143,26 +145,27 @@ const Admin = function () {
               <Route
                 path="/admin/add"
                 render={() => (
-                  <NewProductForm
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    errorMessage={errorMessage}
-                  />
+                  <div className="mt-20 -ml-20">
+                    <NewProductForm
+                      handleChange={handleChange}
+                      handleSubmit={handleSubmit}
+                      errorMessage={errorMessage}
+                    />
+                  </div>
                 )}
               />
               <Route
-            path="/admin/users"
-            render={() => (
-              <UsersList
-                users={users}
-                deleteUser={deleteUser}
-                edit={edit}
-                toggleEdit={toggleEdit}
-                toggleAdmin={toggleAdmin}
-
+                path="/admin/users"
+                render={() => (
+                  <UsersList
+                    users={users}
+                    deleteUser={deleteUser}
+                    edit={edit}
+                    toggleEdit={toggleEdit}
+                    toggleAdmin={toggleAdmin}
+                  />
+                )}
               />
-            )}/>
-
             </Switch>
           </div>
         </section>

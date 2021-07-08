@@ -1,48 +1,45 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import s from "./style.module.css";
 
 const Header = function ({ emptyCart, logOut, user }) {
-  // const [openMenu, setOpenMenu] = useState(false);
-
-  // const toggleMenu = () => {
-  //   if (openMenu) setOpenMenu(false);
-  //   else setOpenMenu(true);
-  // };
-
   return (
     <header className="sticky top-0 z-20 bg-gray-100">
-      <nav className="flex items-center h-20 px-6 justify-around text-gray-700 shadow-md relative">
-        <div className="space-x-5">
+      <nav className="flex items-center h-20 px-6 justify-around text-gray-600 text-lg shadow-md relative">
+        <div className="flex flex-row space-x-5">
           <Link to="/">
-            <span> HERBY </span>
+            <span className="flex flex-row hover:text-gray-900">
+              <img alt="logo" src="/palta.png" className="h-8"></img>
+              <p>HERBY</p>
+            </span>
           </Link>
 
           <Link to="/products/fruit">
-            <span> FRUTAS </span>
+            <span className="hover:text-gray-900"> FRUTAS </span>
           </Link>
           <Link to="/products/veg">
-            <span> VERDURAS </span>
+            <span className="hover:text-gray-900"> VERDURAS </span>
           </Link>
           {/* <Link to="/products">PRODUCTOS</Link> */}
         </div>
         <div className="flex flex-row items-center space-x-5">
           {user.id ? (
-            <button onClick={logOut}>SALIR</button>
+            <button onClick={logOut} className="hover:text-gray-900">
+              SALIR
+            </button>
           ) : (
             <>
               <Link to="/login">
-                <span> LOGIN </span>
+                <span className="hover:text-gray-900"> LOGIN </span>
               </Link>
               <Link to="/register">
-                <span> REGISTER </span>
+                <span className="hover:text-gray-900"> REGISTER </span>
               </Link>
             </>
           )}
           <Link to="/cart">
             <span className="flex">
-              <p className="mr-2">CARRITO</p>
+              <p className="mr-2 hover:text-gray-900">CARRITO</p>
               {/* esto es para mostrar el carrito lleno o vacio */}
               {emptyCart && (
                 <svg
@@ -62,12 +59,7 @@ const Header = function ({ emptyCart, logOut, user }) {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    // stroke-linecap="round"
-                    // stroke-linejoin="round"
-                    // strokeWidth="1"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
+                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               )}
             </span>
@@ -110,7 +102,7 @@ const Header = function ({ emptyCart, logOut, user }) {
 
           {user.isAdmin ? (
             <Link to="/admin">
-              <span> ADMIN </span>
+              <span className="hover:text-gray-900"> ADMIN </span>
             </Link>
           ) : null}
         </div>

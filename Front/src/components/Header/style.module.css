@@ -5,4 +5,5 @@
 
 .menu span:hover + div {
   opacity: 1;
+  color: black;
 }
