@@ -52,15 +52,5 @@ Product.init(
   { sequelize, modelName: "product" }
 );
 
-Product.addHook("beforeUpdate", (product)=>{
-  if(product.stock>10){
-    product.available = true
-    product.save()
-  }
-  else{
-    product.available = false
-    product.save()
-  }
-})
 
 module.exports = Product;

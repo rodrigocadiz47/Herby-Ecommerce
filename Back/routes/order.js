@@ -19,10 +19,10 @@ router.get("/pending/:id", (req, res, next) => {
 router.post("/:id", (req, res, next) => {
   const userId = req.params.id;
   const { amount, id, preTotal } = req.body;
-  User.findOne({ where: { id: userId }, include: { model: Order } })
+  User.findOne({ where: { id: userId }, include: { model: Order} })
     .then((user) => {
       if (user.firstName) {
-        const isOrderNew = user.orders.filter((ord) => ord.productId === id);
+        const isOrderNew = user.orders.filter((ord) => (ord.productId === id) && (!ord.bought));
         if (isOrderNew.length) {
           return isOrderNew[0]
             .update({
