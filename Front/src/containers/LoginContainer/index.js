@@ -20,26 +20,24 @@ export default () => {
     setLoginData({ ...loginData, [fieldName]: value });
   };
 
+  const applyOrders = async function (user) {
+    await cart.forEach((order) => {
+      axios.post(`http://localhost:3001/api/orders/${user.payload.id}`, order);
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(SET_USER(loginData))
-      .then((user) => {
-        if (cart.length) {
-          cart.forEach((order) => {
-            axios.post(
-              `http://localhost:3001/api/orders/${user.payload.id}`,
-              order
-            );
-          });
-        }
-        return user.payload;
-      })
-      .then((user) => {
-        dispatch(GET_LOG_CART(user.id));
-        if (user.id) {
-          history.push("/home");
-        }
-      });
+    dispatch(SET_USER(loginData)).then(async (user) => {
+      if (user.payload && cart.length) {
+        await applyOrders(user);
+        dispatch(GET_LOG_CART(user.payload.id));
+        history.push("/home");
+      } else if (user.payload) {
+        dispatch(GET_LOG_CART(user.payload.id));
+        history.push("/home");
+      }
+    });
   };
 
   return (
@@ -52,4 +50,3 @@ export default () => {
 // 1) traer orders pending
 // 2) localstore.map( order =>
 //                            if(cart.filter (cOrder.id === order.id).length){edit_amount}else{create_order})
-//

@@ -1,5 +1,9 @@
 import axios from "axios";
-import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: JSON.parse(localStorage.getItem("USER-STORAGE")) || {},
@@ -24,12 +28,17 @@ export const registerUser = createAsyncThunk("REGISTER", (user) => {
 });
 
 export const SET_USER = createAsyncThunk("SET_USER", (loginData) => {
-  return axios.post("http://localhost:3001/api/users/login", loginData).then((res) => {
-    if (res.data !== undefined) {
-      localStorage.setItem("USER-STORAGE", JSON.stringify(res.data));
-    }
-    return res.data;
-  });
+  return axios
+    .post("http://localhost:3001/api/users/login", loginData)
+    .then((res) => {
+      if (res.data !== undefined) {
+        localStorage.setItem("USER-STORAGE", JSON.stringify(res.data));
+      }
+      return res.data;
+    })
+    .catch((err) => {
+      throw new Error(err.message);
+    });
 });
 
 export const DELETE_USER = createAsyncThunk("DELETE_USER", (userId) => {
@@ -40,7 +49,9 @@ export const DELETE_USER = createAsyncThunk("DELETE_USER", (userId) => {
 });
 
 export const GET_USERS = createAsyncThunk("GET_USERS", (adminId) => {
-  return axios.get(`http://localhost:3001/api/users/admin/${adminId}`).then((res) => res.data);
+  return axios
+    .get(`http://localhost:3001/api/users/admin/${adminId}`)
+    .then((res) => res.data);
 });
 
 export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
@@ -49,9 +60,11 @@ export const GET_HISTORY = createAsyncThunk("GET_HISTORY", (userId) => {
     .then(({ data }) => data);
 });
 
-export const TOGGLE_ADMIN = createAsyncThunk("TOGGLE_ADMIN", (userId)=>{
-  return axios.put(`http://localhost:3001/api/users/admin/${userId}`).then(({data})=> data)
-})
+export const TOGGLE_ADMIN = createAsyncThunk("TOGGLE_ADMIN", (userId) => {
+  return axios
+    .put(`http://localhost:3001/api/users/admin/${userId}`)
+    .then(({ data }) => data);
+});
 
 export const SET_USER_LOCAL = createAction("SET_USER_LOCAL");
 
@@ -66,8 +79,10 @@ const usersReducer = createReducer(initialState, {
     state.error = true;
   },
   [DELETE_USER.fulfilled]: (state, action) => {
-    const refreshUser=  state.users.filter((user) => user.id !== action.payload.id);
-    state.users= refreshUser
+    const refreshUser = state.users.filter(
+      (user) => user.id !== action.payload.id
+    );
+    state.users = refreshUser;
   },
   [GET_USERS.fulfilled]: (state, action) => {
     state.users = action.payload;
@@ -82,16 +97,16 @@ const usersReducer = createReducer(initialState, {
   [GET_HISTORY.fulfilled]: (state, action) => {
     state.ordersHistory = [...action.payload];
   },
-  [TOGGLE_ADMIN.fulfilled]: (state, action)=>{
-    console.log("STATE USERS", state.users)
-    const toggleAdmin = state.users.map(user=>{
-      if(user.id===action.payload.id){
-        user.isAdmin= action.payload.isAdmin
+  [TOGGLE_ADMIN.fulfilled]: (state, action) => {
+    console.log("STATE USERS", state.users);
+    const toggleAdmin = state.users.map((user) => {
+      if (user.id === action.payload.id) {
+        user.isAdmin = action.payload.isAdmin;
       }
-      return user
-    })
-    state.users= toggleAdmin
-  }
+      return user;
+    });
+    state.users = toggleAdmin;
+  },
 });
 
 export default usersReducer;
