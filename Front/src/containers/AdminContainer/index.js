@@ -6,6 +6,7 @@ import NewProductForm from "../../components/NewProductForm";
 import UsersList from "../../components/UsersList";
 import ProductsList from "../../components/ProductsList";
 import ProductDetail from "../../components/ProductDetail";
+import OrdersContainer from "../OrdersContainer";
 import { GET_USERS, DELETE_USER, TOGGLE_ADMIN } from "../../store/usersReducer";
 import {
   ADD_PRODUCT,
@@ -123,6 +124,14 @@ const Admin = function () {
                   Editar Usuarios
                 </button>
               </Link>
+              <Link to="/admin/orders">
+                <button
+                  onClick={() => dispatch(GET_USERS(user.id))}
+                  class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
+                >
+                  Ordenes
+                </button>
+              </Link>
             </div>
 
             {/* RUTAS PARA EDITAR PRODUCTOS */}
@@ -194,6 +203,9 @@ const Admin = function () {
                 />
               )}
             />
+
+            {/* RUTA PARA VER TODAS LAS ORDENES */}
+            <Route path="/admin/orders" render={() => <OrdersContainer />} />
           </div>
         </section>
       ) : (

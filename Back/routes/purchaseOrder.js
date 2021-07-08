@@ -3,6 +3,25 @@ const router = express.Router();
 const { PurchaseOrder, Order, Products, User } = require("../Models");
 const transporter = require("../mailer");
 
+router.get("/admin", (req, res, next) => {
+  PurchaseOrder.findAll({
+    include: [
+      {
+        model: Order,
+        include: [{ model: Products }],
+      },
+      {
+        model: User,
+        attributes: ["firstName", "address", "phone"],
+      },
+    ],
+  })
+    .then((pOrders) => {
+      res.send(pOrders);
+    })
+    .catch((err) => res.send(err));
+});
+
 router.get("/:id", (req, res, next) => {
   //trae todos las ordenes de compra de un usuario [{purchase1}{purchase2}]//purchase1={id,fecha,total,[order1,order2]}// order={id,productId, productName, productQuantity,productPrice}
   const id = req.params.id;
@@ -35,6 +54,7 @@ router.post("/:id", async (req, res, next) => {
       deliveryRange: "caba",
       wayToPay: "efectivo",
     }); //ver con el front para no harcodear 2 propiedades
+
     orders.map((order) =>
       order.stockUpdate(order.productQuantity, order.productId)
     );
@@ -46,6 +66,7 @@ router.post("/:id", async (req, res, next) => {
         subject: "Nuevo pedido ingresado",
         text: `Estimad@ ${user.firstName} desde Herby le queremos agradecer por su compra.`,
       });
+
 
     res.send(order);
   } catch (error) {
