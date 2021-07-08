@@ -3,7 +3,6 @@ import axios from "axios";
 
 import AddQuantity from "../AddQuantity";
 import AddQuantityHook from "../../utils/AddQuantityHook";
-import Edit from "../Edit";
 
 const ProductDetail = function ({ productId, isAdmin }) {
   const [product, setProduct] = React.useState({});
@@ -60,7 +59,6 @@ const ProductDetail = function ({ productId, isAdmin }) {
           </div>
         </div>
       </div>
-      {isAdmin && <Edit />}
     </section>
   );
 };

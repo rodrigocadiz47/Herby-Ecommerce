@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 
 const LandingPage = function () {
   return (
-    <div className="">
+    <div className="-m-20">
       <section className="">
         <div className="container mx-auto h-screen flex px-5 py-12 md:flex-row flex-col items-center">
           <div className="lg:max-w-xl lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
@@ -41,28 +41,12 @@ const LandingPage = function () {
       </section>
       <section className="text-gray-600 bg-gray-100 body-font">
         <div className="container px-5 py-12 mx-auto">
-          <div className="px-24 py-20">
-            <p className="text-xl leading-relaxed text-gray-500 mb-4">
-              Nuestros proveedores son productores locales, en su mayoría pequeños
-              agricultores ecológicos. Cuando no encontramos productores locales, de fruta
-              en particular (plátano, kiwi, pera, manzana, etc.) el producto es siempre
-              ecológico certificado.
-            </p>
-            <p className="text-xl leading-relaxed text-gray-500">
-              Entregamos nuestros alimentos ecológicos en toda la ciudad y no tenemos
-              pedido minimo. En CABA el transporte es gratuito para compras superiores a
-              $1000 y te lo llevamos nosotros de martes a viernes. Fuera de nuestra zona
-              de reparto, la entrega se realiza por una empresa de mensajería en 24h, lo
-              que garantiza la frescura del producto.
-            </p>
-          </div>
-
           <div className="flex flex-wrap justify-center -m-4">
             <div className="xl:w-1/4 md:w-1/2 p-4">
               <div className="bg-gray-100 p-6 rounded-lg">
                 <img
-                  className="h-40 rounded w-full object-cover object-center mb-6"
-                  src="https://images.pexels.com/photos/4117544/pexels-photo-4117544.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                  className="h-48 rounded w-full object-cover object-center mb-6"
+                  src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                   alt="content"
                 />
                 {/* <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
@@ -82,8 +66,8 @@ const LandingPage = function () {
             <div className="xl:w-1/4 md:w-1/2 p-4">
               <div className="bg-gray-100 p-6 rounded-lg">
                 <img
-                  className="h-40 rounded w-full object-cover object-center mb-6"
-                  src="https://dummyimage.com/720x400"
+                  className="h-48 rounded w-full object-cover object-center mb-6"
+                  src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                   alt="content"
                 />
                 {/* <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
@@ -103,8 +87,8 @@ const LandingPage = function () {
             <div className="xl:w-1/4 md:w-1/2 p-4">
               <div className="bg-gray-100 p-6 rounded-lg">
                 <img
-                  className="h-40 rounded w-full object-cover object-center mb-6"
-                  src="https://dummyimage.com/720x400"
+                  className="h-48 rounded w-full object-cover object-center mb-6"
+                  src="https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                   alt="content"
                 />
                 {/* <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
@@ -121,6 +105,21 @@ const LandingPage = function () {
                 </p>
               </div>
             </div>
+          </div>
+          <div className="px-24 py-20 bg-gray-200 rounded-md shadow-lg my-12">
+            <p className="text-xl leading-relaxed text-gray-500 mb-4">
+              Nuestros proveedores son productores locales, en su mayoría pequeños
+              agricultores ecológicos. Cuando no encontramos productores locales, de fruta
+              en particular (plátano, kiwi, pera, manzana, etc.) el producto es siempre
+              ecológico certificado.
+            </p>
+            <p className="text-xl leading-relaxed text-gray-500">
+              Entregamos nuestros alimentos ecológicos en toda la ciudad y no tenemos
+              pedido minimo. En CABA el transporte es gratuito para compras superiores a
+              $1000 y te lo llevamos nosotros de martes a viernes. Fuera de nuestra zona
+              de reparto, la entrega se realiza por una empresa de mensajería en 24h, lo
+              que garantiza la frescura del producto.
+            </p>
           </div>
         </div>
       </section>
