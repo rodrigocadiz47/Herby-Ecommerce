@@ -32,15 +32,7 @@ router.get("/:id", (req, res, next) => {
     include: [{ model: Order, include: [{ model: Products }] }],
   })
     .then((purchases) => {
-      User.findByPk(id).then((user) => {
-        transporter.sendMail({
-          from: '"HERBY" <herbymailer@gmail.com>',
-          to: user.email,
-          subject: "Nuevo pedido ingresado",
-          text: `Estimado ${user.firstName} desde Herby le queremos agradecer por su compra.`,
-        });
         res.send(purchases);
-      });
     })
     .catch((error) => res.status(500).send(error));
 });
@@ -62,7 +54,20 @@ router.post("/:id", async (req, res, next) => {
       deliveryRange: "caba",
       wayToPay: "efectivo",
     }); //ver con el front para no harcodear 2 propiedades
-    orders.map((order) => order.stockUpdate(order.productQuantity, order.productId));
+
+    orders.map((order) =>
+      order.stockUpdate(order.productQuantity, order.productId)
+    );
+    const user =await User.findByPk(userId)
+
+    transporter.sendMail({
+        from: '"HERBY" <herbymailer@gmail.com>',
+        to: user.email,
+        subject: "Nuevo pedido ingresado",
+        text: `Estimad@ ${user.firstName} desde Herby le queremos agradecer por su compra.`,
+      });
+
+
     res.send(order);
   } catch (error) {
     res.status(400).send(error);
