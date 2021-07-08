@@ -25,19 +25,19 @@ const Footer = function () {
             Desarrolladores
           </p>
           <a href="/" className="flex mb-3 text-sm text-gray-800">
-            Yifei Zhu
-          </a>
-          <a href="/" className="flex mb-3 text-sm text-gray-800">
-            Rodrigo Cadiz
-          </a>
-          <a href="/" className="flex mb-3 text-sm text-gray-800">
             Hernan Langer
           </a>
           <a href="/" className="flex mb-3 text-sm text-gray-800">
             Erika Zurhmule
           </a>
           <a href="/" className="flex mb-3 text-sm text-gray-800">
+            Rodrigo Cadiz
+          </a>
+          <a href="/" className="flex mb-3 text-sm text-gray-800">
             Belen Buccolo
+          </a>
+          <a href="/" className="flex mb-3 text-sm text-gray-800">
+            Yifei Zhu
           </a>
         </nav>
       </div>
